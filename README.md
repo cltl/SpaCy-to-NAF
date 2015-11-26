@@ -18,25 +18,25 @@ print(spacy_to_naf.NAF_to_string(NAF))
 <NAF>
   <nafHeader>
     <linguisticProcessors layer="text">
-      <lp name="SpaCy" timestamp="2015-11-26T16:15:18UTC"/>
+      <lp name="SpaCy" timestamp="2015-11-26T17:21:54UTC"/>
     </linguisticProcessors>
     <linguisticProcessors layer="terms">
-      <lp name="SpaCy" timestamp="2015-11-26T16:15:18UTC"/>
+      <lp name="SpaCy" timestamp="2015-11-26T17:21:54UTC"/>
     </linguisticProcessors>
   </nafHeader>
   <text>
-    <wf sent="1" id="w0" length="3">The</wf>
-    <wf sent="1" id="w1" length="3">cat</wf>
-    <wf sent="1" id="w2" length="3">sat</wf>
-    <wf sent="1" id="w3" length="2">on</wf>
-    <wf sent="1" id="w4" length="3">the</wf>
-    <wf sent="1" id="w5" length="3">mat</wf>
-    <wf sent="1" id="w6" length="1">.</wf>
-    <wf sent="2" id="w7" length="5">Felix</wf>
-    <wf sent="2" id="w8" length="3">was</wf>
-    <wf sent="2" id="w9" length="3">his</wf>
-    <wf sent="2" id="w10" length="4">name</wf>
-    <wf sent="2" id="w11" length="1">.</wf>
+    <wf sent="1" id="w0" length="3" offset="0">The</wf>
+    <wf sent="1" id="w1" length="3" offset="4">cat</wf>
+    <wf sent="1" id="w2" length="3" offset="8">sat</wf>
+    <wf sent="1" id="w3" length="2" offset="12">on</wf>
+    <wf sent="1" id="w4" length="3" offset="15">the</wf>
+    <wf sent="1" id="w5" length="3" offset="19">mat</wf>
+    <wf sent="1" id="w6" length="1" offset="22">.</wf>
+    <wf sent="2" id="w7" length="5" offset="24">Felix</wf>
+    <wf sent="2" id="w8" length="3" offset="30">was</wf>
+    <wf sent="2" id="w9" length="3" offset="34">his</wf>
+    <wf sent="2" id="w10" length="4" offset="38">name</wf>
+    <wf sent="2" id="w11" length="1" offset="42">.</wf>
   </text>
   <terms>
     <term id="t0" lemma="the" pos="ADJ" morphofeat="DT">

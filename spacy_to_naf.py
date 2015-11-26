@@ -7,7 +7,7 @@ from datetime import datetime
 
 # Define Entity object:
 Entity = namedtuple('Entity',['start', 'end', 'entity_type'])
-WfElement = namedtuple('WfElement',['sent', 'wid', 'length', 'wordform'])
+WfElement = namedtuple('WfElement',['sent', 'wid', 'length', 'wordform', 'offset'])
 TermElement = namedtuple('TermElement', ['tid', 'lemma', 'pos', 'morphofeat', 'targets', 'text'])
 EntityElement = namedtuple('EntityElement', ['eid', 'entity_type', 'targets', 'text'])
 DependencyRelation = namedtuple('DependencyRelation', ['from_term', 'to_term', 'rfunc', 'from_orth', 'to_orth'])
@@ -32,6 +32,7 @@ def add_wf_element(text_layer, wf_data):
     wf_el.set("sent", wf_data.sent)
     wf_el.set("id", wf_data.wid)
     wf_el.set("length", wf_data.length)
+    wf_el.set("offset", wf_data.offset)
     wf_el.text = wf_data.wordform
 
 def add_term_element(terms_layer, term_data):
@@ -163,7 +164,8 @@ def naf_from_doc(doc, time=None):
             wf_data = WfElement(sent = str(sentence_number),
                            wid = wid,
                            length = str(len(token.text)),
-                           wordform = token.text)
+                           wordform = token.text,
+                           offset = str(token.idx))
             
             # Create TermElement data:
             term_data = TermElement(tid = tid,
