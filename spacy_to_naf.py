@@ -30,7 +30,7 @@ def add_wf_element(text_layer, wf_data):
     """
     wf_el = etree.SubElement(text_layer, "wf")
     wf_el.set("sent", wf_data.sent)
-    wf_el.set("wid", wf_data.wid)
+    wf_el.set("id", wf_data.wid)
     wf_el.set("length", wf_data.length)
     wf_el.text = wf_data.wordform
 
@@ -81,8 +81,8 @@ def dependencies_to_add(token):
     """
     deps = []
     while token.head is not token:
-        dep_data = DependencyRelation(from_term = 't_' + str(token.head.i),
-                                      to_term = 't_' + str(token.i),
+        dep_data = DependencyRelation(from_term = 't' + str(token.head.i),
+                                      to_term = 't' + str(token.i),
                                       rfunc = token.dep_,
                                       from_orth = token.head.orth_,
                                       to_orth = token.orth_)
@@ -149,8 +149,8 @@ def naf_from_doc(doc, time=None):
             if token_number == next_entity.start:
                 parsing_entity = True
             
-            wid = 'w_' + str(token_number)
-            tid = 't_' + str(term_number)
+            wid = 'w' + str(token_number)
+            tid = 't' + str(term_number)
             
             current_term.append(wid)
             current_term_orth.append(token.orth_)
@@ -183,7 +183,7 @@ def naf_from_doc(doc, time=None):
                 
             if parsing_entity and token_number == next_entity.end:
                 # Create new entity ID.
-                eid = 'e_' + str(entity_number)
+                eid = 'e' + str(entity_number)
                 
                 # Create Entity data:
                 entity_data = EntityElement(eid = eid,
