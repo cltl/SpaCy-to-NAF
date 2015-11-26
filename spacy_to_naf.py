@@ -1,15 +1,9 @@
-
 # coding: utf-8
-
-# In[34]:
 
 from spacy.en import English
 from lxml import etree
 from collections import namedtuple
 from datetime import datetime
-
-
-# In[121]:
 
 # Define Entity object:
 Entity = namedtuple('Entity',['start', 'end', 'entity_type'])
@@ -26,8 +20,8 @@ def get_entity_type(span):
 def entities(doc):
     "Generator that returns Entity objects for a given document."
     for ent in doc.ents:
-        yield Entity(start = ent.start, 
-                     end = ent.end -1, 
+        yield Entity(start = ent.start,
+                     end = ent.end -1,
                      entity_type = get_entity_type(ent))
 
 def add_wf_element(text_layer, wf_data):
@@ -83,7 +77,7 @@ def add_dependency_element(dependency_layer, dep_data):
 def dependencies_to_add(token):
     """
     Walk up the tree, creating a DependencyRelation for each label.
-    The relation is then passed to the 
+    The relation is then passed to the
     """
     deps = []
     while token.head is not token:
@@ -163,13 +157,13 @@ def naf_from_doc(doc, time=None):
             
             if parsing_entity:
                 current_entity.append(tid)
-                current_entity_orth.append(token.orth_)            
+                current_entity_orth.append(token.orth_)
             
             # Create WfElement data:
-            wf_data = WfElement(sent = str(sentence_number), 
+            wf_data = WfElement(sent = str(sentence_number),
                            wid = wid,
                            length = str(len(token.text)),
-                           wordform = token.text)            
+                           wordform = token.text)
             
             # Create TermElement data:
             term_data = TermElement(tid = tid,
@@ -191,7 +185,7 @@ def naf_from_doc(doc, time=None):
                 # Create new entity ID.
                 eid = 'e_' + str(entity_number)
                 
-                # Create Entity data:                
+                # Create Entity data:
                 entity_data = EntityElement(eid = eid,
                                             entity_type = next_entity.entity_type,
                                             targets = current_entity,
@@ -217,7 +211,7 @@ def naf_from_doc(doc, time=None):
                 if not dep_data in dependencies_for_sentence:
                     dependencies_for_sentence.append(dep_data)
 
-        # At the end of the sentence, add all the dependencies to the XML structure.            
+        # At the end of the sentence, add all the dependencies to the XML structure.
         for dep_data in dependencies_for_sentence:
             add_dependency_element(dependency_layer, dep_data)
         current_token = token_number + 1
@@ -247,19 +241,3 @@ def NAF_to_string(NAF, byte=False):
         return xml_string
     else:
         return xml_string.decode('utf-8')
-
-
-# In[126]:
-
-text = """Robert Fidler, 66, built the four-bedroom home near Redhill in Surrey in 2000 without planning permission.
-Reigate and Banstead Borough Council argued he was in contempt of court for not complying with enforcement notices.
-A High Court judge agreed, saying he would be jailed for his "defiance" if the property is not demolished by June."""
-
-NAF = text_to_NAF(text.replace('\n',''))
-print(NAF_to_string(NAF))
-
-
-# In[ ]:
-
-
-
