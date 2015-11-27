@@ -13,7 +13,7 @@ DependencyRelation = namedtuple('DependencyRelation', ['from_term', 'to_term', '
 ChunkElement = namedtuple('ChunkElement', ['cid', 'head', 'phrase', 'text', 'targets'])
 
 def normalize_token_orth(orth):
-    if orth == '\n':
+    if '\n' in orth:
         return 'NEWLINE'
     else:
         return orth
@@ -89,7 +89,7 @@ def chunk_tuples_for_doc(doc):
         yield ChunkElement(cid = 'c' + str(i),
                            head = 't' + str(chunk.root.i),
                            phrase = phrase,
-                           text = chunk.orth_,
+                           text = chunk.orth_.replace('\n',' '),
                            targets = ['t' + str(tok.i) for tok in chunk])
 
 def add_chunk_element(chunks_layer, chunk_data):
