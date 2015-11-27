@@ -21,6 +21,10 @@ Or use the command line:
 python spacy_to_naf.py felix.txt > felix.naf
 ```
 
+NB. Don't use this for batch processing! That would mean loading SpaCy for each
+file, which is wildly inefficient. For large batches, write a python script that
+loads SpaCy, loops over the files, and writes out NAF in one session.
+
 **Output**:
 ```XML
 <NAF>
