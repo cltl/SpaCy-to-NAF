@@ -26,6 +26,10 @@ file, which is wildly inefficient. For large batches, write a python script that
 loads SpaCy and this module, loops over the files, and writes out NAF in one go.
 
 **Output**:
+
+Here is the output of the python code above. Please note that the chunks layer
+currently only contains PPs and NPs.
+
 ```XML
 <NAF>
   <nafHeader>
