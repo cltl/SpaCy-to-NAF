@@ -30,10 +30,10 @@ loads SpaCy and this module, loops over the files, and writes out NAF in one go.
 <NAF>
   <nafHeader>
     <linguisticProcessors layer="text">
-      <lp name="SpaCy" timestamp="2015-11-26T17:21:54UTC"/>
+      <lp name="SpaCy" timestamp="2015-11-27T16:52:14UTC"/>
     </linguisticProcessors>
     <linguisticProcessors layer="terms">
-      <lp name="SpaCy" timestamp="2015-11-26T17:21:54UTC"/>
+      <lp name="SpaCy" timestamp="2015-11-27T16:52:14UTC"/>
     </linguisticProcessors>
   </nafHeader>
   <text>
@@ -156,5 +156,42 @@ loads SpaCy and this module, loops over the files, and writes out NAF in one go.
     <!--punct(was,.)-->
     <dep from="t8" to="t11" rfunc="punct"/>
   </deps>
+  <chunks>
+    <chunk id="c0" head="t1" phrase="NP">
+      <span>
+        <!--The cat-->
+        <target id="t0"/>
+        <target id="t1"/>
+      </span>
+    </chunk>
+    <chunk id="c1" head="t3" phrase="PP">
+      <span>
+        <!--on the mat-->
+        <target id="t3"/>
+        <target id="t4"/>
+        <target id="t5"/>
+      </span>
+    </chunk>
+    <chunk id="c2" head="t5" phrase="NP">
+      <span>
+        <!--the mat-->
+        <target id="t4"/>
+        <target id="t5"/>
+      </span>
+    </chunk>
+    <chunk id="c3" head="t7" phrase="NP">
+      <span>
+        <!--Felix-->
+        <target id="t7"/>
+      </span>
+    </chunk>
+    <chunk id="c4" head="t10" phrase="NP">
+      <span>
+        <!--his name-->
+        <target id="t9"/>
+        <target id="t10"/>
+      </span>
+    </chunk>
+  </chunks>
 </NAF>
 ```

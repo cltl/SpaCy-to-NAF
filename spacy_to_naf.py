@@ -10,6 +10,7 @@ WfElement = namedtuple('WfElement',['sent', 'wid', 'length', 'wordform', 'offset
 TermElement = namedtuple('TermElement', ['tid', 'lemma', 'pos', 'morphofeat', 'targets', 'text'])
 EntityElement = namedtuple('EntityElement', ['eid', 'entity_type', 'targets', 'text'])
 DependencyRelation = namedtuple('DependencyRelation', ['from_term', 'to_term', 'rfunc', 'from_orth', 'to_orth'])
+ChunkElement = namedtuple('ChunkElement', ['cid', 'head', 'phrase', 'text', 'targets'])
 
 def normalize_token_orth(orth):
     if orth == '\n':
@@ -66,6 +67,42 @@ def add_entity_element(entities_layer, entity_data):
     span = etree.SubElement(references_el, "span")
     span.append(etree.Comment(' '.join(entity_data.text)))
     for target in entity_data.targets:
+        target_el = etree.SubElement(span, "target")
+        target_el.set("id", target)
+
+def chunks_for_doc(doc):
+    """
+    Generator function that yields NP and PP chunks with their phrase label.
+    """
+    for chunk in doc.noun_chunks:
+        if chunk.root.head.pos_ == 'ADP':
+            span = doc[chunk.start-1:chunk.end]
+            yield (span, 'PP')
+        yield (chunk, 'NP')
+
+
+def chunk_tuples_for_doc(doc):
+    """
+    Generator function that takes a doc and yields ChunkElement tuples.
+    """
+    for i, (chunk, phrase) in enumerate(chunks_for_doc(doc)):
+        yield ChunkElement(cid = 'c' + str(i),
+                           head = 't' + str(chunk.root.i),
+                           phrase = phrase,
+                           text = chunk.orth_,
+                           targets = ['t' + str(tok.i) for tok in chunk])
+
+def add_chunk_element(chunks_layer, chunk_data):
+    """
+    Function that adds a chunk element to the chunks layer.
+    """
+    chunk_el = etree.SubElement(chunks_layer, "chunk")
+    chunk_el.set("id", chunk_data.cid)
+    chunk_el.set("head", chunk_data.head)
+    chunk_el.set("phrase", chunk_data.phrase)
+    span = etree.SubElement(chunk_el, "span")
+    span.append(etree.Comment(chunk_data.text))
+    for target in chunk_data.targets:
         target_el = etree.SubElement(span, "target")
         target_el.set("id", target)
 
@@ -127,7 +164,7 @@ def naf_from_doc(doc, time=None):
     terms_layer = etree.SubElement(root, "terms")
     entities_layer = etree.SubElement(root, "entities")
     dependency_layer = etree.SubElement(root, "deps")
-    
+    chunks_layer = etree.SubElement(root, "chunks")
     # Initialize variables:
     # ---------------------
     # - Use a generator for entity awareness.
@@ -222,6 +259,10 @@ def naf_from_doc(doc, time=None):
         for dep_data in dependencies_for_sentence:
             add_dependency_element(dependency_layer, dep_data)
         current_token = token_number + 1
+    
+    # Add chunk layer after adding all other layers.
+    for chunk_data in chunk_tuples_for_doc(doc):
+        add_chunk_element(chunks_layer, chunk_data)
     return root
 
 def current_time():
