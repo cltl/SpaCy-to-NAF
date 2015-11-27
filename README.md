@@ -16,6 +16,11 @@ NAF = spacy_to_naf.text_to_NAF(text, nlp)
 print(spacy_to_naf.NAF_to_string(NAF))
 ```
 
+Or use the command line:
+```
+python spacy_to_naf.py felix.txt > felix.naf
+```
+
 **Output**:
 ```XML
 <NAF>
