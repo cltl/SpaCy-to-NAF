@@ -1,6 +1,5 @@
 # coding: utf-8
 
-from spacy.en import English
 from lxml import etree
 from collections import namedtuple
 from datetime import datetime
@@ -223,9 +222,7 @@ def current_time():
     "Function that returns the current time (UTC)"
     return datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SUTC")
 
-nlp = English()
-
-def text_to_NAF(text):
+def text_to_NAF(text, nlp):
     """
     Function that takes a text and returns an xml object containing the NAF.
     """
@@ -243,3 +240,14 @@ def NAF_to_string(NAF, byte=False):
         return xml_string
     else:
         return xml_string.decode('utf-8')
+
+# Command line functionality: given name of a file, process the file contents and
+# print the NAF to stdout.
+if __name__ == '__main__':
+    import sys
+    from spacy.en import English
+    nlp = English()
+    with open(sys.argv[1]) as f:
+        text = f.read()
+        NAF = text_to_NAF(text, nlp)
+        print(NAF_to_string(NAF))

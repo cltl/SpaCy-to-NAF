@@ -6,10 +6,13 @@ This repository contains everything you need to output SpaCy results in NAF form
 
 ```python
 import spacy_to_naf
+from spacy.en import English
+
+nlp = English()
 
 text = """The cat sat on the mat. Felix was his name."""
 
-NAF = spacy_to_naf.text_to_NAF(text.replace('\n',''))
+NAF = spacy_to_naf.text_to_NAF(text, nlp)
 print(spacy_to_naf.NAF_to_string(NAF))
 ```
 
