@@ -11,6 +11,12 @@ TermElement = namedtuple('TermElement', ['tid', 'lemma', 'pos', 'morphofeat', 't
 EntityElement = namedtuple('EntityElement', ['eid', 'entity_type', 'targets', 'text'])
 DependencyRelation = namedtuple('DependencyRelation', ['from_term', 'to_term', 'rfunc', 'from_orth', 'to_orth'])
 
+def normalize_token_orth(orth):
+    if orth == '\n':
+        return 'NEWLINE'
+    else:
+        return orth
+
 def get_entity_type(span):
     "Function to get the entity type of an entity span."
     ent_type_set = {tok.ent_type_ for tok in span if tok.ent_type_ != ''}
@@ -84,8 +90,8 @@ def dependencies_to_add(token):
         dep_data = DependencyRelation(from_term = 't' + str(token.head.i),
                                       to_term = 't' + str(token.i),
                                       rfunc = token.dep_,
-                                      from_orth = token.head.orth_,
-                                      to_orth = token.orth_)
+                                      from_orth = normalize_token_orth(token.head.orth_),
+                                      to_orth = normalize_token_orth(token.orth_))
         deps.append(dep_data)
         token = token.head
     return deps
@@ -153,17 +159,17 @@ def naf_from_doc(doc, time=None):
             tid = 't' + str(term_number)
             
             current_term.append(wid)
-            current_term_orth.append(token.orth_)
+            current_term_orth.append(normalize_token_orth(token.orth_))
             
             if parsing_entity:
                 current_entity.append(tid)
-                current_entity_orth.append(token.orth_)
+                current_entity_orth.append(normalize_token_orth(token.orth_))
             
             # Create WfElement data:
             wf_data = WfElement(sent = str(sentence_number),
                            wid = wid,
                            length = str(len(token.text)),
-                           wordform = token.text,
+                           wordform = normalize_token_orth(token.text),
                            offset = str(token.idx))
             
             # Create TermElement data:
