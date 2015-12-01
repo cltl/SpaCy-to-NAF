@@ -169,7 +169,10 @@ def naf_from_doc(doc, time=None):
     # ---------------------
     # - Use a generator for entity awareness.
     entity_gen = entities(doc)
-    next_entity = next(entity_gen)
+    try:
+        next_entity = next(entity_gen)
+    except StopIteration:
+        next_entity = Entity(start=None, end=None, entity_type=None)
     
     # - Bookkeeping variables.
     current_term = []    # Use a list for multiword expressions.
@@ -248,7 +251,7 @@ def naf_from_doc(doc, time=None):
                     next_entity = next(entity_gen)
                 except StopIteration:
                     # No more entities...
-                    pass
+                    next_entity = Entity(start=None, end=None, entity_type=None)
 
             # Add dependencies for the current token to the list.
             for dep_data in dependencies_to_add(token):
