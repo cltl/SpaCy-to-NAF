@@ -1,5 +1,5 @@
 # coding: utf-8
-
+import re
 from lxml import etree
 from collections import namedtuple
 from datetime import datetime
@@ -12,11 +12,17 @@ EntityElement = namedtuple('EntityElement', ['eid', 'entity_type', 'targets', 't
 DependencyRelation = namedtuple('DependencyRelation', ['from_term', 'to_term', 'rfunc', 'from_orth', 'to_orth'])
 ChunkElement = namedtuple('ChunkElement', ['cid', 'head', 'phrase', 'text', 'targets'])
 
+# Only allow legal strings in XML:
+# http://stackoverflow.com/a/25920392/2899924
+illegal_pattern = re.compile('[^\u0020-\uD7FF\u0009\u000A\u000D\uE000-\uFFFD\u10000-\u10FFFF]+')
+def remove_illegal_chars(text):
+    return re.sub(illegal_pattern, '', text)
+
 def normalize_token_orth(orth):
     if '\n' in orth:
         return 'NEWLINE'
     else:
-        return orth
+        return remove_illegal_chars(orth)
 
 def get_entity_type(span):
     "Function to get the entity type of an entity span."
