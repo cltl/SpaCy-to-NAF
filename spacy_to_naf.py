@@ -95,7 +95,7 @@ def chunk_tuples_for_doc(doc):
         yield ChunkElement(cid = 'c' + str(i),
                            head = 't' + str(chunk.root.i),
                            phrase = phrase,
-                           text = chunk.orth_.replace('\n',' '),
+                           text = remove_illegal_chars(chunk.orth_.replace('\n',' ')),
                            targets = ['t' + str(tok.i) for tok in chunk])
 
 def add_chunk_element(chunks_layer, chunk_data):
@@ -220,7 +220,7 @@ def naf_from_doc(doc, time=None):
             
             # Create TermElement data:
             term_data = TermElement(tid = tid,
-                                    lemma = token.lemma_,
+                                    lemma = remove_illegal_chars(token.lemma_),
                                     pos = token.pos_,
                                     morphofeat = token.tag_,
                                     targets = current_term,
