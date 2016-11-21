@@ -286,12 +286,12 @@ def text_to_NAF(text, nlp):
     time = current_time()
     return naf_from_doc(doc, time=time)
 
-def NAF_to_string(NAF, byte=False):
+def NAF_to_string(NAF, byte=False, use_comments=False):
     """
     Function that takes an XML object containing NAF, and returns it as a string.
     If byte is True, then the output is a bytestring.
     """
-    xml_string = etree.tostring(NAF, pretty_print=True, with_comments=True)
+    xml_string = etree.tostring(NAF, pretty_print=True, with_comments=use_comments)
     if byte:
         return xml_string
     else:
