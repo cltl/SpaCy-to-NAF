@@ -31,7 +31,8 @@ Here is the output of the python code above. Please note that the chunks layer
 currently only contains PPs and NPs.
 
 ```XML
-<NAF>
+<?xml version='1.0' encoding='utf-8'?>
+<NAF xml:lang="en" version="v3.naf">
   <nafHeader>
     <linguisticProcessors layer="text">
       <lp name="SpaCy" timestamp="2015-11-27T16:52:14UTC"/>
