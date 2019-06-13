@@ -2,13 +2,14 @@
 
 This repository contains everything you need to output SpaCy results in NAF format.
 
+
 **Example**:
 
 ```python
 import spacy_to_naf
-from spacy.en import English
+import spacy
 
-nlp = English()
+nlp = spacy.load('en')
 
 text = """The cat sat on the mat. Felix was his name."""
 
@@ -18,7 +19,7 @@ print(spacy_to_naf.NAF_to_string(NAF))
 
 Or use the command line:
 ```
-python spacy_to_naf.py felix.txt > felix.naf
+python spacy_to_naf.py example_files/felix.txt > example_files/felix.naf
 ```
 
 NB. Don't use this for batch processing! That would mean loading SpaCy for each
@@ -35,12 +36,19 @@ currently only contains PPs and NPs.
 <NAF xml:lang="en" version="v3.naf">
   <nafHeader>
     <linguisticProcessors layer="text">
-      <lp name="SpaCy" timestamp="2015-11-27T16:52:14UTC"/>
+      <lp name="spaCy-2.0.0_model-core_web_sm" timestamp="2019-06-13T10:04:46UTC"/>
+    </linguisticProcessors>
+    <linguisticProcessors layer="raw">
+      <lp name="spaCy-2.0.0_model-core_web_sm" timestamp="2019-06-13T10:04:46UTC"/>
+    </linguisticProcessors>
+    <linguisticProcessors layer="entities">
+      <lp name="spaCy-2.0.0_model-core_web_sm" timestamp="2019-06-13T10:04:46UTC"/>
     </linguisticProcessors>
     <linguisticProcessors layer="terms">
-      <lp name="SpaCy" timestamp="2015-11-27T16:52:14UTC"/>
+      <lp name="spaCy-2.0.0_model-core_web_sm" timestamp="2019-06-13T10:04:46UTC"/>
     </linguisticProcessors>
   </nafHeader>
+  <raw>The cat sat on the mat. Felix was his name.</raw>
   <text>
     <wf sent="1" id="w0" length="3" offset="0">The</wf>
     <wf sent="1" id="w1" length="3" offset="4">cat</wf>
@@ -56,7 +64,7 @@ currently only contains PPs and NPs.
     <wf sent="2" id="w11" length="1" offset="42">.</wf>
   </text>
   <terms>
-    <term id="t0" lemma="the" pos="ADJ" morphofeat="DT">
+    <term id="t0" lemma="the" pos="DET" morphofeat="DT">
       <span>
         <!--The-->
         <target id="w0"/>
@@ -80,7 +88,7 @@ currently only contains PPs and NPs.
         <target id="w3"/>
       </span>
     </term>
-    <term id="t4" lemma="the" pos="ADJ" morphofeat="DT">
+    <term id="t4" lemma="the" pos="DET" morphofeat="DT">
       <span>
         <!--the-->
         <target id="w4"/>
@@ -98,7 +106,7 @@ currently only contains PPs and NPs.
         <target id="w6"/>
       </span>
     </term>
-    <term id="t7" lemma="felix" pos="NOUN" morphofeat="NNP">
+    <term id="t7" lemma="felix" pos="PROPN" morphofeat="NNP">
       <span>
         <!--Felix-->
         <target id="w7"/>
@@ -110,7 +118,7 @@ currently only contains PPs and NPs.
         <target id="w8"/>
       </span>
     </term>
-    <term id="t9" lemma="his" pos="ADJ" morphofeat="PRP$">
+    <term id="t9" lemma="-PRON-" pos="ADJ" morphofeat="PRP$">
       <span>
         <!--his-->
         <target id="w9"/>
@@ -129,74 +137,6 @@ currently only contains PPs and NPs.
       </span>
     </term>
   </terms>
-  <entities>
-    <entity id="e0" type="PERSON">
-      <references>
-        <span>
-          <!--Felix-->
-          <target id="t7"/>
-        </span>
-      </references>
-    </entity>
-  </entities>
-  <deps>
-    <!--det(cat,The)-->
-    <dep from="t1" to="t0" rfunc="det"/>
-    <!--nsubj(sat,cat)-->
-    <dep from="t2" to="t1" rfunc="nsubj"/>
-    <!--prep(sat,on)-->
-    <dep from="t2" to="t3" rfunc="prep"/>
-    <!--det(mat,the)-->
-    <dep from="t5" to="t4" rfunc="det"/>
-    <!--pobj(on,mat)-->
-    <dep from="t3" to="t5" rfunc="pobj"/>
-    <!--punct(sat,.)-->
-    <dep from="t2" to="t6" rfunc="punct"/>
-    <!--nsubj(was,Felix)-->
-    <dep from="t8" to="t7" rfunc="nsubj"/>
-    <!--poss(name,his)-->
-    <dep from="t10" to="t9" rfunc="poss"/>
-    <!--attr(was,name)-->
-    <dep from="t8" to="t10" rfunc="attr"/>
-    <!--punct(was,.)-->
-    <dep from="t8" to="t11" rfunc="punct"/>
-  </deps>
-  <chunks>
-    <chunk id="c0" head="t1" phrase="NP">
-      <span>
-        <!--The cat-->
-        <target id="t0"/>
-        <target id="t1"/>
-      </span>
-    </chunk>
-    <chunk id="c1" head="t3" phrase="PP">
-      <span>
-        <!--on the mat-->
-        <target id="t3"/>
-        <target id="t4"/>
-        <target id="t5"/>
-      </span>
-    </chunk>
-    <chunk id="c2" head="t5" phrase="NP">
-      <span>
-        <!--the mat-->
-        <target id="t4"/>
-        <target id="t5"/>
-      </span>
-    </chunk>
-    <chunk id="c3" head="t7" phrase="NP">
-      <span>
-        <!--Felix-->
-        <target id="t7"/>
-      </span>
-    </chunk>
-    <chunk id="c4" head="t10" phrase="NP">
-      <span>
-        <!--his name-->
-        <target id="t9"/>
-        <target id="t10"/>
-      </span>
-    </chunk>
-  </chunks>
+  <entities/>
 </NAF>
 ```
