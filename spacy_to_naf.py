@@ -21,7 +21,7 @@ def remove_illegal_chars(text):
 
 def normalize_token_orth(orth):
     if '\n' in orth:
-        return 'NEWLINE'
+       return 'NEWLINE'
     else:
         return remove_illegal_chars(orth)
 
@@ -149,7 +149,54 @@ def dependencies_to_add(token):
     return deps
 
 
-def naf_from_doc(doc, time=None, language='en'):
+def add_raw_layer(root, raw_layer):
+    """
+    create raw text layer that aligns with the token layer
+
+    :param lxml.etree._Element root: the root element of the XML file
+    :param lxml.etree._Element raw_layer: the 'raw' child of the NAF file
+
+    :rtype: None
+    """
+    # Add raw layer after adding all other layers + check alignment
+    wf_els = root.findall('text/wf')
+    tokens = [wf_els[0].text]
+
+    for prev_wf_el, cur_wf_el in zip(wf_els[:-1], wf_els[1:]):
+        prev_start = int(prev_wf_el.get('offset'))
+        prev_end = prev_start + int(prev_wf_el.get('length'))
+
+        cur_start = int(cur_wf_el.get('offset'))
+
+        delta = cur_start - prev_end  # how many characters are between current token and previous token?
+
+        # no chars between two token (for example with a dot .)
+        if delta == 0:
+            trailing_chars = ''
+        # 1 or more characters between tokens -> n spaces added
+        if delta >= 1:
+            trailing_chars = ' ' * delta
+        elif delta < 0:
+            raise AssertionError(f'please check the offsets of {prev_wf_el.text} and {cur_wf_el.text} (delta of {delta})')
+
+        tokens.append(trailing_chars + cur_wf_el.text)
+
+    raw_text = ''.join(tokens)
+    raw_layer.text = raw_text
+
+    # verify alignment between raw and token layer
+    for wf_el in root.xpath('text/wf'):
+        start = int(wf_el.get('offset'))
+        end = start + int(wf_el.get('length'))
+        token = raw_layer.text[start:end]
+        assert wf_el.text == token, f'mismatch in alignment of wf element {wf_el.text} ({wf_el.get("id")}) with raw layer (expected length {wf_el.get("length")}'
+
+def naf_from_doc(doc, time, modelname, language='en', layers={'raw',
+                                                              'text',
+                                                              'terms',
+                                                              'entities',
+                                                              'deps',
+                                                              'chunks'}):
     """
     Function that takes a document and returns an ElementTree
     object that corresponds to the root of the NAF structure.
@@ -163,26 +210,26 @@ def naf_from_doc(doc, time=None, language='en'):
     
     # Create text and terms layers.
     naf_header = etree.SubElement(root, "nafHeader")
-    
-    ling_proc = etree.SubElement(naf_header, "linguisticProcessors")
-    ling_proc.set("layer", "text")
-    lp = etree.SubElement(ling_proc, "lp")
-    lp.set("name", "SpaCy")
-    if time:
+
+    for layer in layers:
+        ling_proc = etree.SubElement(naf_header, "linguisticProcessors")
+        ling_proc.set("layer", layer)
+        lp = etree.SubElement(ling_proc, "lp")
+        lp.set("name", modelname)
         lp.set("timestamp", time)
-    
-    ling_proc = etree.SubElement(naf_header, "linguisticProcessors")
-    lp = etree.SubElement(ling_proc, "lp")
-    lp.set("name", "SpaCy")
-    if time:
-        lp.set("timestamp", time)
-    ling_proc.set("layer", "terms")
-    
-    text_layer = etree.SubElement(root, "text")
-    terms_layer = etree.SubElement(root, "terms")
-    entities_layer = etree.SubElement(root, "entities")
-    dependency_layer = etree.SubElement(root, "deps")
-    chunks_layer = etree.SubElement(root, "chunks")
+
+    if 'raw' in layers:
+        raw_layer = etree.SubElement(root, 'raw')
+    if 'text' in layers:
+        text_layer = etree.SubElement(root, "text")
+    if 'terms' in layers:
+        terms_layer = etree.SubElement(root, "terms")
+    if 'entities' in layers:
+        entities_layer = etree.SubElement(root, "entities")
+    if 'deps' in layers:
+        dependency_layer = etree.SubElement(root, "deps")
+    if 'chunks' in layers:
+        chunks_layer = etree.SubElement(root, "chunks")
     # Initialize variables:
     # ---------------------
     # - Use a generator for entity awareness.
@@ -205,7 +252,6 @@ def naf_from_doc(doc, time=None, language='en'):
     
     parsing_entity = False # State change: are we working on a term or not?
     
-    
     for sentence_number, sentence in enumerate(doc.sents, start = 1):
         dependencies_for_sentence = []
         for token_number, token in enumerate(sentence, start = current_token):
@@ -227,7 +273,7 @@ def naf_from_doc(doc, time=None, language='en'):
             wf_data = WfElement(sent = str(sentence_number),
                            wid = wid,
                            length = str(len(token.text)),
-                           wordform = normalize_token_orth(token.text),
+                           wordform = token.text,
                            offset = str(token.idx))
             
             # Create TermElement data:
@@ -237,9 +283,11 @@ def naf_from_doc(doc, time=None, language='en'):
                                     morphofeat = token.tag_,
                                     targets = current_term,
                                     text = current_term_orth)
-            
-            add_wf_element(text_layer, wf_data)
-            add_term_element(terms_layer, term_data)
+
+            if 'text' in layers:
+                add_wf_element(text_layer, wf_data)
+            if 'terms' in layers:
+                add_term_element(terms_layer, term_data)
             
             # Move to the next term
             term_number += 1
@@ -256,7 +304,8 @@ def naf_from_doc(doc, time=None, language='en'):
                                             targets = current_entity,
                                             text = current_entity_orth)
                 # Add data to XML:
-                add_entity_element(entities_layer, entity_data)
+                if 'entities' in layers:
+                    add_entity_element(entities_layer, entity_data)
                 
                 # Move to the next entity:
                 entity_number += 1
@@ -272,18 +321,25 @@ def naf_from_doc(doc, time=None, language='en'):
                     next_entity = Entity(start=None, end=None, entity_type=None)
 
             # Add dependencies for the current token to the list.
-            for dep_data in dependencies_to_add(token):
-                if not dep_data in dependencies_for_sentence:
-                    dependencies_for_sentence.append(dep_data)
+            if 'deps 'in layers:
+                for dep_data in dependencies_to_add(token):
+                    if not dep_data in dependencies_for_sentence:
+                        dependencies_for_sentence.append(dep_data)
 
         # At the end of the sentence, add all the dependencies to the XML structure.
         for dep_data in dependencies_for_sentence:
-            add_dependency_element(dependency_layer, dep_data)
+            if 'deps' in layers:
+                add_dependency_element(dependency_layer, dep_data)
         current_token = token_number + 1
     
     # Add chunk layer after adding all other layers.
     for chunk_data in chunk_tuples_for_doc(doc):
-        add_chunk_element(chunks_layer, chunk_data)
+        if 'chunks' in layers:
+            add_chunk_element(chunks_layer, chunk_data)
+
+    # Add raw layer after adding all other layers + check alignment
+    add_raw_layer(root, raw_layer)
+
     return root
 
 
@@ -292,13 +348,14 @@ def current_time():
     return datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SUTC")
 
 
-def text_to_NAF(text, nlp, language='en'):
+def text_to_NAF(text, nlp, layers, language='en'):
     """
     Function that takes a text and returns an xml object containing the NAF.
     """
     doc = nlp(text)
     time = current_time()
-    return naf_from_doc(doc, time=time, language=language)
+    name = f'spaCy-{nlp.meta["version"]}_model-{nlp.meta["name"]}'
+    return naf_from_doc(doc=doc, time=time, modelname=name, language=language, layers=layers)
 
 def NAF_to_string(NAF, byte=False):
     """
@@ -315,9 +372,9 @@ def NAF_to_string(NAF, byte=False):
 # print the NAF to stdout.
 if __name__ == '__main__':
     import sys
-    from spacy.en import English
-    nlp = English()
+    import spacy
+    nlp = spacy.load('en')
     with open(sys.argv[1]) as f:
         text = f.read()
-        NAF = text_to_NAF(text, nlp)
+        NAF = text_to_NAF(text, nlp, layers={'raw', 'text', 'terms', 'entities'})
         print(NAF_to_string(NAF))

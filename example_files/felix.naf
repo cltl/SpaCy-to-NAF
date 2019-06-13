@@ -1,0 +1,2535 @@
+<?xml version='1.0' encoding='utf-8'?>
+<NAF xml:lang="en" version="v3.naf">
+  <nafHeader>
+    <linguisticProcessors layer="text">
+      <lp name="spaCy-2.0.0_model-core_web_sm" timestamp="2019-06-13T10:03:30UTC"/>
+    </linguisticProcessors>
+    <linguisticProcessors layer="raw">
+      <lp name="spaCy-2.0.0_model-core_web_sm" timestamp="2019-06-13T10:03:30UTC"/>
+    </linguisticProcessors>
+    <linguisticProcessors layer="entities">
+      <lp name="spaCy-2.0.0_model-core_web_sm" timestamp="2019-06-13T10:03:30UTC"/>
+    </linguisticProcessors>
+    <linguisticProcessors layer="terms">
+      <lp name="spaCy-2.0.0_model-core_web_sm" timestamp="2019-06-13T10:03:30UTC"/>
+    </linguisticProcessors>
+  </nafHeader>
+  <raw>Cruise began acting in the early 1980s and made his breakthrough with leading roles in the comedy Risky Business (1983) and the action drama Top Gun (1986). Critical acclaim came with his roles in the dramas The Color of Money (1986), Rain Man (1988), and Born on the Fourth of July (1989). For portraying Ron Kovic in the latter, he won a Golden Globe Award and received a nomination for the Academy Award for Best Actor.
+As a leading Hollywood star in the 1990s, Cruise starred in several commercially successful films, including the drama A Few Good Men (1992), the thriller The Firm (1993), the horror film Interview with the Vampire (1994), and the romance Jerry Maguire (1996), for which he won another Golden Globe and received his second Oscar nomination. His performance as a motivational speaker in the 1999 drama Magnolia earned him a third Golden Globe and a nomination for the Academy Award for Best Supporting Actor. As an action star, Cruise has played Ethan Hunt in six films of the Mission: Impossible film series from 1996 to 2018. He also continued to feature in several science fiction and action films, including Vanilla Sky (2001), Minority Report (2002), The Last Samurai (2003), Collateral (2004), War of the Worlds (2005), Knight and Day (2010), Jack Reacher (2012), Oblivion (2013), and Edge of Tomorrow (2014).</raw>
+  <text>
+    <wf sent="1" id="w0" length="6" offset="0">Cruise</wf>
+    <wf sent="1" id="w1" length="5" offset="7">began</wf>
+    <wf sent="1" id="w2" length="6" offset="13">acting</wf>
+    <wf sent="1" id="w3" length="2" offset="20">in</wf>
+    <wf sent="1" id="w4" length="3" offset="23">the</wf>
+    <wf sent="1" id="w5" length="5" offset="27">early</wf>
+    <wf sent="1" id="w6" length="5" offset="33">1980s</wf>
+    <wf sent="1" id="w7" length="3" offset="39">and</wf>
+    <wf sent="1" id="w8" length="4" offset="43">made</wf>
+    <wf sent="1" id="w9" length="3" offset="48">his</wf>
+    <wf sent="1" id="w10" length="12" offset="52">breakthrough</wf>
+    <wf sent="1" id="w11" length="4" offset="65">with</wf>
+    <wf sent="1" id="w12" length="7" offset="70">leading</wf>
+    <wf sent="1" id="w13" length="5" offset="78">roles</wf>
+    <wf sent="1" id="w14" length="2" offset="84">in</wf>
+    <wf sent="1" id="w15" length="3" offset="87">the</wf>
+    <wf sent="1" id="w16" length="6" offset="91">comedy</wf>
+    <wf sent="1" id="w17" length="5" offset="98">Risky</wf>
+    <wf sent="1" id="w18" length="8" offset="104">Business</wf>
+    <wf sent="1" id="w19" length="1" offset="113">(</wf>
+    <wf sent="1" id="w20" length="4" offset="114">1983</wf>
+    <wf sent="1" id="w21" length="1" offset="118">)</wf>
+    <wf sent="1" id="w22" length="3" offset="120">and</wf>
+    <wf sent="1" id="w23" length="3" offset="124">the</wf>
+    <wf sent="1" id="w24" length="6" offset="128">action</wf>
+    <wf sent="1" id="w25" length="5" offset="135">drama</wf>
+    <wf sent="1" id="w26" length="3" offset="141">Top</wf>
+    <wf sent="1" id="w27" length="3" offset="145">Gun</wf>
+    <wf sent="1" id="w28" length="1" offset="149">(</wf>
+    <wf sent="1" id="w29" length="4" offset="150">1986</wf>
+    <wf sent="1" id="w30" length="1" offset="154">)</wf>
+    <wf sent="1" id="w31" length="1" offset="155">.</wf>
+    <wf sent="2" id="w32" length="8" offset="157">Critical</wf>
+    <wf sent="2" id="w33" length="7" offset="166">acclaim</wf>
+    <wf sent="2" id="w34" length="4" offset="174">came</wf>
+    <wf sent="2" id="w35" length="4" offset="179">with</wf>
+    <wf sent="2" id="w36" length="3" offset="184">his</wf>
+    <wf sent="2" id="w37" length="5" offset="188">roles</wf>
+    <wf sent="2" id="w38" length="2" offset="194">in</wf>
+    <wf sent="2" id="w39" length="3" offset="197">the</wf>
+    <wf sent="2" id="w40" length="6" offset="201">dramas</wf>
+    <wf sent="3" id="w41" length="3" offset="208">The</wf>
+    <wf sent="3" id="w42" length="5" offset="212">Color</wf>
+    <wf sent="3" id="w43" length="2" offset="218">of</wf>
+    <wf sent="3" id="w44" length="5" offset="221">Money</wf>
+    <wf sent="3" id="w45" length="1" offset="227">(</wf>
+    <wf sent="3" id="w46" length="4" offset="228">1986</wf>
+    <wf sent="3" id="w47" length="1" offset="232">)</wf>
+    <wf sent="3" id="w48" length="1" offset="233">,</wf>
+    <wf sent="3" id="w49" length="4" offset="235">Rain</wf>
+    <wf sent="3" id="w50" length="3" offset="240">Man</wf>
+    <wf sent="3" id="w51" length="1" offset="244">(</wf>
+    <wf sent="3" id="w52" length="4" offset="245">1988</wf>
+    <wf sent="3" id="w53" length="1" offset="249">)</wf>
+    <wf sent="3" id="w54" length="1" offset="250">,</wf>
+    <wf sent="3" id="w55" length="3" offset="252">and</wf>
+    <wf sent="3" id="w56" length="4" offset="256">Born</wf>
+    <wf sent="3" id="w57" length="2" offset="261">on</wf>
+    <wf sent="3" id="w58" length="3" offset="264">the</wf>
+    <wf sent="3" id="w59" length="6" offset="268">Fourth</wf>
+    <wf sent="3" id="w60" length="2" offset="275">of</wf>
+    <wf sent="3" id="w61" length="4" offset="278">July</wf>
+    <wf sent="3" id="w62" length="1" offset="283">(</wf>
+    <wf sent="3" id="w63" length="4" offset="284">1989</wf>
+    <wf sent="3" id="w64" length="1" offset="288">)</wf>
+    <wf sent="3" id="w65" length="1" offset="289">.</wf>
+    <wf sent="4" id="w66" length="3" offset="291">For</wf>
+    <wf sent="4" id="w67" length="10" offset="295">portraying</wf>
+    <wf sent="4" id="w68" length="3" offset="306">Ron</wf>
+    <wf sent="4" id="w69" length="5" offset="310">Kovic</wf>
+    <wf sent="4" id="w70" length="2" offset="316">in</wf>
+    <wf sent="4" id="w71" length="3" offset="319">the</wf>
+    <wf sent="4" id="w72" length="6" offset="323">latter</wf>
+    <wf sent="4" id="w73" length="1" offset="329">,</wf>
+    <wf sent="4" id="w74" length="2" offset="331">he</wf>
+    <wf sent="4" id="w75" length="3" offset="334">won</wf>
+    <wf sent="4" id="w76" length="1" offset="338">a</wf>
+    <wf sent="4" id="w77" length="6" offset="340">Golden</wf>
+    <wf sent="4" id="w78" length="5" offset="347">Globe</wf>
+    <wf sent="4" id="w79" length="5" offset="353">Award</wf>
+    <wf sent="4" id="w80" length="3" offset="359">and</wf>
+    <wf sent="4" id="w81" length="8" offset="363">received</wf>
+    <wf sent="4" id="w82" length="1" offset="372">a</wf>
+    <wf sent="4" id="w83" length="10" offset="374">nomination</wf>
+    <wf sent="4" id="w84" length="3" offset="385">for</wf>
+    <wf sent="4" id="w85" length="3" offset="389">the</wf>
+    <wf sent="4" id="w86" length="7" offset="393">Academy</wf>
+    <wf sent="4" id="w87" length="5" offset="401">Award</wf>
+    <wf sent="4" id="w88" length="3" offset="407">for</wf>
+    <wf sent="4" id="w89" length="4" offset="411">Best</wf>
+    <wf sent="4" id="w90" length="5" offset="416">Actor</wf>
+    <wf sent="4" id="w91" length="1" offset="421">.</wf>
+    <wf sent="4" id="w92" length="1" offset="422">
+</wf>
+    <wf sent="5" id="w93" length="2" offset="423">As</wf>
+    <wf sent="5" id="w94" length="1" offset="426">a</wf>
+    <wf sent="5" id="w95" length="7" offset="428">leading</wf>
+    <wf sent="5" id="w96" length="9" offset="436">Hollywood</wf>
+    <wf sent="5" id="w97" length="4" offset="446">star</wf>
+    <wf sent="5" id="w98" length="2" offset="451">in</wf>
+    <wf sent="5" id="w99" length="3" offset="454">the</wf>
+    <wf sent="5" id="w100" length="5" offset="458">1990s</wf>
+    <wf sent="5" id="w101" length="1" offset="463">,</wf>
+    <wf sent="5" id="w102" length="6" offset="465">Cruise</wf>
+    <wf sent="5" id="w103" length="7" offset="472">starred</wf>
+    <wf sent="5" id="w104" length="2" offset="480">in</wf>
+    <wf sent="5" id="w105" length="7" offset="483">several</wf>
+    <wf sent="5" id="w106" length="12" offset="491">commercially</wf>
+    <wf sent="5" id="w107" length="10" offset="504">successful</wf>
+    <wf sent="5" id="w108" length="5" offset="515">films</wf>
+    <wf sent="5" id="w109" length="1" offset="520">,</wf>
+    <wf sent="5" id="w110" length="9" offset="522">including</wf>
+    <wf sent="5" id="w111" length="3" offset="532">the</wf>
+    <wf sent="5" id="w112" length="5" offset="536">drama</wf>
+    <wf sent="5" id="w113" length="1" offset="542">A</wf>
+    <wf sent="5" id="w114" length="3" offset="544">Few</wf>
+    <wf sent="5" id="w115" length="4" offset="548">Good</wf>
+    <wf sent="5" id="w116" length="3" offset="553">Men</wf>
+    <wf sent="5" id="w117" length="1" offset="557">(</wf>
+    <wf sent="5" id="w118" length="4" offset="558">1992</wf>
+    <wf sent="5" id="w119" length="1" offset="562">)</wf>
+    <wf sent="5" id="w120" length="1" offset="563">,</wf>
+    <wf sent="5" id="w121" length="3" offset="565">the</wf>
+    <wf sent="5" id="w122" length="8" offset="569">thriller</wf>
+    <wf sent="5" id="w123" length="3" offset="578">The</wf>
+    <wf sent="5" id="w124" length="4" offset="582">Firm</wf>
+    <wf sent="5" id="w125" length="1" offset="587">(</wf>
+    <wf sent="5" id="w126" length="4" offset="588">1993</wf>
+    <wf sent="5" id="w127" length="1" offset="592">)</wf>
+    <wf sent="5" id="w128" length="1" offset="593">,</wf>
+    <wf sent="5" id="w129" length="3" offset="595">the</wf>
+    <wf sent="5" id="w130" length="6" offset="599">horror</wf>
+    <wf sent="5" id="w131" length="4" offset="606">film</wf>
+    <wf sent="5" id="w132" length="9" offset="611">Interview</wf>
+    <wf sent="5" id="w133" length="4" offset="621">with</wf>
+    <wf sent="5" id="w134" length="3" offset="626">the</wf>
+    <wf sent="5" id="w135" length="7" offset="630">Vampire</wf>
+    <wf sent="5" id="w136" length="1" offset="638">(</wf>
+    <wf sent="5" id="w137" length="4" offset="639">1994</wf>
+    <wf sent="5" id="w138" length="1" offset="643">)</wf>
+    <wf sent="5" id="w139" length="1" offset="644">,</wf>
+    <wf sent="5" id="w140" length="3" offset="646">and</wf>
+    <wf sent="5" id="w141" length="3" offset="650">the</wf>
+    <wf sent="5" id="w142" length="7" offset="654">romance</wf>
+    <wf sent="5" id="w143" length="5" offset="662">Jerry</wf>
+    <wf sent="5" id="w144" length="7" offset="668">Maguire</wf>
+    <wf sent="5" id="w145" length="1" offset="676">(</wf>
+    <wf sent="5" id="w146" length="4" offset="677">1996</wf>
+    <wf sent="5" id="w147" length="1" offset="681">)</wf>
+    <wf sent="5" id="w148" length="1" offset="682">,</wf>
+    <wf sent="5" id="w149" length="3" offset="684">for</wf>
+    <wf sent="5" id="w150" length="5" offset="688">which</wf>
+    <wf sent="5" id="w151" length="2" offset="694">he</wf>
+    <wf sent="5" id="w152" length="3" offset="697">won</wf>
+    <wf sent="5" id="w153" length="7" offset="701">another</wf>
+    <wf sent="5" id="w154" length="6" offset="709">Golden</wf>
+    <wf sent="5" id="w155" length="5" offset="716">Globe</wf>
+    <wf sent="5" id="w156" length="3" offset="722">and</wf>
+    <wf sent="5" id="w157" length="8" offset="726">received</wf>
+    <wf sent="5" id="w158" length="3" offset="735">his</wf>
+    <wf sent="5" id="w159" length="6" offset="739">second</wf>
+    <wf sent="5" id="w160" length="5" offset="746">Oscar</wf>
+    <wf sent="5" id="w161" length="10" offset="752">nomination</wf>
+    <wf sent="5" id="w162" length="1" offset="762">.</wf>
+    <wf sent="6" id="w163" length="3" offset="764">His</wf>
+    <wf sent="6" id="w164" length="11" offset="768">performance</wf>
+    <wf sent="6" id="w165" length="2" offset="780">as</wf>
+    <wf sent="6" id="w166" length="1" offset="783">a</wf>
+    <wf sent="6" id="w167" length="12" offset="785">motivational</wf>
+    <wf sent="6" id="w168" length="7" offset="798">speaker</wf>
+    <wf sent="6" id="w169" length="2" offset="806">in</wf>
+    <wf sent="6" id="w170" length="3" offset="809">the</wf>
+    <wf sent="6" id="w171" length="4" offset="813">1999</wf>
+    <wf sent="6" id="w172" length="5" offset="818">drama</wf>
+    <wf sent="6" id="w173" length="8" offset="824">Magnolia</wf>
+    <wf sent="6" id="w174" length="6" offset="833">earned</wf>
+    <wf sent="6" id="w175" length="3" offset="840">him</wf>
+    <wf sent="6" id="w176" length="1" offset="844">a</wf>
+    <wf sent="6" id="w177" length="5" offset="846">third</wf>
+    <wf sent="6" id="w178" length="6" offset="852">Golden</wf>
+    <wf sent="6" id="w179" length="5" offset="859">Globe</wf>
+    <wf sent="6" id="w180" length="3" offset="865">and</wf>
+    <wf sent="6" id="w181" length="1" offset="869">a</wf>
+    <wf sent="6" id="w182" length="10" offset="871">nomination</wf>
+    <wf sent="6" id="w183" length="3" offset="882">for</wf>
+    <wf sent="6" id="w184" length="3" offset="886">the</wf>
+    <wf sent="6" id="w185" length="7" offset="890">Academy</wf>
+    <wf sent="6" id="w186" length="5" offset="898">Award</wf>
+    <wf sent="6" id="w187" length="3" offset="904">for</wf>
+    <wf sent="6" id="w188" length="4" offset="908">Best</wf>
+    <wf sent="6" id="w189" length="10" offset="913">Supporting</wf>
+    <wf sent="6" id="w190" length="5" offset="924">Actor</wf>
+    <wf sent="6" id="w191" length="1" offset="929">.</wf>
+    <wf sent="7" id="w192" length="2" offset="931">As</wf>
+    <wf sent="7" id="w193" length="2" offset="934">an</wf>
+    <wf sent="7" id="w194" length="6" offset="937">action</wf>
+    <wf sent="7" id="w195" length="4" offset="944">star</wf>
+    <wf sent="7" id="w196" length="1" offset="948">,</wf>
+    <wf sent="7" id="w197" length="6" offset="950">Cruise</wf>
+    <wf sent="7" id="w198" length="3" offset="957">has</wf>
+    <wf sent="7" id="w199" length="6" offset="961">played</wf>
+    <wf sent="7" id="w200" length="5" offset="968">Ethan</wf>
+    <wf sent="7" id="w201" length="4" offset="974">Hunt</wf>
+    <wf sent="7" id="w202" length="2" offset="979">in</wf>
+    <wf sent="7" id="w203" length="3" offset="982">six</wf>
+    <wf sent="7" id="w204" length="5" offset="986">films</wf>
+    <wf sent="7" id="w205" length="2" offset="992">of</wf>
+    <wf sent="7" id="w206" length="3" offset="995">the</wf>
+    <wf sent="7" id="w207" length="7" offset="999">Mission</wf>
+    <wf sent="7" id="w208" length="1" offset="1006">:</wf>
+    <wf sent="7" id="w209" length="10" offset="1008">Impossible</wf>
+    <wf sent="7" id="w210" length="4" offset="1019">film</wf>
+    <wf sent="7" id="w211" length="6" offset="1024">series</wf>
+    <wf sent="7" id="w212" length="4" offset="1031">from</wf>
+    <wf sent="7" id="w213" length="4" offset="1036">1996</wf>
+    <wf sent="7" id="w214" length="2" offset="1041">to</wf>
+    <wf sent="7" id="w215" length="4" offset="1044">2018</wf>
+    <wf sent="7" id="w216" length="1" offset="1048">.</wf>
+    <wf sent="8" id="w217" length="2" offset="1050">He</wf>
+    <wf sent="8" id="w218" length="4" offset="1053">also</wf>
+    <wf sent="8" id="w219" length="9" offset="1058">continued</wf>
+    <wf sent="8" id="w220" length="2" offset="1068">to</wf>
+    <wf sent="8" id="w221" length="7" offset="1071">feature</wf>
+    <wf sent="8" id="w222" length="2" offset="1079">in</wf>
+    <wf sent="8" id="w223" length="7" offset="1082">several</wf>
+    <wf sent="8" id="w224" length="7" offset="1090">science</wf>
+    <wf sent="8" id="w225" length="7" offset="1098">fiction</wf>
+    <wf sent="8" id="w226" length="3" offset="1106">and</wf>
+    <wf sent="8" id="w227" length="6" offset="1110">action</wf>
+    <wf sent="8" id="w228" length="5" offset="1117">films</wf>
+    <wf sent="8" id="w229" length="1" offset="1122">,</wf>
+    <wf sent="8" id="w230" length="9" offset="1124">including</wf>
+    <wf sent="8" id="w231" length="7" offset="1134">Vanilla</wf>
+    <wf sent="8" id="w232" length="3" offset="1142">Sky</wf>
+    <wf sent="8" id="w233" length="1" offset="1146">(</wf>
+    <wf sent="8" id="w234" length="4" offset="1147">2001</wf>
+    <wf sent="8" id="w235" length="1" offset="1151">)</wf>
+    <wf sent="8" id="w236" length="1" offset="1152">,</wf>
+    <wf sent="8" id="w237" length="8" offset="1154">Minority</wf>
+    <wf sent="8" id="w238" length="6" offset="1163">Report</wf>
+    <wf sent="8" id="w239" length="1" offset="1170">(</wf>
+    <wf sent="8" id="w240" length="4" offset="1171">2002</wf>
+    <wf sent="8" id="w241" length="1" offset="1175">)</wf>
+    <wf sent="8" id="w242" length="1" offset="1176">,</wf>
+    <wf sent="8" id="w243" length="3" offset="1178">The</wf>
+    <wf sent="8" id="w244" length="4" offset="1182">Last</wf>
+    <wf sent="8" id="w245" length="7" offset="1187">Samurai</wf>
+    <wf sent="8" id="w246" length="1" offset="1195">(</wf>
+    <wf sent="8" id="w247" length="4" offset="1196">2003</wf>
+    <wf sent="8" id="w248" length="1" offset="1200">)</wf>
+    <wf sent="8" id="w249" length="1" offset="1201">,</wf>
+    <wf sent="8" id="w250" length="10" offset="1203">Collateral</wf>
+    <wf sent="8" id="w251" length="1" offset="1214">(</wf>
+    <wf sent="8" id="w252" length="4" offset="1215">2004</wf>
+    <wf sent="8" id="w253" length="1" offset="1219">)</wf>
+    <wf sent="8" id="w254" length="1" offset="1220">,</wf>
+    <wf sent="8" id="w255" length="3" offset="1222">War</wf>
+    <wf sent="8" id="w256" length="2" offset="1226">of</wf>
+    <wf sent="8" id="w257" length="3" offset="1229">the</wf>
+    <wf sent="8" id="w258" length="6" offset="1233">Worlds</wf>
+    <wf sent="8" id="w259" length="1" offset="1240">(</wf>
+    <wf sent="8" id="w260" length="4" offset="1241">2005</wf>
+    <wf sent="8" id="w261" length="1" offset="1245">)</wf>
+    <wf sent="8" id="w262" length="1" offset="1246">,</wf>
+    <wf sent="8" id="w263" length="6" offset="1248">Knight</wf>
+    <wf sent="8" id="w264" length="3" offset="1255">and</wf>
+    <wf sent="8" id="w265" length="3" offset="1259">Day</wf>
+    <wf sent="8" id="w266" length="1" offset="1263">(</wf>
+    <wf sent="8" id="w267" length="4" offset="1264">2010</wf>
+    <wf sent="8" id="w268" length="1" offset="1268">)</wf>
+    <wf sent="8" id="w269" length="1" offset="1269">,</wf>
+    <wf sent="8" id="w270" length="4" offset="1271">Jack</wf>
+    <wf sent="8" id="w271" length="7" offset="1276">Reacher</wf>
+    <wf sent="8" id="w272" length="1" offset="1284">(</wf>
+    <wf sent="8" id="w273" length="4" offset="1285">2012</wf>
+    <wf sent="8" id="w274" length="1" offset="1289">)</wf>
+    <wf sent="8" id="w275" length="1" offset="1290">,</wf>
+    <wf sent="8" id="w276" length="8" offset="1292">Oblivion</wf>
+    <wf sent="8" id="w277" length="1" offset="1301">(</wf>
+    <wf sent="8" id="w278" length="4" offset="1302">2013</wf>
+    <wf sent="8" id="w279" length="1" offset="1306">)</wf>
+    <wf sent="8" id="w280" length="1" offset="1307">,</wf>
+    <wf sent="8" id="w281" length="3" offset="1309">and</wf>
+    <wf sent="8" id="w282" length="4" offset="1313">Edge</wf>
+    <wf sent="8" id="w283" length="2" offset="1318">of</wf>
+    <wf sent="8" id="w284" length="8" offset="1321">Tomorrow</wf>
+    <wf sent="8" id="w285" length="1" offset="1330">(</wf>
+    <wf sent="8" id="w286" length="4" offset="1331">2014</wf>
+    <wf sent="8" id="w287" length="1" offset="1335">)</wf>
+    <wf sent="8" id="w288" length="1" offset="1336">.</wf>
+  </text>
+  <terms>
+    <term id="t0" lemma="cruise" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Cruise-->
+        <target id="w0"/>
+      </span>
+    </term>
+    <term id="t1" lemma="begin" pos="VERB" morphofeat="VBD">
+      <span>
+        <!--began-->
+        <target id="w1"/>
+      </span>
+    </term>
+    <term id="t2" lemma="act" pos="VERB" morphofeat="VBG">
+      <span>
+        <!--acting-->
+        <target id="w2"/>
+      </span>
+    </term>
+    <term id="t3" lemma="in" pos="ADP" morphofeat="IN">
+      <span>
+        <!--in-->
+        <target id="w3"/>
+      </span>
+    </term>
+    <term id="t4" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w4"/>
+      </span>
+    </term>
+    <term id="t5" lemma="early" pos="ADJ" morphofeat="JJ">
+      <span>
+        <!--early-->
+        <target id="w5"/>
+      </span>
+    </term>
+    <term id="t6" lemma="1980s" pos="NUM" morphofeat="CD">
+      <span>
+        <!--1980s-->
+        <target id="w6"/>
+      </span>
+    </term>
+    <term id="t7" lemma="and" pos="CCONJ" morphofeat="CC">
+      <span>
+        <!--and-->
+        <target id="w7"/>
+      </span>
+    </term>
+    <term id="t8" lemma="make" pos="VERB" morphofeat="VBD">
+      <span>
+        <!--made-->
+        <target id="w8"/>
+      </span>
+    </term>
+    <term id="t9" lemma="-PRON-" pos="ADJ" morphofeat="PRP$">
+      <span>
+        <!--his-->
+        <target id="w9"/>
+      </span>
+    </term>
+    <term id="t10" lemma="breakthrough" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--breakthrough-->
+        <target id="w10"/>
+      </span>
+    </term>
+    <term id="t11" lemma="with" pos="ADP" morphofeat="IN">
+      <span>
+        <!--with-->
+        <target id="w11"/>
+      </span>
+    </term>
+    <term id="t12" lemma="lead" pos="VERB" morphofeat="VBG">
+      <span>
+        <!--leading-->
+        <target id="w12"/>
+      </span>
+    </term>
+    <term id="t13" lemma="role" pos="NOUN" morphofeat="NNS">
+      <span>
+        <!--roles-->
+        <target id="w13"/>
+      </span>
+    </term>
+    <term id="t14" lemma="in" pos="ADP" morphofeat="IN">
+      <span>
+        <!--in-->
+        <target id="w14"/>
+      </span>
+    </term>
+    <term id="t15" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w15"/>
+      </span>
+    </term>
+    <term id="t16" lemma="comedy" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--comedy-->
+        <target id="w16"/>
+      </span>
+    </term>
+    <term id="t17" lemma="risky" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Risky-->
+        <target id="w17"/>
+      </span>
+    </term>
+    <term id="t18" lemma="business" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Business-->
+        <target id="w18"/>
+      </span>
+    </term>
+    <term id="t19" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w19"/>
+      </span>
+    </term>
+    <term id="t20" lemma="1983" pos="NUM" morphofeat="CD">
+      <span>
+        <!--1983-->
+        <target id="w20"/>
+      </span>
+    </term>
+    <term id="t21" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w21"/>
+      </span>
+    </term>
+    <term id="t22" lemma="and" pos="CCONJ" morphofeat="CC">
+      <span>
+        <!--and-->
+        <target id="w22"/>
+      </span>
+    </term>
+    <term id="t23" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w23"/>
+      </span>
+    </term>
+    <term id="t24" lemma="action" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--action-->
+        <target id="w24"/>
+      </span>
+    </term>
+    <term id="t25" lemma="drama" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--drama-->
+        <target id="w25"/>
+      </span>
+    </term>
+    <term id="t26" lemma="top" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Top-->
+        <target id="w26"/>
+      </span>
+    </term>
+    <term id="t27" lemma="gun" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Gun-->
+        <target id="w27"/>
+      </span>
+    </term>
+    <term id="t28" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w28"/>
+      </span>
+    </term>
+    <term id="t29" lemma="1986" pos="NUM" morphofeat="CD">
+      <span>
+        <!--1986-->
+        <target id="w29"/>
+      </span>
+    </term>
+    <term id="t30" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w30"/>
+      </span>
+    </term>
+    <term id="t31" lemma="." pos="PUNCT" morphofeat=".">
+      <span>
+        <!--.-->
+        <target id="w31"/>
+      </span>
+    </term>
+    <term id="t32" lemma="critical" pos="ADJ" morphofeat="JJ">
+      <span>
+        <!--Critical-->
+        <target id="w32"/>
+      </span>
+    </term>
+    <term id="t33" lemma="acclaim" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--acclaim-->
+        <target id="w33"/>
+      </span>
+    </term>
+    <term id="t34" lemma="come" pos="VERB" morphofeat="VBD">
+      <span>
+        <!--came-->
+        <target id="w34"/>
+      </span>
+    </term>
+    <term id="t35" lemma="with" pos="ADP" morphofeat="IN">
+      <span>
+        <!--with-->
+        <target id="w35"/>
+      </span>
+    </term>
+    <term id="t36" lemma="-PRON-" pos="ADJ" morphofeat="PRP$">
+      <span>
+        <!--his-->
+        <target id="w36"/>
+      </span>
+    </term>
+    <term id="t37" lemma="role" pos="NOUN" morphofeat="NNS">
+      <span>
+        <!--roles-->
+        <target id="w37"/>
+      </span>
+    </term>
+    <term id="t38" lemma="in" pos="ADP" morphofeat="IN">
+      <span>
+        <!--in-->
+        <target id="w38"/>
+      </span>
+    </term>
+    <term id="t39" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w39"/>
+      </span>
+    </term>
+    <term id="t40" lemma="dramas" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--dramas-->
+        <target id="w40"/>
+      </span>
+    </term>
+    <term id="t41" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--The-->
+        <target id="w41"/>
+      </span>
+    </term>
+    <term id="t42" lemma="color" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Color-->
+        <target id="w42"/>
+      </span>
+    </term>
+    <term id="t43" lemma="of" pos="ADP" morphofeat="IN">
+      <span>
+        <!--of-->
+        <target id="w43"/>
+      </span>
+    </term>
+    <term id="t44" lemma="money" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Money-->
+        <target id="w44"/>
+      </span>
+    </term>
+    <term id="t45" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w45"/>
+      </span>
+    </term>
+    <term id="t46" lemma="1986" pos="NUM" morphofeat="CD">
+      <span>
+        <!--1986-->
+        <target id="w46"/>
+      </span>
+    </term>
+    <term id="t47" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w47"/>
+      </span>
+    </term>
+    <term id="t48" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w48"/>
+      </span>
+    </term>
+    <term id="t49" lemma="rain" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--Rain-->
+        <target id="w49"/>
+      </span>
+    </term>
+    <term id="t50" lemma="man" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Man-->
+        <target id="w50"/>
+      </span>
+    </term>
+    <term id="t51" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w51"/>
+      </span>
+    </term>
+    <term id="t52" lemma="1988" pos="NUM" morphofeat="CD">
+      <span>
+        <!--1988-->
+        <target id="w52"/>
+      </span>
+    </term>
+    <term id="t53" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w53"/>
+      </span>
+    </term>
+    <term id="t54" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w54"/>
+      </span>
+    </term>
+    <term id="t55" lemma="and" pos="CCONJ" morphofeat="CC">
+      <span>
+        <!--and-->
+        <target id="w55"/>
+      </span>
+    </term>
+    <term id="t56" lemma="bear" pos="VERB" morphofeat="VBN">
+      <span>
+        <!--Born-->
+        <target id="w56"/>
+      </span>
+    </term>
+    <term id="t57" lemma="on" pos="ADP" morphofeat="IN">
+      <span>
+        <!--on-->
+        <target id="w57"/>
+      </span>
+    </term>
+    <term id="t58" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w58"/>
+      </span>
+    </term>
+    <term id="t59" lemma="fourth" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Fourth-->
+        <target id="w59"/>
+      </span>
+    </term>
+    <term id="t60" lemma="of" pos="ADP" morphofeat="IN">
+      <span>
+        <!--of-->
+        <target id="w60"/>
+      </span>
+    </term>
+    <term id="t61" lemma="july" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--July-->
+        <target id="w61"/>
+      </span>
+    </term>
+    <term id="t62" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w62"/>
+      </span>
+    </term>
+    <term id="t63" lemma="1989" pos="NUM" morphofeat="CD">
+      <span>
+        <!--1989-->
+        <target id="w63"/>
+      </span>
+    </term>
+    <term id="t64" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w64"/>
+      </span>
+    </term>
+    <term id="t65" lemma="." pos="PUNCT" morphofeat=".">
+      <span>
+        <!--.-->
+        <target id="w65"/>
+      </span>
+    </term>
+    <term id="t66" lemma="for" pos="ADP" morphofeat="IN">
+      <span>
+        <!--For-->
+        <target id="w66"/>
+      </span>
+    </term>
+    <term id="t67" lemma="portray" pos="VERB" morphofeat="VBG">
+      <span>
+        <!--portraying-->
+        <target id="w67"/>
+      </span>
+    </term>
+    <term id="t68" lemma="ron" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Ron-->
+        <target id="w68"/>
+      </span>
+    </term>
+    <term id="t69" lemma="kovic" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Kovic-->
+        <target id="w69"/>
+      </span>
+    </term>
+    <term id="t70" lemma="in" pos="ADP" morphofeat="IN">
+      <span>
+        <!--in-->
+        <target id="w70"/>
+      </span>
+    </term>
+    <term id="t71" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w71"/>
+      </span>
+    </term>
+    <term id="t72" lemma="latter" pos="ADJ" morphofeat="JJ">
+      <span>
+        <!--latter-->
+        <target id="w72"/>
+      </span>
+    </term>
+    <term id="t73" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w73"/>
+      </span>
+    </term>
+    <term id="t74" lemma="-PRON-" pos="PRON" morphofeat="PRP">
+      <span>
+        <!--he-->
+        <target id="w74"/>
+      </span>
+    </term>
+    <term id="t75" lemma="win" pos="VERB" morphofeat="VBD">
+      <span>
+        <!--won-->
+        <target id="w75"/>
+      </span>
+    </term>
+    <term id="t76" lemma="a" pos="DET" morphofeat="DT">
+      <span>
+        <!--a-->
+        <target id="w76"/>
+      </span>
+    </term>
+    <term id="t77" lemma="golden" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Golden-->
+        <target id="w77"/>
+      </span>
+    </term>
+    <term id="t78" lemma="globe" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Globe-->
+        <target id="w78"/>
+      </span>
+    </term>
+    <term id="t79" lemma="award" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Award-->
+        <target id="w79"/>
+      </span>
+    </term>
+    <term id="t80" lemma="and" pos="CCONJ" morphofeat="CC">
+      <span>
+        <!--and-->
+        <target id="w80"/>
+      </span>
+    </term>
+    <term id="t81" lemma="receive" pos="VERB" morphofeat="VBD">
+      <span>
+        <!--received-->
+        <target id="w81"/>
+      </span>
+    </term>
+    <term id="t82" lemma="a" pos="DET" morphofeat="DT">
+      <span>
+        <!--a-->
+        <target id="w82"/>
+      </span>
+    </term>
+    <term id="t83" lemma="nomination" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--nomination-->
+        <target id="w83"/>
+      </span>
+    </term>
+    <term id="t84" lemma="for" pos="ADP" morphofeat="IN">
+      <span>
+        <!--for-->
+        <target id="w84"/>
+      </span>
+    </term>
+    <term id="t85" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w85"/>
+      </span>
+    </term>
+    <term id="t86" lemma="academy" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Academy-->
+        <target id="w86"/>
+      </span>
+    </term>
+    <term id="t87" lemma="award" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Award-->
+        <target id="w87"/>
+      </span>
+    </term>
+    <term id="t88" lemma="for" pos="ADP" morphofeat="IN">
+      <span>
+        <!--for-->
+        <target id="w88"/>
+      </span>
+    </term>
+    <term id="t89" lemma="good" pos="ADJ" morphofeat="JJS">
+      <span>
+        <!--Best-->
+        <target id="w89"/>
+      </span>
+    </term>
+    <term id="t90" lemma="actor" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--Actor-->
+        <target id="w90"/>
+      </span>
+    </term>
+    <term id="t91" lemma="." pos="PUNCT" morphofeat=".">
+      <span>
+        <!--.-->
+        <target id="w91"/>
+      </span>
+    </term>
+    <term id="t92" lemma="&#10;" pos="SPACE" morphofeat="">
+      <span>
+        <!--NEWLINE-->
+        <target id="w92"/>
+      </span>
+    </term>
+    <term id="t93" lemma="as" pos="ADP" morphofeat="IN">
+      <span>
+        <!--As-->
+        <target id="w93"/>
+      </span>
+    </term>
+    <term id="t94" lemma="a" pos="DET" morphofeat="DT">
+      <span>
+        <!--a-->
+        <target id="w94"/>
+      </span>
+    </term>
+    <term id="t95" lemma="lead" pos="VERB" morphofeat="VBG">
+      <span>
+        <!--leading-->
+        <target id="w95"/>
+      </span>
+    </term>
+    <term id="t96" lemma="hollywood" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Hollywood-->
+        <target id="w96"/>
+      </span>
+    </term>
+    <term id="t97" lemma="star" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--star-->
+        <target id="w97"/>
+      </span>
+    </term>
+    <term id="t98" lemma="in" pos="ADP" morphofeat="IN">
+      <span>
+        <!--in-->
+        <target id="w98"/>
+      </span>
+    </term>
+    <term id="t99" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w99"/>
+      </span>
+    </term>
+    <term id="t100" lemma="1990" pos="NOUN" morphofeat="NNS">
+      <span>
+        <!--1990s-->
+        <target id="w100"/>
+      </span>
+    </term>
+    <term id="t101" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w101"/>
+      </span>
+    </term>
+    <term id="t102" lemma="cruise" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Cruise-->
+        <target id="w102"/>
+      </span>
+    </term>
+    <term id="t103" lemma="star" pos="VERB" morphofeat="VBD">
+      <span>
+        <!--starred-->
+        <target id="w103"/>
+      </span>
+    </term>
+    <term id="t104" lemma="in" pos="ADP" morphofeat="IN">
+      <span>
+        <!--in-->
+        <target id="w104"/>
+      </span>
+    </term>
+    <term id="t105" lemma="several" pos="ADJ" morphofeat="JJ">
+      <span>
+        <!--several-->
+        <target id="w105"/>
+      </span>
+    </term>
+    <term id="t106" lemma="commercially" pos="ADV" morphofeat="RB">
+      <span>
+        <!--commercially-->
+        <target id="w106"/>
+      </span>
+    </term>
+    <term id="t107" lemma="successful" pos="ADJ" morphofeat="JJ">
+      <span>
+        <!--successful-->
+        <target id="w107"/>
+      </span>
+    </term>
+    <term id="t108" lemma="film" pos="NOUN" morphofeat="NNS">
+      <span>
+        <!--films-->
+        <target id="w108"/>
+      </span>
+    </term>
+    <term id="t109" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w109"/>
+      </span>
+    </term>
+    <term id="t110" lemma="include" pos="VERB" morphofeat="VBG">
+      <span>
+        <!--including-->
+        <target id="w110"/>
+      </span>
+    </term>
+    <term id="t111" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w111"/>
+      </span>
+    </term>
+    <term id="t112" lemma="drama" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--drama-->
+        <target id="w112"/>
+      </span>
+    </term>
+    <term id="t113" lemma="a" pos="DET" morphofeat="DT">
+      <span>
+        <!--A-->
+        <target id="w113"/>
+      </span>
+    </term>
+    <term id="t114" lemma="few" pos="ADJ" morphofeat="JJ">
+      <span>
+        <!--Few-->
+        <target id="w114"/>
+      </span>
+    </term>
+    <term id="t115" lemma="good" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Good-->
+        <target id="w115"/>
+      </span>
+    </term>
+    <term id="t116" lemma="men" pos="PROPN" morphofeat="NNPS">
+      <span>
+        <!--Men-->
+        <target id="w116"/>
+      </span>
+    </term>
+    <term id="t117" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w117"/>
+      </span>
+    </term>
+    <term id="t118" lemma="1992" pos="NUM" morphofeat="CD">
+      <span>
+        <!--1992-->
+        <target id="w118"/>
+      </span>
+    </term>
+    <term id="t119" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w119"/>
+      </span>
+    </term>
+    <term id="t120" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w120"/>
+      </span>
+    </term>
+    <term id="t121" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w121"/>
+      </span>
+    </term>
+    <term id="t122" lemma="thriller" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--thriller-->
+        <target id="w122"/>
+      </span>
+    </term>
+    <term id="t123" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--The-->
+        <target id="w123"/>
+      </span>
+    </term>
+    <term id="t124" lemma="firm" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--Firm-->
+        <target id="w124"/>
+      </span>
+    </term>
+    <term id="t125" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w125"/>
+      </span>
+    </term>
+    <term id="t126" lemma="1993" pos="NUM" morphofeat="CD">
+      <span>
+        <!--1993-->
+        <target id="w126"/>
+      </span>
+    </term>
+    <term id="t127" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w127"/>
+      </span>
+    </term>
+    <term id="t128" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w128"/>
+      </span>
+    </term>
+    <term id="t129" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w129"/>
+      </span>
+    </term>
+    <term id="t130" lemma="horror" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--horror-->
+        <target id="w130"/>
+      </span>
+    </term>
+    <term id="t131" lemma="film" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--film-->
+        <target id="w131"/>
+      </span>
+    </term>
+    <term id="t132" lemma="interview" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--Interview-->
+        <target id="w132"/>
+      </span>
+    </term>
+    <term id="t133" lemma="with" pos="ADP" morphofeat="IN">
+      <span>
+        <!--with-->
+        <target id="w133"/>
+      </span>
+    </term>
+    <term id="t134" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w134"/>
+      </span>
+    </term>
+    <term id="t135" lemma="vampire" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Vampire-->
+        <target id="w135"/>
+      </span>
+    </term>
+    <term id="t136" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w136"/>
+      </span>
+    </term>
+    <term id="t137" lemma="1994" pos="NUM" morphofeat="CD">
+      <span>
+        <!--1994-->
+        <target id="w137"/>
+      </span>
+    </term>
+    <term id="t138" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w138"/>
+      </span>
+    </term>
+    <term id="t139" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w139"/>
+      </span>
+    </term>
+    <term id="t140" lemma="and" pos="CCONJ" morphofeat="CC">
+      <span>
+        <!--and-->
+        <target id="w140"/>
+      </span>
+    </term>
+    <term id="t141" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w141"/>
+      </span>
+    </term>
+    <term id="t142" lemma="romance" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--romance-->
+        <target id="w142"/>
+      </span>
+    </term>
+    <term id="t143" lemma="jerry" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Jerry-->
+        <target id="w143"/>
+      </span>
+    </term>
+    <term id="t144" lemma="maguire" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Maguire-->
+        <target id="w144"/>
+      </span>
+    </term>
+    <term id="t145" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w145"/>
+      </span>
+    </term>
+    <term id="t146" lemma="1996" pos="NUM" morphofeat="CD">
+      <span>
+        <!--1996-->
+        <target id="w146"/>
+      </span>
+    </term>
+    <term id="t147" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w147"/>
+      </span>
+    </term>
+    <term id="t148" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w148"/>
+      </span>
+    </term>
+    <term id="t149" lemma="for" pos="ADP" morphofeat="IN">
+      <span>
+        <!--for-->
+        <target id="w149"/>
+      </span>
+    </term>
+    <term id="t150" lemma="which" pos="ADJ" morphofeat="WDT">
+      <span>
+        <!--which-->
+        <target id="w150"/>
+      </span>
+    </term>
+    <term id="t151" lemma="-PRON-" pos="PRON" morphofeat="PRP">
+      <span>
+        <!--he-->
+        <target id="w151"/>
+      </span>
+    </term>
+    <term id="t152" lemma="win" pos="VERB" morphofeat="VBD">
+      <span>
+        <!--won-->
+        <target id="w152"/>
+      </span>
+    </term>
+    <term id="t153" lemma="another" pos="DET" morphofeat="DT">
+      <span>
+        <!--another-->
+        <target id="w153"/>
+      </span>
+    </term>
+    <term id="t154" lemma="golden" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Golden-->
+        <target id="w154"/>
+      </span>
+    </term>
+    <term id="t155" lemma="globe" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Globe-->
+        <target id="w155"/>
+      </span>
+    </term>
+    <term id="t156" lemma="and" pos="CCONJ" morphofeat="CC">
+      <span>
+        <!--and-->
+        <target id="w156"/>
+      </span>
+    </term>
+    <term id="t157" lemma="receive" pos="VERB" morphofeat="VBD">
+      <span>
+        <!--received-->
+        <target id="w157"/>
+      </span>
+    </term>
+    <term id="t158" lemma="-PRON-" pos="ADJ" morphofeat="PRP$">
+      <span>
+        <!--his-->
+        <target id="w158"/>
+      </span>
+    </term>
+    <term id="t159" lemma="second" pos="ADJ" morphofeat="JJ">
+      <span>
+        <!--second-->
+        <target id="w159"/>
+      </span>
+    </term>
+    <term id="t160" lemma="oscar" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Oscar-->
+        <target id="w160"/>
+      </span>
+    </term>
+    <term id="t161" lemma="nomination" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--nomination-->
+        <target id="w161"/>
+      </span>
+    </term>
+    <term id="t162" lemma="." pos="PUNCT" morphofeat=".">
+      <span>
+        <!--.-->
+        <target id="w162"/>
+      </span>
+    </term>
+    <term id="t163" lemma="-PRON-" pos="ADJ" morphofeat="PRP$">
+      <span>
+        <!--His-->
+        <target id="w163"/>
+      </span>
+    </term>
+    <term id="t164" lemma="performance" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--performance-->
+        <target id="w164"/>
+      </span>
+    </term>
+    <term id="t165" lemma="as" pos="ADP" morphofeat="IN">
+      <span>
+        <!--as-->
+        <target id="w165"/>
+      </span>
+    </term>
+    <term id="t166" lemma="a" pos="DET" morphofeat="DT">
+      <span>
+        <!--a-->
+        <target id="w166"/>
+      </span>
+    </term>
+    <term id="t167" lemma="motivational" pos="ADJ" morphofeat="JJ">
+      <span>
+        <!--motivational-->
+        <target id="w167"/>
+      </span>
+    </term>
+    <term id="t168" lemma="speaker" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--speaker-->
+        <target id="w168"/>
+      </span>
+    </term>
+    <term id="t169" lemma="in" pos="ADP" morphofeat="IN">
+      <span>
+        <!--in-->
+        <target id="w169"/>
+      </span>
+    </term>
+    <term id="t170" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w170"/>
+      </span>
+    </term>
+    <term id="t171" lemma="1999" pos="NUM" morphofeat="CD">
+      <span>
+        <!--1999-->
+        <target id="w171"/>
+      </span>
+    </term>
+    <term id="t172" lemma="drama" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--drama-->
+        <target id="w172"/>
+      </span>
+    </term>
+    <term id="t173" lemma="magnolia" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Magnolia-->
+        <target id="w173"/>
+      </span>
+    </term>
+    <term id="t174" lemma="earn" pos="VERB" morphofeat="VBD">
+      <span>
+        <!--earned-->
+        <target id="w174"/>
+      </span>
+    </term>
+    <term id="t175" lemma="-PRON-" pos="PRON" morphofeat="PRP">
+      <span>
+        <!--him-->
+        <target id="w175"/>
+      </span>
+    </term>
+    <term id="t176" lemma="a" pos="DET" morphofeat="DT">
+      <span>
+        <!--a-->
+        <target id="w176"/>
+      </span>
+    </term>
+    <term id="t177" lemma="third" pos="ADJ" morphofeat="JJ">
+      <span>
+        <!--third-->
+        <target id="w177"/>
+      </span>
+    </term>
+    <term id="t178" lemma="golden" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Golden-->
+        <target id="w178"/>
+      </span>
+    </term>
+    <term id="t179" lemma="globe" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Globe-->
+        <target id="w179"/>
+      </span>
+    </term>
+    <term id="t180" lemma="and" pos="CCONJ" morphofeat="CC">
+      <span>
+        <!--and-->
+        <target id="w180"/>
+      </span>
+    </term>
+    <term id="t181" lemma="a" pos="DET" morphofeat="DT">
+      <span>
+        <!--a-->
+        <target id="w181"/>
+      </span>
+    </term>
+    <term id="t182" lemma="nomination" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--nomination-->
+        <target id="w182"/>
+      </span>
+    </term>
+    <term id="t183" lemma="for" pos="ADP" morphofeat="IN">
+      <span>
+        <!--for-->
+        <target id="w183"/>
+      </span>
+    </term>
+    <term id="t184" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w184"/>
+      </span>
+    </term>
+    <term id="t185" lemma="academy" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Academy-->
+        <target id="w185"/>
+      </span>
+    </term>
+    <term id="t186" lemma="award" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Award-->
+        <target id="w186"/>
+      </span>
+    </term>
+    <term id="t187" lemma="for" pos="ADP" morphofeat="IN">
+      <span>
+        <!--for-->
+        <target id="w187"/>
+      </span>
+    </term>
+    <term id="t188" lemma="good" pos="ADJ" morphofeat="JJS">
+      <span>
+        <!--Best-->
+        <target id="w188"/>
+      </span>
+    </term>
+    <term id="t189" lemma="supporting" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Supporting-->
+        <target id="w189"/>
+      </span>
+    </term>
+    <term id="t190" lemma="actor" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--Actor-->
+        <target id="w190"/>
+      </span>
+    </term>
+    <term id="t191" lemma="." pos="PUNCT" morphofeat=".">
+      <span>
+        <!--.-->
+        <target id="w191"/>
+      </span>
+    </term>
+    <term id="t192" lemma="as" pos="ADP" morphofeat="IN">
+      <span>
+        <!--As-->
+        <target id="w192"/>
+      </span>
+    </term>
+    <term id="t193" lemma="an" pos="DET" morphofeat="DT">
+      <span>
+        <!--an-->
+        <target id="w193"/>
+      </span>
+    </term>
+    <term id="t194" lemma="action" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--action-->
+        <target id="w194"/>
+      </span>
+    </term>
+    <term id="t195" lemma="star" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--star-->
+        <target id="w195"/>
+      </span>
+    </term>
+    <term id="t196" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w196"/>
+      </span>
+    </term>
+    <term id="t197" lemma="cruise" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Cruise-->
+        <target id="w197"/>
+      </span>
+    </term>
+    <term id="t198" lemma="have" pos="VERB" morphofeat="VBZ">
+      <span>
+        <!--has-->
+        <target id="w198"/>
+      </span>
+    </term>
+    <term id="t199" lemma="play" pos="VERB" morphofeat="VBN">
+      <span>
+        <!--played-->
+        <target id="w199"/>
+      </span>
+    </term>
+    <term id="t200" lemma="ethan" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Ethan-->
+        <target id="w200"/>
+      </span>
+    </term>
+    <term id="t201" lemma="hunt" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Hunt-->
+        <target id="w201"/>
+      </span>
+    </term>
+    <term id="t202" lemma="in" pos="ADP" morphofeat="IN">
+      <span>
+        <!--in-->
+        <target id="w202"/>
+      </span>
+    </term>
+    <term id="t203" lemma="six" pos="NUM" morphofeat="CD">
+      <span>
+        <!--six-->
+        <target id="w203"/>
+      </span>
+    </term>
+    <term id="t204" lemma="film" pos="NOUN" morphofeat="NNS">
+      <span>
+        <!--films-->
+        <target id="w204"/>
+      </span>
+    </term>
+    <term id="t205" lemma="of" pos="ADP" morphofeat="IN">
+      <span>
+        <!--of-->
+        <target id="w205"/>
+      </span>
+    </term>
+    <term id="t206" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w206"/>
+      </span>
+    </term>
+    <term id="t207" lemma="mission" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--Mission-->
+        <target id="w207"/>
+      </span>
+    </term>
+    <term id="t208" lemma=":" pos="PUNCT" morphofeat=":">
+      <span>
+        <!--:-->
+        <target id="w208"/>
+      </span>
+    </term>
+    <term id="t209" lemma="impossible" pos="ADJ" morphofeat="JJ">
+      <span>
+        <!--Impossible-->
+        <target id="w209"/>
+      </span>
+    </term>
+    <term id="t210" lemma="film" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--film-->
+        <target id="w210"/>
+      </span>
+    </term>
+    <term id="t211" lemma="series" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--series-->
+        <target id="w211"/>
+      </span>
+    </term>
+    <term id="t212" lemma="from" pos="ADP" morphofeat="IN">
+      <span>
+        <!--from-->
+        <target id="w212"/>
+      </span>
+    </term>
+    <term id="t213" lemma="1996" pos="NUM" morphofeat="CD">
+      <span>
+        <!--1996-->
+        <target id="w213"/>
+      </span>
+    </term>
+    <term id="t214" lemma="to" pos="ADP" morphofeat="IN">
+      <span>
+        <!--to-->
+        <target id="w214"/>
+      </span>
+    </term>
+    <term id="t215" lemma="2018" pos="NUM" morphofeat="CD">
+      <span>
+        <!--2018-->
+        <target id="w215"/>
+      </span>
+    </term>
+    <term id="t216" lemma="." pos="PUNCT" morphofeat=".">
+      <span>
+        <!--.-->
+        <target id="w216"/>
+      </span>
+    </term>
+    <term id="t217" lemma="-PRON-" pos="PRON" morphofeat="PRP">
+      <span>
+        <!--He-->
+        <target id="w217"/>
+      </span>
+    </term>
+    <term id="t218" lemma="also" pos="ADV" morphofeat="RB">
+      <span>
+        <!--also-->
+        <target id="w218"/>
+      </span>
+    </term>
+    <term id="t219" lemma="continue" pos="VERB" morphofeat="VBD">
+      <span>
+        <!--continued-->
+        <target id="w219"/>
+      </span>
+    </term>
+    <term id="t220" lemma="to" pos="PART" morphofeat="TO">
+      <span>
+        <!--to-->
+        <target id="w220"/>
+      </span>
+    </term>
+    <term id="t221" lemma="feature" pos="VERB" morphofeat="VB">
+      <span>
+        <!--feature-->
+        <target id="w221"/>
+      </span>
+    </term>
+    <term id="t222" lemma="in" pos="ADP" morphofeat="IN">
+      <span>
+        <!--in-->
+        <target id="w222"/>
+      </span>
+    </term>
+    <term id="t223" lemma="several" pos="ADJ" morphofeat="JJ">
+      <span>
+        <!--several-->
+        <target id="w223"/>
+      </span>
+    </term>
+    <term id="t224" lemma="science" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--science-->
+        <target id="w224"/>
+      </span>
+    </term>
+    <term id="t225" lemma="fiction" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--fiction-->
+        <target id="w225"/>
+      </span>
+    </term>
+    <term id="t226" lemma="and" pos="CCONJ" morphofeat="CC">
+      <span>
+        <!--and-->
+        <target id="w226"/>
+      </span>
+    </term>
+    <term id="t227" lemma="action" pos="NOUN" morphofeat="NN">
+      <span>
+        <!--action-->
+        <target id="w227"/>
+      </span>
+    </term>
+    <term id="t228" lemma="film" pos="NOUN" morphofeat="NNS">
+      <span>
+        <!--films-->
+        <target id="w228"/>
+      </span>
+    </term>
+    <term id="t229" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w229"/>
+      </span>
+    </term>
+    <term id="t230" lemma="include" pos="VERB" morphofeat="VBG">
+      <span>
+        <!--including-->
+        <target id="w230"/>
+      </span>
+    </term>
+    <term id="t231" lemma="vanilla" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Vanilla-->
+        <target id="w231"/>
+      </span>
+    </term>
+    <term id="t232" lemma="sky" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Sky-->
+        <target id="w232"/>
+      </span>
+    </term>
+    <term id="t233" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w233"/>
+      </span>
+    </term>
+    <term id="t234" lemma="2001" pos="NUM" morphofeat="CD">
+      <span>
+        <!--2001-->
+        <target id="w234"/>
+      </span>
+    </term>
+    <term id="t235" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w235"/>
+      </span>
+    </term>
+    <term id="t236" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w236"/>
+      </span>
+    </term>
+    <term id="t237" lemma="minority" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Minority-->
+        <target id="w237"/>
+      </span>
+    </term>
+    <term id="t238" lemma="report" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Report-->
+        <target id="w238"/>
+      </span>
+    </term>
+    <term id="t239" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w239"/>
+      </span>
+    </term>
+    <term id="t240" lemma="2002" pos="NUM" morphofeat="CD">
+      <span>
+        <!--2002-->
+        <target id="w240"/>
+      </span>
+    </term>
+    <term id="t241" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w241"/>
+      </span>
+    </term>
+    <term id="t242" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w242"/>
+      </span>
+    </term>
+    <term id="t243" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--The-->
+        <target id="w243"/>
+      </span>
+    </term>
+    <term id="t244" lemma="last" pos="ADJ" morphofeat="JJ">
+      <span>
+        <!--Last-->
+        <target id="w244"/>
+      </span>
+    </term>
+    <term id="t245" lemma="samurai" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Samurai-->
+        <target id="w245"/>
+      </span>
+    </term>
+    <term id="t246" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w246"/>
+      </span>
+    </term>
+    <term id="t247" lemma="2003" pos="NUM" morphofeat="CD">
+      <span>
+        <!--2003-->
+        <target id="w247"/>
+      </span>
+    </term>
+    <term id="t248" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w248"/>
+      </span>
+    </term>
+    <term id="t249" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w249"/>
+      </span>
+    </term>
+    <term id="t250" lemma="collateral" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Collateral-->
+        <target id="w250"/>
+      </span>
+    </term>
+    <term id="t251" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w251"/>
+      </span>
+    </term>
+    <term id="t252" lemma="2004" pos="NUM" morphofeat="CD">
+      <span>
+        <!--2004-->
+        <target id="w252"/>
+      </span>
+    </term>
+    <term id="t253" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w253"/>
+      </span>
+    </term>
+    <term id="t254" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w254"/>
+      </span>
+    </term>
+    <term id="t255" lemma="war" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--War-->
+        <target id="w255"/>
+      </span>
+    </term>
+    <term id="t256" lemma="of" pos="ADP" morphofeat="IN">
+      <span>
+        <!--of-->
+        <target id="w256"/>
+      </span>
+    </term>
+    <term id="t257" lemma="the" pos="DET" morphofeat="DT">
+      <span>
+        <!--the-->
+        <target id="w257"/>
+      </span>
+    </term>
+    <term id="t258" lemma="worlds" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Worlds-->
+        <target id="w258"/>
+      </span>
+    </term>
+    <term id="t259" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w259"/>
+      </span>
+    </term>
+    <term id="t260" lemma="2005" pos="NUM" morphofeat="CD">
+      <span>
+        <!--2005-->
+        <target id="w260"/>
+      </span>
+    </term>
+    <term id="t261" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w261"/>
+      </span>
+    </term>
+    <term id="t262" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w262"/>
+      </span>
+    </term>
+    <term id="t263" lemma="knight" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Knight-->
+        <target id="w263"/>
+      </span>
+    </term>
+    <term id="t264" lemma="and" pos="CCONJ" morphofeat="CC">
+      <span>
+        <!--and-->
+        <target id="w264"/>
+      </span>
+    </term>
+    <term id="t265" lemma="day" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Day-->
+        <target id="w265"/>
+      </span>
+    </term>
+    <term id="t266" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w266"/>
+      </span>
+    </term>
+    <term id="t267" lemma="2010" pos="NUM" morphofeat="CD">
+      <span>
+        <!--2010-->
+        <target id="w267"/>
+      </span>
+    </term>
+    <term id="t268" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w268"/>
+      </span>
+    </term>
+    <term id="t269" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w269"/>
+      </span>
+    </term>
+    <term id="t270" lemma="jack" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Jack-->
+        <target id="w270"/>
+      </span>
+    </term>
+    <term id="t271" lemma="reacher" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Reacher-->
+        <target id="w271"/>
+      </span>
+    </term>
+    <term id="t272" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w272"/>
+      </span>
+    </term>
+    <term id="t273" lemma="2012" pos="NUM" morphofeat="CD">
+      <span>
+        <!--2012-->
+        <target id="w273"/>
+      </span>
+    </term>
+    <term id="t274" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w274"/>
+      </span>
+    </term>
+    <term id="t275" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w275"/>
+      </span>
+    </term>
+    <term id="t276" lemma="oblivion" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Oblivion-->
+        <target id="w276"/>
+      </span>
+    </term>
+    <term id="t277" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w277"/>
+      </span>
+    </term>
+    <term id="t278" lemma="2013" pos="NUM" morphofeat="CD">
+      <span>
+        <!--2013-->
+        <target id="w278"/>
+      </span>
+    </term>
+    <term id="t279" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w279"/>
+      </span>
+    </term>
+    <term id="t280" lemma="," pos="PUNCT" morphofeat=",">
+      <span>
+        <!--,-->
+        <target id="w280"/>
+      </span>
+    </term>
+    <term id="t281" lemma="and" pos="CCONJ" morphofeat="CC">
+      <span>
+        <!--and-->
+        <target id="w281"/>
+      </span>
+    </term>
+    <term id="t282" lemma="edge" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Edge-->
+        <target id="w282"/>
+      </span>
+    </term>
+    <term id="t283" lemma="of" pos="ADP" morphofeat="IN">
+      <span>
+        <!--of-->
+        <target id="w283"/>
+      </span>
+    </term>
+    <term id="t284" lemma="tomorrow" pos="PROPN" morphofeat="NNP">
+      <span>
+        <!--Tomorrow-->
+        <target id="w284"/>
+      </span>
+    </term>
+    <term id="t285" lemma="(" pos="PUNCT" morphofeat="-LRB-">
+      <span>
+        <!--(-->
+        <target id="w285"/>
+      </span>
+    </term>
+    <term id="t286" lemma="2014" pos="NUM" morphofeat="CD">
+      <span>
+        <!--2014-->
+        <target id="w286"/>
+      </span>
+    </term>
+    <term id="t287" lemma=")" pos="PUNCT" morphofeat="-RRB-">
+      <span>
+        <!--)-->
+        <target id="w287"/>
+      </span>
+    </term>
+    <term id="t288" lemma="." pos="PUNCT" morphofeat=".">
+      <span>
+        <!--.-->
+        <target id="w288"/>
+      </span>
+    </term>
+  </terms>
+  <entities>
+    <entity id="e0" type="DATE">
+      <references>
+        <span>
+          <!--the early 1980s-->
+          <target id="t4"/>
+          <target id="t5"/>
+          <target id="t6"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e1" type="PERSON">
+      <references>
+        <span>
+          <!--Risky Business-->
+          <target id="t17"/>
+          <target id="t18"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e2" type="DATE">
+      <references>
+        <span>
+          <!--1983-->
+          <target id="t20"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e3" type="DATE">
+      <references>
+        <span>
+          <!--1986-->
+          <target id="t29"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e4" type="WORK_OF_ART">
+      <references>
+        <span>
+          <!--The Color of Money-->
+          <target id="t41"/>
+          <target id="t42"/>
+          <target id="t43"/>
+          <target id="t44"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e5" type="DATE">
+      <references>
+        <span>
+          <!--1986-->
+          <target id="t46"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e6" type="PERSON">
+      <references>
+        <span>
+          <!--Rain Man-->
+          <target id="t49"/>
+          <target id="t50"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e7" type="DATE">
+      <references>
+        <span>
+          <!--1988-->
+          <target id="t52"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e8" type="DATE">
+      <references>
+        <span>
+          <!--the Fourth of July ( 1989-->
+          <target id="t58"/>
+          <target id="t59"/>
+          <target id="t60"/>
+          <target id="t61"/>
+          <target id="t62"/>
+          <target id="t63"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e9" type="PERSON">
+      <references>
+        <span>
+          <!--Ron Kovic-->
+          <target id="t68"/>
+          <target id="t69"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e10" type="WORK_OF_ART">
+      <references>
+        <span>
+          <!--Golden Globe Award-->
+          <target id="t77"/>
+          <target id="t78"/>
+          <target id="t79"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e11" type="ORG">
+      <references>
+        <span>
+          <!--the Academy Award for Best Actor-->
+          <target id="t85"/>
+          <target id="t86"/>
+          <target id="t87"/>
+          <target id="t88"/>
+          <target id="t89"/>
+          <target id="t90"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e12" type="GPE">
+      <references>
+        <span>
+          <!--NEWLINE-->
+          <target id="t92"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e13" type="GPE">
+      <references>
+        <span>
+          <!--Hollywood-->
+          <target id="t96"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e14" type="DATE">
+      <references>
+        <span>
+          <!--the 1990s-->
+          <target id="t99"/>
+          <target id="t100"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e15" type="ORG">
+      <references>
+        <span>
+          <!--Cruise-->
+          <target id="t102"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e16" type="WORK_OF_ART">
+      <references>
+        <span>
+          <!--A Few Good Men (-->
+          <target id="t113"/>
+          <target id="t114"/>
+          <target id="t115"/>
+          <target id="t116"/>
+          <target id="t117"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e17" type="DATE">
+      <references>
+        <span>
+          <!--1992-->
+          <target id="t118"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e18" type="ORG">
+      <references>
+        <span>
+          <!--The Firm (-->
+          <target id="t123"/>
+          <target id="t124"/>
+          <target id="t125"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e19" type="DATE">
+      <references>
+        <span>
+          <!--1993-->
+          <target id="t126"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e20" type="ORG">
+      <references>
+        <span>
+          <!--Interview-->
+          <target id="t132"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e21" type="GPE">
+      <references>
+        <span>
+          <!--Vampire-->
+          <target id="t135"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e22" type="DATE">
+      <references>
+        <span>
+          <!--1994-->
+          <target id="t137"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e23" type="PERSON">
+      <references>
+        <span>
+          <!--Jerry Maguire-->
+          <target id="t143"/>
+          <target id="t144"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e24" type="DATE">
+      <references>
+        <span>
+          <!--1996-->
+          <target id="t146"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e25" type="ORG">
+      <references>
+        <span>
+          <!--Golden Globe-->
+          <target id="t154"/>
+          <target id="t155"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e26" type="ORDINAL">
+      <references>
+        <span>
+          <!--second-->
+          <target id="t159"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e27" type="PERSON">
+      <references>
+        <span>
+          <!--Oscar-->
+          <target id="t160"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e28" type="DATE">
+      <references>
+        <span>
+          <!--1999-->
+          <target id="t171"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e29" type="PERSON">
+      <references>
+        <span>
+          <!--Magnolia-->
+          <target id="t173"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e30" type="ORDINAL">
+      <references>
+        <span>
+          <!--third-->
+          <target id="t177"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e31" type="ORG">
+      <references>
+        <span>
+          <!--Golden Globe-->
+          <target id="t178"/>
+          <target id="t179"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e32" type="ORG">
+      <references>
+        <span>
+          <!--the Academy Award for Best Supporting Actor-->
+          <target id="t184"/>
+          <target id="t185"/>
+          <target id="t186"/>
+          <target id="t187"/>
+          <target id="t188"/>
+          <target id="t189"/>
+          <target id="t190"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e33" type="ORG">
+      <references>
+        <span>
+          <!--Cruise-->
+          <target id="t197"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e34" type="PERSON">
+      <references>
+        <span>
+          <!--Ethan Hunt-->
+          <target id="t200"/>
+          <target id="t201"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e35" type="CARDINAL">
+      <references>
+        <span>
+          <!--six-->
+          <target id="t203"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e36" type="WORK_OF_ART">
+      <references>
+        <span>
+          <!--the Mission : Impossible-->
+          <target id="t206"/>
+          <target id="t207"/>
+          <target id="t208"/>
+          <target id="t209"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e37" type="DATE">
+      <references>
+        <span>
+          <!--1996-->
+          <target id="t213"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e38" type="DATE">
+      <references>
+        <span>
+          <!--2018-->
+          <target id="t215"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e39" type="PRODUCT">
+      <references>
+        <span>
+          <!--Vanilla Sky-->
+          <target id="t231"/>
+          <target id="t232"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e40" type="ORG">
+      <references>
+        <span>
+          <!--Minority Report-->
+          <target id="t237"/>
+          <target id="t238"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e41" type="DATE">
+      <references>
+        <span>
+          <!--2002-->
+          <target id="t240"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e42" type="ORG">
+      <references>
+        <span>
+          <!--The Last Samurai-->
+          <target id="t243"/>
+          <target id="t244"/>
+          <target id="t245"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e43" type="DATE">
+      <references>
+        <span>
+          <!--2003-->
+          <target id="t247"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e44" type="ORG">
+      <references>
+        <span>
+          <!--Collateral-->
+          <target id="t250"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e45" type="DATE">
+      <references>
+        <span>
+          <!--2004-->
+          <target id="t252"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e46" type="PERSON">
+      <references>
+        <span>
+          <!--Worlds-->
+          <target id="t258"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e47" type="DATE">
+      <references>
+        <span>
+          <!--2005-->
+          <target id="t260"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e48" type="PERSON">
+      <references>
+        <span>
+          <!--Knight-->
+          <target id="t263"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e49" type="DATE">
+      <references>
+        <span>
+          <!--2010-->
+          <target id="t267"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e50" type="PERSON">
+      <references>
+        <span>
+          <!--Jack Reacher-->
+          <target id="t270"/>
+          <target id="t271"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e51" type="DATE">
+      <references>
+        <span>
+          <!--2012-->
+          <target id="t273"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e52" type="DATE">
+      <references>
+        <span>
+          <!--2013-->
+          <target id="t278"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e53" type="PERSON">
+      <references>
+        <span>
+          <!--Edge-->
+          <target id="t282"/>
+        </span>
+      </references>
+    </entity>
+    <entity id="e54" type="DATE">
+      <references>
+        <span>
+          <!--2014-->
+          <target id="t286"/>
+        </span>
+      </references>
+    </entity>
+  </entities>
+</NAF>
+
