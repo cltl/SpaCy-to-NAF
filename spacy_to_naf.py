@@ -52,7 +52,7 @@ def add_wf_element(text_layer, wf_data):
     wf_el.text = wf_data.wordform
 
 
-def add_term_element(terms_layer, term_data):
+def add_term_element(terms_layer, term_data, add_comments=False):
     """
     Function that adds a term element to the text layer.
     """
@@ -62,13 +62,14 @@ def add_term_element(terms_layer, term_data):
     term_el.set("pos", term_data.pos)
     term_el.set("morphofeat", term_data.morphofeat)
     span = etree.SubElement(term_el, "span")
-    span.append(etree.Comment(' '.join(term_data.text)))
+    if add_comments:
+        span.append(etree.Comment(' '.join(term_data.text)))
     for target in term_data.targets:
         target_el = etree.SubElement(span, "target")
         target_el.set("id", target)
 
 
-def add_entity_element(entities_layer, entity_data):
+def add_entity_element(entities_layer, entity_data, add_comments=False):
     """
     Function that adds an entity element to the entity layer.
     """
@@ -77,7 +78,8 @@ def add_entity_element(entities_layer, entity_data):
     entity_el.set("type", entity_data.entity_type)
     references_el = etree.SubElement(entity_el, "references")
     span = etree.SubElement(references_el, "span")
-    span.append(etree.Comment(' '.join(entity_data.text)))
+    if add_comments:
+        span.append(etree.Comment(' '.join(entity_data.text)))
     for target in entity_data.targets:
         target_el = etree.SubElement(span, "target")
         target_el.set("id", target)
@@ -105,7 +107,7 @@ def chunk_tuples_for_doc(doc):
                            targets = ['t' + str(tok.i) for tok in chunk])
 
 
-def add_chunk_element(chunks_layer, chunk_data):
+def add_chunk_element(chunks_layer, chunk_data, add_comments=False):
     """
     Function that adds a chunk element to the chunks layer.
     """
@@ -114,18 +116,20 @@ def add_chunk_element(chunks_layer, chunk_data):
     chunk_el.set("head", chunk_data.head)
     chunk_el.set("phrase", chunk_data.phrase)
     span = etree.SubElement(chunk_el, "span")
-    span.append(etree.Comment(chunk_data.text))
+    if add_comments:
+        span.append(etree.Comment(chunk_data.text))
     for target in chunk_data.targets:
         target_el = etree.SubElement(span, "target")
         target_el.set("id", target)
 
 
-def add_dependency_element(dependency_layer, dep_data):
+def add_dependency_element(dependency_layer, dep_data, add_comments):
     """
     Function that adds dependency elements to the deps layer.
     """
-    comment = dep_data.rfunc + '(' + dep_data.from_orth + ',' + dep_data.to_orth + ')'
-    dependency_layer.append(etree.Comment(comment))
+    if add_comments:
+        comment = dep_data.rfunc + '(' + dep_data.from_orth + ',' + dep_data.to_orth + ')'
+        dependency_layer.append(etree.Comment(comment))
     dep_el = etree.SubElement(dependency_layer, "dep")
     dep_el.set("from", dep_data.from_term)
     dep_el.set("to", dep_data.to_term)
@@ -191,12 +195,17 @@ def add_raw_layer(root, raw_layer):
         token = raw_layer.text[start:end]
         assert wf_el.text == token, f'mismatch in alignment of wf element {wf_el.text} ({wf_el.get("id")}) with raw layer (expected length {wf_el.get("length")}'
 
-def naf_from_doc(doc, time, modelname, language='en', layers={'raw',
-                                                              'text',
-                                                              'terms',
-                                                              'entities',
-                                                              'deps',
-                                                              'chunks'}):
+def naf_from_doc(doc,
+                 time,
+                 modelname,
+                 language='en',
+                 comments=False,
+                 layers={'raw',
+                         'text',
+                         'terms',
+                         'entities',
+                         'deps',
+                         'chunks'}):
     """
     Function that takes a document and returns an ElementTree
     object that corresponds to the root of the NAF structure.
@@ -287,7 +296,7 @@ def naf_from_doc(doc, time, modelname, language='en', layers={'raw',
             if 'text' in layers:
                 add_wf_element(text_layer, wf_data)
             if 'terms' in layers:
-                add_term_element(terms_layer, term_data)
+                add_term_element(terms_layer, term_data, add_comments=comments)
             
             # Move to the next term
             term_number += 1
@@ -305,7 +314,7 @@ def naf_from_doc(doc, time, modelname, language='en', layers={'raw',
                                             text = current_entity_orth)
                 # Add data to XML:
                 if 'entities' in layers:
-                    add_entity_element(entities_layer, entity_data)
+                    add_entity_element(entities_layer, entity_data, add_comments=comments)
                 
                 # Move to the next entity:
                 entity_number += 1
@@ -329,13 +338,13 @@ def naf_from_doc(doc, time, modelname, language='en', layers={'raw',
         # At the end of the sentence, add all the dependencies to the XML structure.
         for dep_data in dependencies_for_sentence:
             if 'deps' in layers:
-                add_dependency_element(dependency_layer, dep_data)
+                add_dependency_element(dependency_layer, dep_data, add_comments=comments)
         current_token = token_number + 1
     
     # Add chunk layer after adding all other layers.
     for chunk_data in chunk_tuples_for_doc(doc):
         if 'chunks' in layers:
-            add_chunk_element(chunks_layer, chunk_data)
+            add_chunk_element(chunks_layer, chunk_data, add_comments=comments)
 
     # Add raw layer after adding all other layers + check alignment
     add_raw_layer(root, raw_layer)
