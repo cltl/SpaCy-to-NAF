@@ -3,6 +3,7 @@ import re
 from lxml import etree
 from collections import namedtuple
 from datetime import datetime
+import spacy
 
 # Define Entity object:
 Entity = namedtuple('Entity',['start', 'end', 'entity_type'])
@@ -196,10 +197,15 @@ def add_raw_layer(root, raw_layer):
         assert wf_el.text == token, f'mismatch in alignment of wf element {wf_el.text} ({wf_el.get("id")}) with raw layer (expected length {wf_el.get("length")}'
 
 def naf_from_doc(doc,
-                 time,
+                 dct,
+                 start_time,
+                 end_time,
                  modelname,
+                 modelversion,
                  language='en',
                  comments=False,
+                 title=None,
+                 uri=None,
                  layers={'raw',
                          'text',
                          'terms',
@@ -220,12 +226,27 @@ def naf_from_doc(doc,
     # Create text and terms layers.
     naf_header = etree.SubElement(root, "nafHeader")
 
+    # add fileDesc child to nafHeader
+    filedesc_el = etree.SubElement(naf_header, 'fileDesc')
+    filedesc_el.set('creationtime', dct)
+    if title is not None:
+        filedesc_el.set('title', title)
+
+    # add public child to nafHeader
+    public_el = etree.SubElement(naf_header, 'public')
+    if uri is not None:
+        public_el.set('uri', uri)
+
+
     for layer in layers:
         ling_proc = etree.SubElement(naf_header, "linguisticProcessors")
         ling_proc.set("layer", layer)
         lp = etree.SubElement(ling_proc, "lp")
         lp.set("name", modelname)
-        lp.set("timestamp", time)
+        lp.set("beginTimestamp", start_time)
+        lp.set('endTimestamp', end_time)
+        lp.set('name', modelname)
+        lp.set('version', modelversion)
 
     if 'raw' in layers:
         raw_layer = etree.SubElement(root, 'raw')
@@ -352,19 +373,33 @@ def naf_from_doc(doc,
     return root
 
 
-def current_time():
+def time_in_correct_format(datetime_obj):
     "Function that returns the current time (UTC)"
-    return datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SUTC")
+    return datetime_obj.strftime("%Y-%m-%dT%H:%M:%SUTC")
 
 
-def text_to_NAF(text, nlp, layers, language='en'):
+def text_to_NAF(text, nlp, dct, layers, title=None, uri=None, language='en'):
     """
     Function that takes a text and returns an xml object containing the NAF.
     """
+    dct_correct_format = time_in_correct_format(dct)
+
+    start_time = time_in_correct_format(datetime.now())
     doc = nlp(text)
-    time = current_time()
-    name = f'spaCy-{nlp.meta["version"]}_model-{nlp.meta["name"]}'
-    return naf_from_doc(doc=doc, time=time, modelname=name, language=language, layers=layers)
+    end_time = time_in_correct_format(datetime.now())
+
+    model_name = f'spaCy-model_{nlp.meta["lang"]}_{nlp.meta["name"]}'
+    model_version = f'spaCy_version-{spacy.__version__}__model_version-{nlp.meta["version"]}'
+    return naf_from_doc(doc=doc,
+                        dct=dct_correct_format,
+                        start_time=start_time,
+                        end_time=end_time,
+                        modelname=model_name,
+                        modelversion=model_version,
+                        language=language,
+                        title=title,
+                        uri=uri,
+                        layers=layers)
 
 def NAF_to_string(NAF, byte=False):
     """
@@ -382,8 +417,10 @@ def NAF_to_string(NAF, byte=False):
 if __name__ == '__main__':
     import sys
     import spacy
+    from datetime import datetime
+
     nlp = spacy.load('en')
     with open(sys.argv[1]) as f:
         text = f.read()
-        NAF = text_to_NAF(text, nlp, layers={'raw', 'text', 'terms', 'entities'})
+        NAF = text_to_NAF(text, nlp, dct=datetime.now(), layers={'raw', 'text', 'terms', 'entities'})
         print(NAF_to_string(NAF))
