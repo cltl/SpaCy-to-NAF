@@ -253,7 +253,6 @@ def naf_from_doc(doc,
         ling_proc = etree.SubElement(naf_header, "linguisticProcessors")
         ling_proc.set("layer", layer)
         lp = etree.SubElement(ling_proc, "lp")
-        lp.set("name", modelname)
         lp.set("beginTimestamp", start_time)
         lp.set('endTimestamp', end_time)
         lp.set('name', modelname)
