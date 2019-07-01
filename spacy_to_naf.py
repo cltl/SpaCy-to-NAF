@@ -9,7 +9,12 @@ import spacy
 Entity = namedtuple('Entity',['start', 'end', 'entity_type'])
 WfElement = namedtuple('WfElement',['sent', 'wid', 'length', 'wordform', 'offset'])
 TermElement = namedtuple('TermElement', ['tid', 'lemma', 'pos', 'morphofeat', 'targets', 'text'])
-EntityElement = namedtuple('EntityElement', ['eid', 'entity_type', 'targets', 'text'])
+EntityElement = namedtuple('EntityElement', ['eid',
+                                             'entity_type',
+                                             'targets',
+                                             'text',
+                                             'ext_refs' # list of dictionaries, e.g., [{'reference' : 'Naples'}]
+                                             ])
 DependencyRelation = namedtuple('DependencyRelation', ['from_term', 'to_term', 'rfunc', 'from_orth', 'to_orth'])
 ChunkElement = namedtuple('ChunkElement', ['cid', 'head', 'phrase', 'text', 'targets'])
 
@@ -84,6 +89,12 @@ def add_entity_element(entities_layer, entity_data, add_comments=False):
     for target in entity_data.targets:
         target_el = etree.SubElement(span, "target")
         target_el.set("id", target)
+
+    assert type(entity_data.ext_refs) == list, f'ext_refs should be a list of dictionaries (can be empty)'
+    ext_refs_el = etree.SubElement(entity_el, 'externalReferences')
+    for ext_ref_info in entity_data.ext_refs:
+        one_ext_ref_el = etree.SubElement(ext_refs_el, 'externalRef')
+        one_ext_ref_el.set('reference', ext_ref_info['reference'])
 
 def chunks_for_doc(doc):
     """
@@ -332,7 +343,9 @@ def naf_from_doc(doc,
                 entity_data = EntityElement(eid = eid,
                                             entity_type = next_entity.entity_type,
                                             targets = current_entity,
-                                            text = current_entity_orth)
+                                            text = current_entity_orth,
+                                            ext_refs=[] # entity linking currently not part of spaCy
+                                            )
                 # Add data to XML:
                 if 'entities' in layers:
                     add_entity_element(entities_layer, entity_data, add_comments=comments)
@@ -419,7 +432,7 @@ if __name__ == '__main__':
     import spacy
     from datetime import datetime
 
-    nlp = spacy.load('en')
+    nlp = spacy.load('en_core_web_sm')
     with open(sys.argv[1]) as f:
         text = f.read()
         NAF = text_to_NAF(text, nlp, dct=datetime.now(), layers={'raw', 'text', 'terms', 'entities'})
