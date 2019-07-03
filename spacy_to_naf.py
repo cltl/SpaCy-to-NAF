@@ -32,6 +32,14 @@ def normalize_token_orth(orth):
         return remove_illegal_chars(orth)
 
 
+def prepare_comment_text(text):
+    "Function to prepare text to be put inside a comment."
+    text = text.replace('--','DOUBLEDASH')
+    if text.endswith('-'):
+        text = text[:-1] + 'SINGLEDASH'
+    return text
+
+
 def get_entity_type(span):
     "Function to get the entity type of an entity span."
     ent_type_set = {tok.ent_type_ for tok in span if tok.ent_type_ != ''}
@@ -69,7 +77,9 @@ def add_term_element(terms_layer, term_data, add_comments=False):
     term_el.set("morphofeat", term_data.morphofeat)
     span = etree.SubElement(term_el, "span")
     if add_comments:
-        span.append(etree.Comment(' '.join(term_data.text)))
+        text = ' '.join(term_data.text)
+        text = prepare_comment_text(text)
+        span.append(etree.Comment(text))
     for target in term_data.targets:
         target_el = etree.SubElement(span, "target")
         target_el.set("id", target)
@@ -85,7 +95,9 @@ def add_entity_element(entities_layer, entity_data, add_comments=False):
     references_el = etree.SubElement(entity_el, "references")
     span = etree.SubElement(references_el, "span")
     if add_comments:
-        span.append(etree.Comment(' '.join(entity_data.text)))
+        text = ' '.join(entity_data.text)
+        text = prepare_comment_text(text)
+        span.append(etree.Comment(text))
     for target in entity_data.targets:
         target_el = etree.SubElement(span, "target")
         target_el.set("id", target)
@@ -129,7 +141,9 @@ def add_chunk_element(chunks_layer, chunk_data, add_comments=False):
     chunk_el.set("phrase", chunk_data.phrase)
     span = etree.SubElement(chunk_el, "span")
     if add_comments:
-        span.append(etree.Comment(chunk_data.text))
+        text = chunk_data.text
+        text = prepare_comment_text(text)
+        span.append(etree.Comment(text))
     for target in chunk_data.targets:
         target_el = etree.SubElement(span, "target")
         target_el.set("id", target)
@@ -141,6 +155,7 @@ def add_dependency_element(dependency_layer, dep_data, add_comments):
     """
     if add_comments:
         comment = dep_data.rfunc + '(' + dep_data.from_orth + ',' + dep_data.to_orth + ')'
+        comment = prepare_comment_text(comment)
         dependency_layer.append(etree.Comment(comment))
     dep_el = etree.SubElement(dependency_layer, "dep")
     dep_el.set("from", dep_data.from_term)
