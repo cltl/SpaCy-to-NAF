@@ -378,7 +378,7 @@ def naf_from_doc(doc,
                     next_entity = Entity(start=None, end=None, entity_type=None)
 
             # Add dependencies for the current token to the list.
-            if 'deps 'in layers:
+            if 'deps' in layers:
                 for dep_data in dependencies_to_add(token):
                     if not dep_data in dependencies_for_sentence:
                         dependencies_for_sentence.append(dep_data)
