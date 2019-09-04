@@ -63,7 +63,7 @@ def add_wf_element(text_layer, wf_data):
     wf_el.set("id", wf_data.wid)
     wf_el.set("length", wf_data.length)
     wf_el.set("offset", wf_data.offset)
-    wf_el.text = wf_data.wordform
+    wf_el.text = etree.CDATA(wf_data.wordform)
 
 
 def add_term_element(terms_layer, term_data, add_comments=False):
