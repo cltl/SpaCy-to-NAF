@@ -8,7 +8,7 @@ import spacy
 # Define Entity object:
 Entity = namedtuple('Entity',['start', 'end', 'entity_type'])
 WfElement = namedtuple('WfElement',['sent', 'wid', 'length', 'wordform', 'offset'])
-TermElement = namedtuple('TermElement', ['tid', 'lemma', 'pos', 'morphofeat', 'targets', 'text'])
+TermElement = namedtuple('TermElement', ['tid', 'lemma', 'pos', 'type', 'morphofeat', 'targets', 'text'])
 EntityElement = namedtuple('EntityElement', ['eid',
                                              'entity_type',
                                              'targets',
@@ -17,6 +17,79 @@ EntityElement = namedtuple('EntityElement', ['eid',
                                              ])
 DependencyRelation = namedtuple('DependencyRelation', ['from_term', 'to_term', 'rfunc', 'from_orth', 'to_orth'])
 ChunkElement = namedtuple('ChunkElement', ['cid', 'head', 'phrase', 'text', 'targets'])
+
+
+udpos2nafpos_info = {
+    'ADJ' : {
+        'class' : 'open',
+        'naf_pos' : 'G'
+    },
+    'ADP' : {
+        'class' : 'open',
+        'naf_pos' : 'P'
+    },
+    'ADV' : {
+        'class' : 'open',
+        'naf_pos' : 'A'
+    },
+    'AUX' : {
+        'class' : 'close',
+        'naf_pos' : 'V',
+    },
+    'CCONJ' : {
+        'class' : 'close',
+        'naf_pos' : 'C'
+    },
+    'DET' : {
+        'class' : 'close',
+        'naf_pos' : 'D'
+    },
+    'INTJ' : {
+        'class' : 'open',
+        'naf_pos' : 'O'
+    },
+    'NOUN' : {
+        'class' : 'open',
+        'naf_pos' : 'N'
+    },
+    'NUM' : {
+        'class' : 'close',
+        'naf_pos' : 'O'
+    },
+    'PART' : {
+        'class' : 'close',
+        'naf_pos' : 'O'
+    },
+    'PRON' : {
+        'class' : 'close',
+        'naf_pos' : 'O'
+    },
+    'PROPN' : {
+        'class' : 'open',
+        'naf_pos' : 'R'
+    },
+    'PUNCT' : {
+        'class' : 'close',
+        'naf_pos' : 'O'
+    },
+    'SCONJ' : {
+        'class' : 'close',
+        'naf_pos' : 'O'
+    },
+    'SYM' : {
+        'class' : 'open',
+        'naf_pos' : 'O'
+    },
+    'VERB' : {
+        'class' : 'open',
+        'naf_pos' : 'V'
+    },
+    'X' : {
+        'class' : 'open',
+        'naf_pos' : 'O'
+    }
+}
+
 
 # Only allow legal strings in XML:
 # http://stackoverflow.com/a/25920392/2899924
@@ -74,6 +147,7 @@ def add_term_element(terms_layer, term_data, add_comments=False):
     term_el.set("id", term_data.tid)
     term_el.set("lemma", term_data.lemma)
     term_el.set("pos", term_data.pos)
+    term_el.set('type', term_data.type)
     term_el.set("morphofeat", term_data.morphofeat)
     span = etree.SubElement(term_el, "span")
     if add_comments:
@@ -232,6 +306,7 @@ def naf_from_doc(doc,
                  comments=False,
                  title=None,
                  uri=None,
+                 map_udpos2naf_pos=True,
                  layers={'raw',
                          'text',
                          'terms',
@@ -241,6 +316,10 @@ def naf_from_doc(doc,
     """
     Function that takes a document and returns an ElementTree
     object that corresponds to the root of the NAF structure.
+
+    :param bool map_udpos2naf_pos: if True, we use "udpos2nafpos_info"
+    to map the Universal Dependencies pos (https://universaldependencies.org/u/pos/)
+    to the NAF pos tagset
     """
     # NAF:
     # ---------------------
@@ -301,9 +380,9 @@ def naf_from_doc(doc,
     current_entity = []    # Use a list for multiword entities.
     current_entity_orth = [] # id.
     
-    current_token = 0    # Keep track of the token number.
-    term_number = 0      # Keep track of the term number.
-    entity_number = 0    # Keep track of the entity number.
+    current_token = 1    # Keep track of the token number.
+    term_number = 1      # Keep track of the term number.
+    entity_number = 1    # Keep track of the entity number.
     
     parsing_entity = False # State change: are we working on a term or not?
     
@@ -332,9 +411,17 @@ def naf_from_doc(doc,
                            offset = str(token.idx))
             
             # Create TermElement data:
+            spacy_pos = token.pos_
+            if map_udpos2naf_pos:
+                pos = udpos2nafpos_info[spacy_pos]['naf_pos']
+            else:
+                pos = spacy_pos
+            pos_type = udpos2nafpos_info[spacy_pos]['class']
+
             term_data = TermElement(tid = tid,
                                     lemma = remove_illegal_chars(token.lemma_),
-                                    pos = token.pos_,
+                                    pos = pos,
+                                    type=pos_type,
                                     morphofeat = token.tag_,
                                     targets = current_term,
                                     text = current_term_orth)
@@ -405,7 +492,7 @@ def time_in_correct_format(datetime_obj):
     return datetime_obj.strftime("%Y-%m-%dT%H:%M:%SUTC")
 
 
-def text_to_NAF(text, nlp, dct, layers, title=None, uri=None, language='en'):
+def text_to_NAF(text, nlp, dct, layers, title=None, uri=None, language='en', map_udpos2naf_pos=True):
     """
     Function that takes a text and returns an xml object containing the NAF.
     """
@@ -426,7 +513,8 @@ def text_to_NAF(text, nlp, dct, layers, title=None, uri=None, language='en'):
                         language=language,
                         title=title,
                         uri=uri,
-                        layers=layers)
+                        layers=layers,
+                        map_udpos2naf_pos=map_udpos2naf_pos)
 
 def NAF_to_string(NAF, byte=False):
     """
@@ -449,5 +537,9 @@ if __name__ == '__main__':
     nlp = spacy.load('en_core_web_sm')
     with open(sys.argv[1]) as f:
         text = f.read()
-        NAF = text_to_NAF(text, nlp, dct=datetime.now(), layers={'raw', 'text', 'terms', 'entities'})
+        NAF = text_to_NAF(text,
+                          nlp,
+                          dct=datetime.now(),
+                          layers={'raw', 'text', 'terms', 'entities'},
+                          map_udpos2naf_pos=True) # map UD pos to NAF pos
         print(NAF_to_string(NAF))

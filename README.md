@@ -2,6 +2,7 @@
 
 This repository contains everything you need to output SpaCy results in NAF format.
 
+Please check **log.md** for updates on the conversion script.
 
 **Example**:
 
