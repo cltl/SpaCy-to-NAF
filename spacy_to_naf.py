@@ -419,11 +419,13 @@ def naf_from_doc(doc,
             if map_udpos2naf_pos:
                 if spacy_pos in map_udpos2naf_pos:
                     pos = udpos2nafpos_info[spacy_pos]['naf_pos']
+                    pos_type = udpos2nafpos_info[spacy_pos]['class']
                 else:
                     pos = 'O'
+                    pos_type = 'open'
             else:
                 pos = spacy_pos
-            pos_type = udpos2nafpos_info[spacy_pos]['class']
+                pos_type = 'open'
 
             term_data = TermElement(tid = tid,
                                     lemma = remove_illegal_chars(token.lemma_),
