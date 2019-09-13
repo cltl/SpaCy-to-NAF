@@ -417,7 +417,7 @@ def naf_from_doc(doc,
             # Create TermElement data:
             spacy_pos = token.pos_
             if map_udpos2naf_pos:
-                if spacy_pos in map_udpos2naf_pos:
+                if spacy_pos in udpos2nafpos_info:
                     pos = udpos2nafpos_info[spacy_pos]['naf_pos']
                     pos_type = udpos2nafpos_info[spacy_pos]['class']
                 else:
