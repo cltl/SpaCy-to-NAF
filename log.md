@@ -1,4 +1,7 @@
 
+## 13-9-2019
+- added SPACE to mapping spacy_to_naf.udpos2nafpos_info
+- default value 'O' if pos value not found
 
 ## 12-9-2019
 - token and terms now start at one
