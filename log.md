@@ -1,3 +1,5 @@
+## 15-9-2019
+- added 'resource' to EntityElement. In next version, we can create a namedtuple for external references.
 
 ## 13-9-2019
 - added SPACE to mapping spacy_to_naf.udpos2nafpos_info

@@ -13,7 +13,8 @@ EntityElement = namedtuple('EntityElement', ['eid',
                                              'entity_type',
                                              'targets',
                                              'text',
-                                             'ext_refs' # list of dictionaries, e.g., [{'reference' : 'Naples'}]
+                                             'ext_refs' # list of dictionaries, e.g., [{'reference' : 'Naples',
+                                                                                      # 'resource' : 'Wikipedia'}]
                                              ])
 DependencyRelation = namedtuple('DependencyRelation', ['from_term', 'to_term', 'rfunc', 'from_orth', 'to_orth'])
 ChunkElement = namedtuple('ChunkElement', ['cid', 'head', 'phrase', 'text', 'targets'])
@@ -185,6 +186,7 @@ def add_entity_element(entities_layer, entity_data, add_comments=False):
     for ext_ref_info in entity_data.ext_refs:
         one_ext_ref_el = etree.SubElement(ext_refs_el, 'externalRef')
         one_ext_ref_el.set('reference', ext_ref_info['reference'])
+        one_ext_ref_el.set('resource', ext_ref_info['resource'])
 
 def chunks_for_doc(doc):
     """
