@@ -10,10 +10,11 @@ from datetime import datetime
 nlp = spacy.load('en_core_web_sm')
 
 
-NAF = text_to_NAF('Tom Cruise is an actor',
+NAF = text_to_NAF('Tom Cruise is an actor.\n\n\nHe likes to act.',
                   nlp,
                   dct=datetime.now(),
                   layers={'raw', 'text', 'terms'},
+                  replace_hidden_characters=True,
                   map_udpos2naf_pos=True) # map UD pos to NAF pos
 
 

@@ -27,6 +27,14 @@ NB. Don't use this for batch processing! That would mean loading SpaCy for each
 file, which is wildly inefficient. For large batches, write a python script that
 loads SpaCy and this module, loops over the files, and writes out NAF in one go.
 
+## Proposals NAF version 4
+* move to UD part of speech (generally accepted)
+* Title and headers
+* Special characters in text (newlines, etc.)
+* Multiple entity and srl layers
+* How to represent LU and Frame (why as “uri” in predicate element)
+* Misalignment in “span/target” elements”
+
 **Output**:
 
 Here is the output of the python code above. Please note that the chunks layer
@@ -36,108 +44,107 @@ currently only contains PPs and NPs.
 <?xml version='1.0' encoding='utf-8'?>
 <NAF xml:lang="en" version="v3.naf">
   <nafHeader>
-    <linguisticProcessors layer="text">
-      <lp name="spaCy-2.0.0_model-core_web_sm" timestamp="2019-06-13T10:04:46UTC"/>
-    </linguisticProcessors>
-    <linguisticProcessors layer="raw">
-      <lp name="spaCy-2.0.0_model-core_web_sm" timestamp="2019-06-13T10:04:46UTC"/>
+    <fileDesc creationtime="2019-09-12T11:14:14UTC"/>
+    <public/>
+    <linguisticProcessors layer="terms">
+      <lp beginTimestamp="2019-09-12T11:14:14UTC" endTimestamp="2019-09-12T11:14:14UTC" name="spaCy-model_en_core_web_sm" version="spaCy_version-2.1.4__model_version-2.1.0"/>
     </linguisticProcessors>
     <linguisticProcessors layer="entities">
-      <lp name="spaCy-2.0.0_model-core_web_sm" timestamp="2019-06-13T10:04:46UTC"/>
+      <lp beginTimestamp="2019-09-12T11:14:14UTC" endTimestamp="2019-09-12T11:14:14UTC" name="spaCy-model_en_core_web_sm" version="spaCy_version-2.1.4__model_version-2.1.0"/>
     </linguisticProcessors>
-    <linguisticProcessors layer="terms">
-      <lp name="spaCy-2.0.0_model-core_web_sm" timestamp="2019-06-13T10:04:46UTC"/>
+    <linguisticProcessors layer="raw">
+      <lp beginTimestamp="2019-09-12T11:14:14UTC" endTimestamp="2019-09-12T11:14:14UTC" name="spaCy-model_en_core_web_sm" version="spaCy_version-2.1.4__model_version-2.1.0"/>
+    </linguisticProcessors>
+    <linguisticProcessors layer="text">
+      <lp beginTimestamp="2019-09-12T11:14:14UTC" endTimestamp="2019-09-12T11:14:14UTC" name="spaCy-model_en_core_web_sm" version="spaCy_version-2.1.4__model_version-2.1.0"/>
     </linguisticProcessors>
   </nafHeader>
   <raw>The cat sat on the mat. Felix was his name.</raw>
   <text>
-    <wf sent="1" id="w0" length="3" offset="0">The</wf>
-    <wf sent="1" id="w1" length="3" offset="4">cat</wf>
-    <wf sent="1" id="w2" length="3" offset="8">sat</wf>
-    <wf sent="1" id="w3" length="2" offset="12">on</wf>
-    <wf sent="1" id="w4" length="3" offset="15">the</wf>
-    <wf sent="1" id="w5" length="3" offset="19">mat</wf>
-    <wf sent="1" id="w6" length="1" offset="22">.</wf>
-    <wf sent="2" id="w7" length="5" offset="24">Felix</wf>
-    <wf sent="2" id="w8" length="3" offset="30">was</wf>
-    <wf sent="2" id="w9" length="3" offset="34">his</wf>
-    <wf sent="2" id="w10" length="4" offset="38">name</wf>
-    <wf sent="2" id="w11" length="1" offset="42">.</wf>
+    <wf sent="1" id="w1" length="3" offset="0"><![CDATA[The]]></wf>
+    <wf sent="1" id="w2" length="3" offset="4"><![CDATA[cat]]></wf>
+    <wf sent="1" id="w3" length="3" offset="8"><![CDATA[sat]]></wf>
+    <wf sent="1" id="w4" length="2" offset="12"><![CDATA[on]]></wf>
+    <wf sent="1" id="w5" length="3" offset="15"><![CDATA[the]]></wf>
+    <wf sent="1" id="w6" length="3" offset="19"><![CDATA[mat]]></wf>
+    <wf sent="1" id="w7" length="1" offset="22"><![CDATA[.]]></wf>
+    <wf sent="2" id="w8" length="5" offset="24"><![CDATA[Felix]]></wf>
+    <wf sent="2" id="w9" length="3" offset="30"><![CDATA[was]]></wf>
+    <wf sent="2" id="w10" length="3" offset="34"><![CDATA[his]]></wf>
+    <wf sent="2" id="w11" length="4" offset="38"><![CDATA[name]]></wf>
+    <wf sent="2" id="w12" length="1" offset="42"><![CDATA[.]]></wf>
   </text>
   <terms>
-    <term id="t0" lemma="the" pos="DET" morphofeat="DT">
+    <term id="t1" lemma="the" pos="D" type="close" morphofeat="DT">
       <span>
-        <!--The-->
-        <target id="w0"/>
-      </span>
-    </term>
-    <term id="t1" lemma="cat" pos="NOUN" morphofeat="NN">
-      <span>
-        <!--cat-->
         <target id="w1"/>
       </span>
     </term>
-    <term id="t2" lemma="sit" pos="VERB" morphofeat="VBD">
+    <term id="t2" lemma="cat" pos="N" type="open" morphofeat="NN">
       <span>
-        <!--sat-->
         <target id="w2"/>
       </span>
     </term>
-    <term id="t3" lemma="on" pos="ADP" morphofeat="IN">
+    <term id="t3" lemma="sit" pos="V" type="open" morphofeat="VBD">
       <span>
-        <!--on-->
         <target id="w3"/>
       </span>
     </term>
-    <term id="t4" lemma="the" pos="DET" morphofeat="DT">
+    <term id="t4" lemma="on" pos="P" type="open" morphofeat="IN">
       <span>
-        <!--the-->
         <target id="w4"/>
       </span>
     </term>
-    <term id="t5" lemma="mat" pos="NOUN" morphofeat="NN">
+    <term id="t5" lemma="the" pos="D" type="close" morphofeat="DT">
       <span>
-        <!--mat-->
         <target id="w5"/>
       </span>
     </term>
-    <term id="t6" lemma="." pos="PUNCT" morphofeat=".">
+    <term id="t6" lemma="mat" pos="N" type="open" morphofeat="NN">
       <span>
-        <!--.-->
         <target id="w6"/>
       </span>
     </term>
-    <term id="t7" lemma="felix" pos="PROPN" morphofeat="NNP">
+    <term id="t7" lemma="." pos="O" type="close" morphofeat=".">
       <span>
-        <!--Felix-->
         <target id="w7"/>
       </span>
     </term>
-    <term id="t8" lemma="be" pos="VERB" morphofeat="VBD">
+    <term id="t8" lemma="Felix" pos="R" type="open" morphofeat="NNP">
       <span>
-        <!--was-->
         <target id="w8"/>
       </span>
     </term>
-    <term id="t9" lemma="-PRON-" pos="ADJ" morphofeat="PRP$">
+    <term id="t9" lemma="be" pos="V" type="open" morphofeat="VBD">
       <span>
-        <!--his-->
         <target id="w9"/>
       </span>
     </term>
-    <term id="t10" lemma="name" pos="NOUN" morphofeat="NN">
+    <term id="t10" lemma="-PRON-" pos="D" type="close" morphofeat="PRP$">
       <span>
-        <!--name-->
         <target id="w10"/>
       </span>
     </term>
-    <term id="t11" lemma="." pos="PUNCT" morphofeat=".">
+    <term id="t11" lemma="name" pos="N" type="open" morphofeat="NN">
       <span>
-        <!--.-->
         <target id="w11"/>
       </span>
     </term>
+    <term id="t12" lemma="." pos="O" type="close" morphofeat=".">
+      <span>
+        <target id="w12"/>
+      </span>
+    </term>
   </terms>
-  <entities/>
+  <entities>
+    <entity id="e1" type="PERSON">
+      <references>
+        <span>
+          <target id="t7"/>
+        </span>
+      </references>
+      <externalReferences/>
+    </entity>
+  </entities>
 </NAF>
 ```

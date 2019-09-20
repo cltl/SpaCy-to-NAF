@@ -1,3 +1,6 @@
+## 20-9-2019
+- added keyword **replace_hidden_characters** to **text_to_NAF** which allows to replace hidden characters to ' '
+
 ## 15-9-2019
 - added 'resource' to EntityElement. In next version, we can create a namedtuple for external references.
 

@@ -19,6 +19,18 @@ EntityElement = namedtuple('EntityElement', ['eid',
 DependencyRelation = namedtuple('DependencyRelation', ['from_term', 'to_term', 'rfunc', 'from_orth', 'to_orth'])
 ChunkElement = namedtuple('ChunkElement', ['cid', 'head', 'phrase', 'text', 'targets'])
 
+hidden_characters = [
+    '\a',
+    '\b',
+    '\t',
+    '\n',
+    '\v',
+    '\f',
+    '\r',
+]
+
+hidden_table = {ord(hidden_character) : ' '
+                for hidden_character in hidden_characters}
 
 udpos2nafpos_info = {
     'ADJ' : {
@@ -495,6 +507,8 @@ def naf_from_doc(doc,
     # Add raw layer after adding all other layers + check alignment
     add_raw_layer(root, raw_layer)
 
+    assert raw_layer.text == doc.text
+
     return root
 
 
@@ -503,14 +517,28 @@ def time_in_correct_format(datetime_obj):
     return datetime_obj.strftime("%Y-%m-%dT%H:%M:%SUTC")
 
 
-def text_to_NAF(text, nlp, dct, layers, title=None, uri=None, language='en', map_udpos2naf_pos=True):
+def text_to_NAF(text, nlp, dct, layers,
+                title=None,
+                uri=None,
+                language='en',
+                replace_hidden_characters=False,
+                map_udpos2naf_pos=True,
+                ):
     """
     Function that takes a text and returns an xml object containing the NAF.
     """
+    if replace_hidden_characters:
+        text_to_use = text.translate(hidden_table)
+    else:
+        text_to_use = text
+
+    assert len(text) == len(text_to_use)
+
     dct_correct_format = time_in_correct_format(dct)
 
     start_time = time_in_correct_format(datetime.now())
-    doc = nlp(text)
+    doc = nlp(text_to_use)
+
     end_time = time_in_correct_format(datetime.now())
 
     model_name = f'spaCy-model_{nlp.meta["lang"]}_{nlp.meta["name"]}'
@@ -552,5 +580,6 @@ if __name__ == '__main__':
                           nlp,
                           dct=datetime.now(),
                           layers={'raw', 'text', 'terms', 'entities'},
+                          replace_hidden_characters=False,
                           map_udpos2naf_pos=True) # map UD pos to NAF pos
         print(NAF_to_string(NAF))
