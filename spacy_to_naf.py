@@ -261,14 +261,16 @@ def dependencies_to_add(token):
     The relation is then passed to the
     """
     deps = []
-    while token.head is not token:
-        dep_data = DependencyRelation(from_term = 't' + str(token.head.i),
-                                      to_term = 't' + str(token.i),
+    print(token, token.head)
+    while token.head.i is not token.i:
+        dep_data = DependencyRelation(from_term = 't' + str(token.head.i + 1), # we start counting at 1
+                                      to_term = 't' + str(token.i + 1), # we start counting at 1
                                       rfunc = token.dep_,
                                       from_orth = normalize_token_orth(token.head.orth_),
                                       to_orth = normalize_token_orth(token.orth_))
         deps.append(dep_data)
         token = token.head
+
     return deps
 
 
