@@ -343,8 +343,10 @@ def naf_from_doc(doc,
     """
     # NAF:
     # ---------------------
-    # Create NAF root.
+    # Create NAF tree.
+    tree = etree.ElementTree()
     root = etree.Element("NAF")
+    tree._setroot(root)
     root.set('{http://www.w3.org/XML/1998/namespace}lang',language)
     root.set('version', "v3.naf")
     
@@ -511,7 +513,7 @@ def naf_from_doc(doc,
 
     assert raw_layer.text == doc.text
 
-    return root
+    return tree
 
 
 def time_in_correct_format(datetime_obj):
@@ -568,6 +570,13 @@ def NAF_to_string(NAF, byte=False):
     else:
         return xml_string.decode('utf-8')
 
+
+def NAF_to_file(NAF, output_path):
+    NAF.write(output_path,
+              encoding='utf-8',
+              pretty_print=True,
+              xml_declaration=True)
+
 # Command line functionality: given name of a file, process the file contents and
 # print the NAF to stdout.
 if __name__ == '__main__':
@@ -578,10 +587,16 @@ if __name__ == '__main__':
     nlp = spacy.load('en_core_web_sm')
     with open(sys.argv[1]) as f:
         text = f.read()
-        NAF = text_to_NAF(text,
-                          nlp,
-                          dct=datetime.now(),
-                          layers={'raw', 'text', 'terms', 'entities'},
+        naf = text_to_NAF(text,
+                                 nlp,
+                                 dct=datetime.now(),
+                                 layers={'raw',
+                                         'text',
+                                         'terms',
+                                         'entities',
+                                         'deps'},
                           replace_hidden_characters=False,
                           map_udpos2naf_pos=True) # map UD pos to NAF pos
-        print(NAF_to_string(NAF))
+
+        print(NAF_to_string(naf))
+        NAF_to_file(naf, 'example_files/output.xml')

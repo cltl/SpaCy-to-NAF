@@ -1,3 +1,6 @@
+## 25-9-2019
+-added function **NAF_to_file** which  uses etree.ElementTree.write to write NAF to file.
+
 ## 20-9-2019
 - added keyword **replace_hidden_characters** to **text_to_NAF** which allows to replace hidden characters to ' '
 - fixed the 'deps' layer, which was stuck in a while loop.

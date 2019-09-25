@@ -10,19 +10,20 @@ from datetime import datetime
 nlp = spacy.load('en_core_web_sm')
 
 
-NAF = text_to_NAF('Tom Cruise is an actor.\n\n\nHe likes to act.',
-                  nlp,
-                  dct=datetime.now(),
-                  layers={'raw', 'text', 'terms'},
-                  replace_hidden_characters=True,
-                  map_udpos2naf_pos=True) # map UD pos to NAF pos
+tree = text_to_NAF('Tom Cruise is an actor.\n\n\nHe likes to act.',
+                   nlp,
+                   dct=datetime.now(),
+                   layers={'raw', 'text', 'terms'},
+                   replace_hidden_characters=True,
+                   map_udpos2naf_pos=True) # map UD pos to NAF pos
+
+root = tree.getroot()
 
 
-
-entities_layer = NAF.find('entities')
+entities_layer = root.find('entities')
 if entities_layer is None:
-    etree.SubElement(NAF, "entities")
-    entities_layer = NAF.find('entities')
+    etree.SubElement(root, "entities")
+    entities_layer = root.find('entities')
 
 entity_data = EntityElement(eid='1',
                             entity_type='None',
@@ -34,5 +35,5 @@ entity_data = EntityElement(eid='1',
 
 add_entity_element(entities_layer, entity_data)
 
-print(NAF_to_string(NAF))
+print(NAF_to_string(root))
 
