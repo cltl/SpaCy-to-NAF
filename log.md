@@ -1,3 +1,8 @@
+## 23-1-2020
+
+-added keyword argument **layer_to_attributes_to_ignore** to indicate
+which attributes you want to exclude. Now only implemented for terms.
+
 ## 25-9-2019
 -added function **NAF_to_file** which  uses etree.ElementTree.write to write NAF to file.
 

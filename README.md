@@ -27,6 +27,9 @@ NB. Don't use this for batch processing! That would mean loading SpaCy for each
 file, which is wildly inefficient. For large batches, write a python script that
 loads SpaCy and this module, loops over the files, and writes out NAF in one go.
 
+## TODO
+* add https://github.com/huggingface/neuralcoref
+
 ## Proposals NAF version 4
 * move to UD part of speech (generally accepted)
 * Title and headers

@@ -8,7 +8,7 @@ import spacy
 # Define Entity object:
 Entity = namedtuple('Entity',['start', 'end', 'entity_type'])
 WfElement = namedtuple('WfElement',['sent', 'wid', 'length', 'wordform', 'offset'])
-TermElement = namedtuple('TermElement', ['tid', 'lemma', 'pos', 'type', 'morphofeat', 'targets', 'text'])
+TermElement = namedtuple('TermElement', ['id', 'lemma', 'pos', 'type', 'morphofeat', 'targets', 'text'])
 EntityElement = namedtuple('EntityElement', ['eid',
                                              'entity_type',
                                              'targets',
@@ -156,17 +156,23 @@ def add_wf_element(text_layer, wf_data):
     wf_el.text = etree.CDATA(wf_data.wordform)
 
 
-def add_term_element(terms_layer, term_data, add_comments=False):
+def add_term_element(terms_layer,
+                     term_data,
+                     unwanted_attributes=set(),
+                     add_comments=False):
     """
     Function that adds a term element to the text layer.
     """
     term_el = etree.SubElement(terms_layer, "term")
-    term_el.set("id", term_data.tid)
-    term_el.set("lemma", term_data.lemma)
-    term_el.set("pos", term_data.pos)
-    term_el.set('type', term_data.type)
-    term_el.set("morphofeat", term_data.morphofeat)
+
+    attrs = ['id', 'lemma', 'pos', 'type', 'morphofeat']
+
+    for attr in attrs:
+        if attr not in unwanted_attributes:
+            term_el.set(attr, getattr(term_data, attr))
+
     span = etree.SubElement(term_el, "span")
+
     if add_comments:
         text = ' '.join(term_data.text)
         text = prepare_comment_text(text)
@@ -261,7 +267,6 @@ def dependencies_to_add(token):
     The relation is then passed to the
     """
     deps = []
-    print(token, token.head)
     while token.head.i is not token.i:
         dep_data = DependencyRelation(from_term = 't' + str(token.head.i + 1), # we start counting at 1
                                       to_term = 't' + str(token.i + 1), # we start counting at 1
@@ -327,6 +332,7 @@ def naf_from_doc(doc,
                  title=None,
                  uri=None,
                  map_udpos2naf_pos=True,
+                 layer_to_attributes_to_ignore=dict(),
                  layers={'raw',
                          'text',
                          'terms',
@@ -349,7 +355,7 @@ def naf_from_doc(doc,
     tree._setroot(root)
     root.set('{http://www.w3.org/XML/1998/namespace}lang',language)
     root.set('version', "v3.naf")
-    
+
     # Create text and terms layers.
     naf_header = etree.SubElement(root, "nafHeader")
 
@@ -394,44 +400,44 @@ def naf_from_doc(doc,
         next_entity = next(entity_gen)
     except StopIteration:
         next_entity = Entity(start=None, end=None, entity_type=None)
-    
+
     # - Bookkeeping variables.
     current_term = []    # Use a list for multiword expressions.
     current_term_orth = [] # id.
-    
+
     current_entity = []    # Use a list for multiword entities.
     current_entity_orth = [] # id.
-    
+
     current_token = 1    # Keep track of the token number.
     term_number = 1      # Keep track of the term number.
     entity_number = 1    # Keep track of the entity number.
-    
+
     parsing_entity = False # State change: are we working on a term or not?
-    
+
     for sentence_number, sentence in enumerate(doc.sents, start = 1):
         dependencies_for_sentence = []
         for token_number, token in enumerate(sentence, start = current_token):
             # Do we need a state change?
             if token_number == next_entity.start:
                 parsing_entity = True
-            
+
             wid = 'w' + str(token_number)
             tid = 't' + str(term_number)
-            
+
             current_term.append(wid)
             current_term_orth.append(normalize_token_orth(token.orth_))
-            
+
             if parsing_entity:
                 current_entity.append(tid)
                 current_entity_orth.append(normalize_token_orth(token.orth_))
-            
+
             # Create WfElement data:
             wf_data = WfElement(sent = str(sentence_number),
                            wid = wid,
                            length = str(len(token.text)),
                            wordform = token.text,
                            offset = str(token.idx))
-            
+
             # Create TermElement data:
             spacy_pos = token.pos_
             if map_udpos2naf_pos:
@@ -445,7 +451,7 @@ def naf_from_doc(doc,
                 pos = spacy_pos
                 pos_type = 'open'
 
-            term_data = TermElement(tid = tid,
+            term_data = TermElement(id = tid,
                                     lemma = remove_illegal_chars(token.lemma_),
                                     pos = pos,
                                     type=pos_type,
@@ -456,17 +462,20 @@ def naf_from_doc(doc,
             if 'text' in layers:
                 add_wf_element(text_layer, wf_data)
             if 'terms' in layers:
-                add_term_element(terms_layer, term_data, add_comments=comments)
-            
+                add_term_element(terms_layer,
+                                 term_data,
+                                 unwanted_attributes=layer_to_attributes_to_ignore.get('terms', set()),
+                                 add_comments=comments)
+
             # Move to the next term
             term_number += 1
             current_term = []
             current_term_orth = []
-                
+
             if parsing_entity and token_number == next_entity.end:
                 # Create new entity ID.
                 eid = 'e' + str(entity_number)
-                
+
                 # Create Entity data:
                 entity_data = EntityElement(eid = eid,
                                             entity_type = next_entity.entity_type,
@@ -477,12 +486,12 @@ def naf_from_doc(doc,
                 # Add data to XML:
                 if 'entities' in layers:
                     add_entity_element(entities_layer, entity_data, add_comments=comments)
-                
+
                 # Move to the next entity:
                 entity_number += 1
                 current_entity = []
                 current_entity_orth = []
-                
+
                 # Move to the next entity
                 parsing_entity = False
                 try:
@@ -502,7 +511,7 @@ def naf_from_doc(doc,
             if 'deps' in layers:
                 add_dependency_element(dependency_layer, dep_data, add_comments=comments)
         current_token = token_number + 1
-    
+
     # Add chunk layer after adding all other layers.
     for chunk_data in chunk_tuples_for_doc(doc):
         if 'chunks' in layers:
@@ -525,6 +534,7 @@ def text_to_NAF(text, nlp, dct, layers,
                 title=None,
                 uri=None,
                 language='en',
+                layer_to_attributes_to_ignore=dict(),
                 replace_hidden_characters=False,
                 map_udpos2naf_pos=True,
                 ):
@@ -557,6 +567,7 @@ def text_to_NAF(text, nlp, dct, layers,
                         title=title,
                         uri=uri,
                         layers=layers,
+                        layer_to_attributes_to_ignore=layer_to_attributes_to_ignore,
                         map_udpos2naf_pos=map_udpos2naf_pos)
 
 def NAF_to_string(NAF, byte=False):
@@ -585,18 +596,23 @@ if __name__ == '__main__':
     from datetime import datetime
 
     nlp = spacy.load('en_core_web_sm')
+
+    layer_to_attributes_to_ignore = {
+        'terms' : {'morphofeat', 'type'} # this will not add these attributes to the term element
+    }
     with open(sys.argv[1]) as f:
         text = f.read()
         naf = text_to_NAF(text,
-                                 nlp,
-                                 dct=datetime.now(),
-                                 layers={'raw',
-                                         'text',
-                                         'terms',
-                                         'entities',
-                                         'deps'},
+                         nlp,
+                         dct=datetime.now(),
+                         layers={'raw',
+                                 'text',
+                                 'terms',
+                                 'entities',
+                                 'deps'},
                           replace_hidden_characters=False,
-                          map_udpos2naf_pos=True) # map UD pos to NAF pos
+                          layer_to_attributes_to_ignore=layer_to_attributes_to_ignore,
+                          map_udpos2naf_pos=False) # map UD pos to NAF pos
 
         print(NAF_to_string(naf))
-        NAF_to_file(naf, 'example_files/output.xml')
+        #NAF_to_file(naf, 'example_files/output.xml')
