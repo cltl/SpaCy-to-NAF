@@ -1,3 +1,6 @@
+## 27-1-2020
+-added keyword argument **naf_version** to be able to differentiate between NAF version 3 and 4
+
 ## 23-1-2020
 
 -added keyword argument **layer_to_attributes_to_ignore** to indicate

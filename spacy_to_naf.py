@@ -8,7 +8,7 @@ import spacy
 # Define Entity object:
 Entity = namedtuple('Entity',['start', 'end', 'entity_type'])
 WfElement = namedtuple('WfElement',['sent', 'wid', 'length', 'wordform', 'offset'])
-TermElement = namedtuple('TermElement', ['id', 'lemma', 'pos', 'type', 'morphofeat', 'targets', 'text'])
+TermElement = namedtuple('TermElement', ['id', 'lemma', 'pos', 'type', 'morphofeat', 'targets', 'text', 'phrase_type'])
 EntityElement = namedtuple('EntityElement', ['eid',
                                              'entity_type',
                                              'targets',
@@ -158,6 +158,7 @@ def add_wf_element(text_layer, wf_data):
 
 def add_term_element(terms_layer,
                      term_data,
+                     naf_version,
                      unwanted_attributes=set(),
                      add_comments=False):
     """
@@ -166,6 +167,9 @@ def add_term_element(terms_layer,
     term_el = etree.SubElement(terms_layer, "term")
 
     attrs = ['id', 'lemma', 'pos', 'type', 'morphofeat']
+
+    if naf_version == 'v4':
+        attrs.append('phrase_type')
 
     for attr in attrs:
         if attr not in unwanted_attributes:
@@ -327,6 +331,7 @@ def naf_from_doc(doc,
                  end_time,
                  modelname,
                  modelversion,
+                 naf_version='v3',
                  language='en',
                  comments=False,
                  title=None,
@@ -354,7 +359,8 @@ def naf_from_doc(doc,
     root = etree.Element("NAF")
     tree._setroot(root)
     root.set('{http://www.w3.org/XML/1998/namespace}lang',language)
-    root.set('version', "v3.naf")
+
+    root.set('version', naf_version)
 
     # Create text and terms layers.
     naf_header = etree.SubElement(root, "nafHeader")
@@ -457,13 +463,15 @@ def naf_from_doc(doc,
                                     type=pos_type,
                                     morphofeat = token.tag_,
                                     targets = current_term,
-                                    text = current_term_orth)
+                                    text = current_term_orth,
+                                    phrase_type='singleton')
 
             if 'text' in layers:
                 add_wf_element(text_layer, wf_data)
             if 'terms' in layers:
                 add_term_element(terms_layer,
                                  term_data,
+                                 naf_version,
                                  unwanted_attributes=layer_to_attributes_to_ignore.get('terms', set()),
                                  add_comments=comments)
 
@@ -535,6 +543,7 @@ def text_to_NAF(text, nlp, dct, layers,
                 uri=None,
                 language='en',
                 layer_to_attributes_to_ignore=dict(),
+                naf_version='v3',
                 replace_hidden_characters=False,
                 map_udpos2naf_pos=True,
                 ):
@@ -563,6 +572,7 @@ def text_to_NAF(text, nlp, dct, layers,
                         end_time=end_time,
                         modelname=model_name,
                         modelversion=model_version,
+                        naf_version=naf_version,
                         language=language,
                         title=title,
                         uri=uri,
@@ -581,7 +591,6 @@ def NAF_to_string(NAF, byte=False):
     else:
         return xml_string.decode('utf-8')
 
-
 def NAF_to_file(NAF, output_path):
     NAF.write(output_path,
               encoding='utf-8',
@@ -595,7 +604,8 @@ if __name__ == '__main__':
     import spacy
     from datetime import datetime
 
-    nlp = spacy.load('en_core_web_sm')
+    #nlp = spacy.load('en_core_web_sm')
+    nlp = spacy.load('nl_core_news_sm')
 
     layer_to_attributes_to_ignore = {
         'terms' : {'morphofeat', 'type'} # this will not add these attributes to the term element
@@ -607,10 +617,9 @@ if __name__ == '__main__':
                          dct=datetime.now(),
                          layers={'raw',
                                  'text',
-                                 'terms',
-                                 'entities',
-                                 'deps'},
+                                 'terms'},
                           replace_hidden_characters=False,
+                          naf_version='v3',
                           layer_to_attributes_to_ignore=layer_to_attributes_to_ignore,
                           map_udpos2naf_pos=False) # map UD pos to NAF pos
 
