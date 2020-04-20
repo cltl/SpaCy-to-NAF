@@ -28,15 +28,8 @@ file, which is wildly inefficient. For large batches, write a python script that
 loads SpaCy and this module, loops over the files, and writes out NAF in one go.
 
 ## TODO
+* add dtd validation of naf version 4
 * add https://github.com/huggingface/neuralcoref
-
-## Proposals NAF version 4
-* move to UD part of speech (generally accepted)
-* Title and headers
-* Special characters in text (newlines, etc.)
-* Multiple entity and srl layers
-* How to represent LU and Frame (why as “uri” in predicate element)
-* Misalignment in “span/target” elements”
 
 **Output**:
 

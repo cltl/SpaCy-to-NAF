@@ -186,15 +186,23 @@ def add_term_element(terms_layer,
         target_el.set("id", target)
 
 
-def add_entity_element(entities_layer, entity_data, add_comments=False):
+def add_entity_element(entities_layer,
+                       naf_version,
+                       entity_data,
+                       add_comments=False):
     """
     Function that adds an entity element to the entity layer.
     """
     entity_el = etree.SubElement(entities_layer, "entity")
     entity_el.set("id", entity_data.eid)
     entity_el.set("type", entity_data.entity_type)
-    references_el = etree.SubElement(entity_el, "references")
-    span = etree.SubElement(references_el, "span")
+
+    if naf_version == 'v3':
+        references_el = etree.SubElement(entity_el, "references")
+        span = etree.SubElement(references_el, "span")
+    elif naf_version == 'v4':
+        span = etree.SubElement(entity_el, "span")
+
     if add_comments:
         text = ' '.join(entity_data.text)
         text = prepare_comment_text(text)
@@ -208,7 +216,10 @@ def add_entity_element(entities_layer, entity_data, add_comments=False):
     for ext_ref_info in entity_data.ext_refs:
         one_ext_ref_el = etree.SubElement(ext_refs_el, 'externalRef')
         one_ext_ref_el.set('reference', ext_ref_info['reference'])
-        one_ext_ref_el.set('resource', ext_ref_info['resource'])
+
+        for optional_attr in ['resource', 'source', 'timestamp']:
+            if optional_attr in ext_ref_info:
+                one_ext_ref_el.set(optional_attr, ext_ref_info[optional_attr])
 
 def chunks_for_doc(doc):
     """
@@ -325,6 +336,26 @@ def add_raw_layer(root, raw_layer):
         token = raw_layer.text[start:end]
         assert wf_el.text == token, f'mismatch in alignment of wf element {wf_el.text} ({wf_el.get("id")}) with raw layer (expected length {wf_el.get("length")}'
 
+def add_linguisticProcessors_el(naf_header,
+                                layer,
+                                start_time,
+                                end_time,
+                                modelname,
+                                modelversion=None):
+    """
+
+    :return:
+    """
+    ling_proc = etree.SubElement(naf_header, "linguisticProcessors")
+    ling_proc.set("layer", layer)
+    lp = etree.SubElement(ling_proc, "lp")
+    lp.set("beginTimestamp", start_time)
+    lp.set('endTimestamp', end_time)
+    lp.set('name', modelname)
+    if modelversion:
+        lp.set('version', modelversion)
+
+
 def naf_from_doc(doc,
                  dct,
                  start_time,
@@ -378,13 +409,12 @@ def naf_from_doc(doc,
 
 
     for layer in layers:
-        ling_proc = etree.SubElement(naf_header, "linguisticProcessors")
-        ling_proc.set("layer", layer)
-        lp = etree.SubElement(ling_proc, "lp")
-        lp.set("beginTimestamp", start_time)
-        lp.set('endTimestamp', end_time)
-        lp.set('name', modelname)
-        lp.set('version', modelversion)
+        add_linguisticProcessors_el(naf_header,
+                                    layer,
+                                    start_time,
+                                    end_time,
+                                    modelname,
+                                    modelversion)
 
     if 'raw' in layers:
         raw_layer = etree.SubElement(root, 'raw')
@@ -493,7 +523,10 @@ def naf_from_doc(doc,
                                             )
                 # Add data to XML:
                 if 'entities' in layers:
-                    add_entity_element(entities_layer, entity_data, add_comments=comments)
+                    add_entity_element(entities_layer,
+                                       naf_version,
+                                       entity_data,
+                                       add_comments=comments)
 
                 # Move to the next entity:
                 entity_number += 1
@@ -604,8 +637,8 @@ if __name__ == '__main__':
     import spacy
     from datetime import datetime
 
-    #nlp = spacy.load('en_core_web_sm')
-    nlp = spacy.load('nl_core_news_sm')
+    nlp = spacy.load('en_core_web_sm')
+    #nlp = spacy.load('nl_core_news_sm')
 
     layer_to_attributes_to_ignore = {
         'terms' : {'morphofeat', 'type'} # this will not add these attributes to the term element
@@ -619,7 +652,7 @@ if __name__ == '__main__':
                                  'text',
                                  'terms'},
                           replace_hidden_characters=False,
-                          naf_version='v3',
+                          naf_version='v4',
                           layer_to_attributes_to_ignore=layer_to_attributes_to_ignore,
                           map_udpos2naf_pos=False) # map UD pos to NAF pos
 
