@@ -8,9 +8,26 @@ import io
 import requests
 import sys
 
-NAF_VERSION_TO_DTD_URL = {
-    'v3' : 'https://raw.githubusercontent.com/newsreader/NAF/master/naf.dtd',
-    'v4' : 'https://raw.githubusercontent.com/cltl/NAF-4-Development/master/res/naf_development/naf_v4.dtd'
+def load_dtd_as_file_object(dtd_url, verbose=0):
+    dtd = None
+    r = requests.get(dtd_url)
+
+    if r.status_code == 200:
+        dtd_file_object = io.StringIO(r.text)
+        dtd = etree.DTD(dtd_file_object)
+
+    if verbose >= 1:
+        print()
+        if dtd is None:
+            print(f'failed to load dtd from {dtd_url}')
+        else:
+            print(f'succesfully loaded dtd from {dtd_url}')
+
+    return dtd
+
+NAF_VERSION_TO_DTD = {
+    'v3' : load_dtd_as_file_object('https://raw.githubusercontent.com/newsreader/NAF/master/naf.dtd'),
+    'v4' : load_dtd_as_file_object('https://raw.githubusercontent.com/cltl/NAF-4-Development/master/res/naf_development/naf_v4.dtd')
 }
 # Define Entity object:
 Entity = namedtuple('Entity',['start', 'end', 'entity_type'])
@@ -127,23 +144,6 @@ def normalize_token_orth(orth):
        return 'NEWLINE'
     else:
         return remove_illegal_chars(orth)
-
-def load_dtd_as_file_object(dtd_url, verbose=0):
-    dtd = None
-    r = requests.get(dtd_url)
-
-    if r.status_code == 200:
-        dtd_file_object = io.StringIO(r.text)
-        dtd = etree.DTD(dtd_file_object)
-
-    if verbose >= 1:
-        print()
-        if dtd is None:
-            print(f'failed to load dtd from {dtd_url}')
-        else:
-            print(f'succesfully loaded dtd from {dtd_url}')
-
-    return dtd
 
 def validate_naf_file(dtd, root):
     succes = dtd.validate(root)
@@ -600,8 +600,7 @@ def naf_from_doc(doc,
     assert raw_layer.text == doc.text
 
     if dtd_validation:
-        dtd_url = NAF_VERSION_TO_DTD_URL[naf_version]
-        dtd = load_dtd_as_file_object(dtd_url)
+        dtd = NAF_VERSION_TO_DTD[naf_version]
         validate_naf_file(dtd, root)
 
     return tree
