@@ -3,6 +3,6 @@
 rm -r output
 mkdir output
 
+python v4_validation.py > output/v4_validation.naf 2> output/v4_validation.err
 python v4_raw_text_terms.py > output/v4_raw_text_terms.naf 2> output/v4_raw_text_terms.err
-#python add_entity.py
-#python add_dependency.py
+python v4_add_entity.py > output/v4_add_entity.naf 2> output/v4_add_entity.err

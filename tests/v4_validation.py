@@ -14,6 +14,7 @@ naf = text_to_NAF('Tom Cruise is an actor.\n\n\nHe likes to act.',
                    naf_version='v4',
                    layer_to_attributes_to_ignore={'terms' : {'morphofeat', 'type'}},
                    replace_hidden_characters=True,
-                   dtd_validation=True) # map UD pos to NAF pos
+                   map_udpos2naf_pos=False,
+                   dtd_validation=True)
 
 print(NAF_to_string(naf))

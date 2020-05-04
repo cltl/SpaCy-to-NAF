@@ -16,9 +16,11 @@ now = datetime.now()
 tree = text_to_NAF('Tom Cruise is an actor.\n\n\nHe likes to act.',
                    nlp,
                    dct=now,
+                   naf_version='v4',
                    layers={'raw', 'text', 'terms'},
                    replace_hidden_characters=True,
-                   map_udpos2naf_pos=False) # map UD pos to NAF pos
+                   map_udpos2naf_pos=False,
+                   dtd_validation=True) # map UD pos to NAF pos
 
 root = tree.getroot()
 naf_header = root.find('nafHeader')
@@ -42,7 +44,7 @@ entity_data = EntityElement(eid='1',
                             targets=['t1', 't2'],
                             text='Tom Cruise',
                             ext_refs=[{'reference' : 'https://en.wikipedia.org/wiki/Tom_Cruise',
-                                       'resource' : 'https://en.wikipedia.org',
+                                       'resource' : 'https://www.wikipedia.org/',
                                        'source' : 'Wikipedia hyperlinks',
                                        'timestamp' : time_as_string}])
 

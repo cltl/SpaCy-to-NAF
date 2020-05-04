@@ -4,7 +4,14 @@ from lxml import etree
 from collections import namedtuple
 from datetime import datetime
 import spacy
+import io
+import requests
+import sys
 
+NAF_VERSION_TO_DTD_URL = {
+    'v3' : 'https://raw.githubusercontent.com/newsreader/NAF/master/naf.dtd',
+    'v4' : 'https://raw.githubusercontent.com/cltl/NAF-4-Development/master/res/naf_development/naf_v4.dtd'
+}
 # Define Entity object:
 Entity = namedtuple('Entity',['start', 'end', 'entity_type'])
 WfElement = namedtuple('WfElement',['sent', 'wid', 'length', 'wordform', 'offset'])
@@ -121,6 +128,34 @@ def normalize_token_orth(orth):
     else:
         return remove_illegal_chars(orth)
 
+def load_dtd_as_file_object(dtd_url, verbose=0):
+    dtd = None
+    r = requests.get(dtd_url)
+
+    if r.status_code == 200:
+        dtd_file_object = io.StringIO(r.text)
+        dtd = etree.DTD(dtd_file_object)
+
+    if verbose >= 1:
+        print()
+        if dtd is None:
+            print(f'failed to load dtd from {dtd_url}')
+        else:
+            print(f'succesfully loaded dtd from {dtd_url}')
+
+    return dtd
+
+def validate_naf_file(dtd, root):
+    succes = dtd.validate(root)
+
+    if not succes:
+        print()
+        print(sys.stderr.write("DTD error log:"))
+        for error in dtd.error_log.filter_from_errors():
+            sys.stderr.write(str(error))
+        raise Exception(f'dtd validation failed. Please inspect stderr.')
+
+    return succes
 
 def prepare_comment_text(text):
     "Function to prepare text to be put inside a comment."
@@ -374,7 +409,8 @@ def naf_from_doc(doc,
                          'terms',
                          'entities',
                          'deps',
-                         'chunks'}):
+                         'chunks'},
+                 dtd_validation=False):
     """
     Function that takes a document and returns an ElementTree
     object that corresponds to the root of the NAF structure.
@@ -563,6 +599,11 @@ def naf_from_doc(doc,
 
     assert raw_layer.text == doc.text
 
+    if dtd_validation:
+        dtd_url = NAF_VERSION_TO_DTD_URL[naf_version]
+        dtd = load_dtd_as_file_object(dtd_url)
+        validate_naf_file(dtd, root)
+
     return tree
 
 
@@ -578,8 +619,8 @@ def text_to_NAF(text, nlp, dct, layers,
                 layer_to_attributes_to_ignore=dict(),
                 naf_version='v3',
                 replace_hidden_characters=False,
-                map_udpos2naf_pos=True,
-                ):
+                map_udpos2naf_pos=False,
+                dtd_validation=False):
     """
     Function that takes a text and returns an xml object containing the NAF.
     """
@@ -611,7 +652,8 @@ def text_to_NAF(text, nlp, dct, layers,
                         uri=uri,
                         layers=layers,
                         layer_to_attributes_to_ignore=layer_to_attributes_to_ignore,
-                        map_udpos2naf_pos=map_udpos2naf_pos)
+                        map_udpos2naf_pos=map_udpos2naf_pos,
+                        dtd_validation=dtd_validation)
 
 def NAF_to_string(NAF, byte=False):
     """
@@ -638,7 +680,6 @@ if __name__ == '__main__':
     from datetime import datetime
 
     nlp = spacy.load('en_core_web_sm')
-    #nlp = spacy.load('nl_core_news_sm')
 
     layer_to_attributes_to_ignore = {
         'terms' : {'morphofeat', 'type'} # this will not add these attributes to the term element
@@ -654,7 +695,7 @@ if __name__ == '__main__':
                           replace_hidden_characters=False,
                           naf_version='v4',
                           layer_to_attributes_to_ignore=layer_to_attributes_to_ignore,
-                          map_udpos2naf_pos=False) # map UD pos to NAF pos
+                          dtd_validation=False)
 
         print(NAF_to_string(naf))
         #NAF_to_file(naf, 'example_files/output.xml')
