@@ -7,7 +7,7 @@ from spacy_to_naf import text_to_NAF, NAF_to_string
 
 nlp = spacy.load('nl_core_news_sm')
 
-naf = text_to_NAF('De aanslagpleger nam het document aan.',
+naf = text_to_NAF("Hij nam de kat aan.",
                    nlp,
                    dct=datetime.now(),
                    layers={'raw', 'text', 'terms', 'deps'},

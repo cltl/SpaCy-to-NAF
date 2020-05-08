@@ -317,7 +317,8 @@ def dependencies_to_add(token):
     The relation is then passed to the
     """
     deps = []
-    while token.head.i is not token.i:
+
+    while token.head.i != token.i:
         dep_data = DependencyRelation(from_term = 't' + str(token.head.i + 1), # we start counting at 1
                                       to_term = 't' + str(token.i + 1), # we start counting at 1
                                       rfunc = token.dep_,
@@ -597,7 +598,8 @@ def naf_from_doc(doc,
     # Add raw layer after adding all other layers + check alignment
     add_raw_layer(root, raw_layer)
 
-    assert raw_layer.text == doc.text
+    assert raw_layer.text == doc.text, f'{len(raw_layer.text)} - {len(doc.text)}'
+
 
     if dtd_validation:
         dtd = NAF_VERSION_TO_DTD[naf_version]
