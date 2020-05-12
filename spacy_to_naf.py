@@ -157,6 +157,90 @@ def validate_naf_file(dtd, root):
 
     return succes
 
+def create_seperable_verb_lemma(verb, particle, language):
+    """joins components of a seperable verb"""
+    if language == 'nl':
+        lemma = particle+verb
+    if language == 'en':
+        lemma = f'{verb}_{particle}'
+    return lemma
+
+def add_multi_words(root,
+                    naf_version,
+                    language):
+    """
+    Provided that the NAF file contains a
+    adds multi-word terms to term layer in naf file
+    """
+    if naf_version == 'v3':
+        print('add_multi_words function only applies to naf version 4')
+        return root
+
+    supported_languages = {'nl', 'en'}
+    if language not in supported_languages:
+        print(f'add_multi_words function only implemented for {supported_languages}, not for supplied {language}')
+        return root
+
+    terms_el = root.find('terms')
+
+    # dictionary from tid -> term_el
+    tid_to_term = {term_el.get('id') : term_el
+                   for term_el in root.xpath('terms/term')}
+    max_tid = max(
+        int(term_el.get('id')[1:])
+        for term_el in root.xpath('terms/term')
+    )
+
+    num_of_compound_prts = 0
+
+    # loop deps el
+    for dep in root.findall('deps/dep'):
+        if dep.get('rfunc') == 'compound:prt':
+            idverb = dep.get('from')
+            idparticle = dep.get('to')
+            num_of_compound_prts += 1
+
+            verb_term_el = tid_to_term[idverb]
+            verb = verb_term_el.get('lemma')
+            verb_term_el.set('phrase_type', 'component')
+
+            particle_term_el = tid_to_term[idparticle]
+            particle = particle_term_el.get('lemma')
+            particle_term_el.set('phrase_type', 'component')
+
+            seperable_verb_lemma = create_seperable_verb_lemma(verb,
+                                                               particle,
+                                                               language)
+
+            mw_term_id = max_tid + 1
+            max_tid += 1
+
+            attributes = [('id', f't{mw_term_id}'),
+                          ('lemma', seperable_verb_lemma),
+                          ('pos', 'VERB'),
+                          ('phrase_type', 'multi-word')]
+
+            another_term_element = etree.SubElement(terms_el,
+                                                    'term')
+            for attr, value in attributes:
+                another_term_element.set(attr, value)
+
+            component = etree.SubElement(another_term_element, 'component')
+            component_attribute_verb = {'id': idverb}
+            component_attribute_particle = {'id': idparticle}
+            etree.SubElement(component,
+                             'target',
+                             attrib=component_attribute_verb)
+            etree.SubElement(component,
+                             'target',
+                             attrib=component_attribute_particle)
+
+    # check that the correct number of term elements have been added
+    current_num_of_term_els = len(root.xpath('terms/term'))
+    assert (len(tid_to_term) + num_of_compound_prts) == current_num_of_term_els, f'mismatch between number of compound:prts values and number of term elements added.'
+
+    return root
+
 def prepare_comment_text(text):
     "Function to prepare text to be put inside a comment."
     text = text.replace('--','DOUBLEDASH')
@@ -404,6 +488,7 @@ def naf_from_doc(doc,
                  title=None,
                  uri=None,
                  map_udpos2naf_pos=True,
+                 add_mws=True,
                  layer_to_attributes_to_ignore=dict(),
                  layers={'raw',
                          'text',
@@ -426,7 +511,7 @@ def naf_from_doc(doc,
     tree = etree.ElementTree()
     root = etree.Element("NAF")
     tree._setroot(root)
-    root.set('{http://www.w3.org/XML/1998/namespace}lang',language)
+    root.set('{http://www.w3.org/XML/1998/namespace}lang', language)
 
     root.set('version', naf_version)
 
@@ -590,6 +675,12 @@ def naf_from_doc(doc,
                 add_dependency_element(dependency_layer, dep_data, add_comments=comments)
         current_token = token_number + 1
 
+    if all(['deps' in layers,
+            add_mws]):
+        add_multi_words(root,
+                        naf_version,
+                        language)
+
     # Add chunk layer after adding all other layers.
     for chunk_data in chunk_tuples_for_doc(doc):
         if 'chunks' in layers:
@@ -621,6 +712,7 @@ def text_to_NAF(text, nlp, dct, layers,
                 naf_version='v3',
                 replace_hidden_characters=False,
                 map_udpos2naf_pos=False,
+                add_mws=True,
                 dtd_validation=False):
     """
     Function that takes a text and returns an xml object containing the NAF.
@@ -652,6 +744,7 @@ def text_to_NAF(text, nlp, dct, layers,
                         title=title,
                         uri=uri,
                         layers=layers,
+                        add_mws=True,
                         layer_to_attributes_to_ignore=layer_to_attributes_to_ignore,
                         map_udpos2naf_pos=map_udpos2naf_pos,
                         dtd_validation=dtd_validation)
@@ -692,9 +785,11 @@ if __name__ == '__main__':
                          dct=datetime.now(),
                          layers={'raw',
                                  'text',
-                                 'terms'},
+                                 'terms',
+                                 'deps'},
                           replace_hidden_characters=False,
                           naf_version='v4',
+                          add_mws=True,
                           layer_to_attributes_to_ignore=layer_to_attributes_to_ignore,
                           dtd_validation=False)
 
