@@ -218,7 +218,7 @@ def add_multi_words(root,
             attributes = [('id', f't{mw_term_id}'),
                           ('lemma', seperable_verb_lemma),
                           ('pos', 'VERB'),
-                          ('phrase_type', 'multi-word')]
+                          ('phrase_type', 'multi_word')]
 
             another_term_element = etree.SubElement(terms_el,
                                                     'term')
