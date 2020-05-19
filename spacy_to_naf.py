@@ -744,7 +744,7 @@ def text_to_NAF(text, nlp, dct, layers,
                         title=title,
                         uri=uri,
                         layers=layers,
-                        add_mws=True,
+                        add_mws=add_mws,
                         layer_to_attributes_to_ignore=layer_to_attributes_to_ignore,
                         map_udpos2naf_pos=map_udpos2naf_pos,
                         dtd_validation=dtd_validation)
