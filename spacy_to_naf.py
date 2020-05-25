@@ -165,6 +165,31 @@ def create_seperable_verb_lemma(verb, particle, language):
         lemma = f'{verb}_{particle}'
     return lemma
 
+def retag_deps_layer(tid_mapping,
+                     deps_layer,
+                     not_replace_tags={'compound:prt'}):
+    """
+
+    :param dict tid_mapping: mapping from tid to tid that you want to replace it with
+    :param deps_layer: the NAF layers <deps>
+    :param set not_replace_tags: dependency tags for which you do
+    not want to replace the tids
+    """
+    attrs = ['from', 'to']
+
+    for dep_el in deps_layer.xpath('dep'):
+
+        for attr in attrs:
+            from_tid = dep_el.get(attr)
+            rfunc = dep_el.get('rfunc')
+
+            if rfunc in not_replace_tags:
+                continue
+
+            mapped_to = tid_mapping.get(from_tid, None)
+            if mapped_to is not None:
+                dep_el.set(attr, mapped_to)
+
 def add_multi_words(root,
                     naf_version,
                     language):
@@ -182,6 +207,7 @@ def add_multi_words(root,
         return root
 
     terms_el = root.find('terms')
+    deps_el = root.find('deps')
 
     # dictionary from tid -> term_el
     tid_to_term = {term_el.get('id') : term_el
@@ -192,6 +218,7 @@ def add_multi_words(root,
     )
 
     num_of_compound_prts = 0
+    componentid_to_termid = {}
 
     # loop deps el
     for dep in root.findall('deps/dep'):
@@ -215,10 +242,11 @@ def add_multi_words(root,
             mw_term_id = max_tid + 1
             max_tid += 1
 
-            attributes = [('id', f't{mw_term_id}'),
+            the_mw_term_id = f't{mw_term_id}'
+            attributes = [('id', the_mw_term_id),
                           ('lemma', seperable_verb_lemma),
                           ('pos', 'VERB'),
-                          ('phrase_type', 'multi_word')]
+                          ('phrase_type', 'phrasal_verb')]
 
             another_term_element = etree.SubElement(terms_el,
                                                     'term')
@@ -234,6 +262,12 @@ def add_multi_words(root,
             etree.SubElement(component,
                              'target',
                              attrib=component_attribute_particle)
+
+            componentid_to_termid[idverb] = the_mw_term_id
+            componentid_to_termid[idparticle] = the_mw_term_id
+
+    retag_deps_layer(tid_mapping=componentid_to_termid,
+                     deps_layer=deps_el)
 
     # check that the correct number of term elements have been added
     current_num_of_term_els = len(root.xpath('terms/term'))
