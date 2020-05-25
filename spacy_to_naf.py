@@ -27,7 +27,7 @@ def load_dtd_as_file_object(dtd_url, verbose=0):
 
 NAF_VERSION_TO_DTD = {
     'v3' : load_dtd_as_file_object('https://raw.githubusercontent.com/newsreader/NAF/master/naf.dtd'),
-    'v4' : load_dtd_as_file_object('https://raw.githubusercontent.com/cltl/NAF-4-Development/master/res/naf_development/naf_v4.dtd')
+    'v3.1' : load_dtd_as_file_object('https://raw.githubusercontent.com/cltl/NAF-4-Development/master/res/naf_development/naf_v3.1.dtd')
 }
 # Define Entity object:
 Entity = namedtuple('Entity',['start', 'end', 'entity_type'])
@@ -246,7 +246,8 @@ def add_multi_words(root,
             attributes = [('id', the_mw_term_id),
                           ('lemma', seperable_verb_lemma),
                           ('pos', 'VERB'),
-                          ('phrase_type', 'phrasal_verb')]
+                          ('phrase_type', 'multi_word'),
+                          ('ud_rel', 'compound:prt')]
 
             another_term_element = etree.SubElement(terms_el,
                                                     'term')

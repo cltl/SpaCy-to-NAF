@@ -16,7 +16,7 @@ now = datetime.now()
 tree = text_to_NAF('Tom Cruise is an actor.\n\n\nHe likes to act.',
                    nlp,
                    dct=now,
-                   naf_version='v4',
+                   naf_version='v3.1',
                    layers={'raw', 'text', 'terms'},
                    replace_hidden_characters=True,
                    map_udpos2naf_pos=False,
