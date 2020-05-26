@@ -322,7 +322,7 @@ def add_term_element(terms_layer,
 
     attrs = ['id', 'lemma', 'pos', 'type', 'morphofeat']
 
-    if naf_version == 'v4':
+    if naf_version == 'v3.1':
         attrs.append('phrase_type')
 
     for attr in attrs:
@@ -354,7 +354,7 @@ def add_entity_element(entities_layer,
     if naf_version == 'v3':
         references_el = etree.SubElement(entity_el, "references")
         span = etree.SubElement(references_el, "span")
-    elif naf_version == 'v4':
+    elif naf_version == 'v3.1':
         span = etree.SubElement(entity_el, "span")
 
     if add_comments:
@@ -823,7 +823,7 @@ if __name__ == '__main__':
                                  'terms',
                                  'deps'},
                           replace_hidden_characters=False,
-                          naf_version='v4',
+                          naf_version='v3.1',
                           add_mws=True,
                           layer_to_attributes_to_ignore=layer_to_attributes_to_ignore,
                           dtd_validation=False)

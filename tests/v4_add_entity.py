@@ -10,13 +10,13 @@ from spacy_to_naf import add_linguisticProcessors_el
 from datetime import datetime
 
 nlp = spacy.load('en_core_web_sm')
-naf_version = 'v4'
+naf_version = 'v3.1'
 now = datetime.now()
 
 tree = text_to_NAF('Tom Cruise is an actor.\n\n\nHe likes to act.',
                    nlp,
                    dct=now,
-                   naf_version='v3.1',
+                   naf_version=naf_version,
                    layers={'raw', 'text', 'terms'},
                    replace_hidden_characters=True,
                    map_udpos2naf_pos=False,
