@@ -298,7 +298,7 @@ def entities(doc):
                      entity_type = get_entity_type(ent))
 
 
-def add_wf_element(text_layer, wf_data):
+def add_wf_element(text_layer, wf_data, cdata=True):
     """
     Function that adds a wf element to the text layer.
     """
@@ -307,7 +307,11 @@ def add_wf_element(text_layer, wf_data):
     wf_el.set("id", wf_data.wid)
     wf_el.set("length", wf_data.length)
     wf_el.set("offset", wf_data.offset)
-    wf_el.text = etree.CDATA(wf_data.wordform)
+
+    if cdata:
+        wf_el.text = etree.CDATA(wf_data.wordform)
+    else:
+        wf_el.text = wf_data.wordform
 
 
 def add_term_element(terms_layer,
@@ -524,6 +528,7 @@ def naf_from_doc(doc,
                  uri=None,
                  map_udpos2naf_pos=True,
                  add_mws=True,
+                 cdata=True,
                  layer_to_attributes_to_ignore=dict(),
                  layers={'raw',
                          'text',
@@ -563,7 +568,6 @@ def naf_from_doc(doc,
     public_el = etree.SubElement(naf_header, 'public')
     if uri is not None:
         public_el.set('uri', uri)
-
 
     for layer in layers:
         add_linguisticProcessors_el(naf_header,
@@ -654,7 +658,7 @@ def naf_from_doc(doc,
                                     phrase_type='singleton')
 
             if 'text' in layers:
-                add_wf_element(text_layer, wf_data)
+                add_wf_element(text_layer, wf_data, cdata=cdata)
             if 'terms' in layers:
                 add_term_element(terms_layer,
                                  term_data,
@@ -739,12 +743,16 @@ def time_in_correct_format(datetime_obj):
     return datetime_obj.strftime("%Y-%m-%dT%H:%M:%SUTC")
 
 
-def text_to_NAF(text, nlp, dct, layers,
+def text_to_NAF(text,
+                nlp,
+                dct,
+                layers,
                 title=None,
                 uri=None,
                 language='en',
                 layer_to_attributes_to_ignore=dict(),
                 naf_version='v3',
+                cdata=True,
                 replace_hidden_characters=False,
                 map_udpos2naf_pos=False,
                 add_mws=True,
@@ -780,6 +788,7 @@ def text_to_NAF(text, nlp, dct, layers,
                         uri=uri,
                         layers=layers,
                         add_mws=add_mws,
+                        cdata=cdata,
                         layer_to_attributes_to_ignore=layer_to_attributes_to_ignore,
                         map_udpos2naf_pos=map_udpos2naf_pos,
                         dtd_validation=dtd_validation)
