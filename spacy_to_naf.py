@@ -453,7 +453,7 @@ def dependencies_to_add(token):
     return deps
 
 
-def add_raw_layer(root, raw_layer):
+def add_raw_layer(root, raw_layer, cdata=True):
     """
     create raw text layer that aligns with the token layer
 
@@ -486,7 +486,11 @@ def add_raw_layer(root, raw_layer):
         tokens.append(trailing_chars + cur_wf_el.text)
 
     raw_text = ''.join(tokens)
-    raw_layer.text = raw_text
+
+    if cdata:
+        raw_layer.text = etree.CDATA(raw_text)
+    else:
+        raw_layer.text = raw_text
 
     # verify alignment between raw and token layer
     for wf_el in root.xpath('text/wf'):
@@ -726,7 +730,7 @@ def naf_from_doc(doc,
             add_chunk_element(chunks_layer, chunk_data, add_comments=comments)
 
     # Add raw layer after adding all other layers + check alignment
-    add_raw_layer(root, raw_layer)
+    add_raw_layer(root, raw_layer, cdata=cdata)
 
     assert raw_layer.text == doc.text, f'{len(raw_layer.text)} - {len(doc.text)}'
 
