@@ -32,7 +32,7 @@ NAF_VERSION_TO_DTD = {
 # Define Entity object:
 Entity = namedtuple('Entity',['start', 'end', 'entity_type'])
 WfElement = namedtuple('WfElement',['sent', 'wid', 'length', 'wordform', 'offset'])
-TermElement = namedtuple('TermElement', ['id', 'lemma', 'pos', 'type', 'morphofeat', 'targets', 'text', 'phrase_type'])
+TermElement = namedtuple('TermElement', ['id', 'lemma', 'pos', 'type', 'morphofeat', 'targets', 'text'])
 EntityElement = namedtuple('EntityElement', ['eid',
                                              'entity_type',
                                              'targets',
@@ -165,30 +165,25 @@ def create_seperable_verb_lemma(verb, particle, language):
         lemma = f'{verb}_{particle}'
     return lemma
 
-def retag_deps_layer(tid_mapping,
-                     deps_layer,
-                     not_replace_tags={'compound:prt'}):
-    """
+def get_mws_layer(root):
+    mws_layer = root.find('multiwords')
+    if mws_layer is None:
+        etree.SubElement(root, 'multiwords')
+        mws_layer = root.find('multiwords')
+    return mws_layer
 
-    :param dict tid_mapping: mapping from tid to tid that you want to replace it with
-    :param deps_layer: the NAF layers <deps>
-    :param set not_replace_tags: dependency tags for which you do
-    not want to replace the tids
-    """
-    attrs = ['from', 'to']
+def get_next_mw_id(root):
+    mws_layer = get_mws_layer(root)
 
-    for dep_el in deps_layer.xpath('dep'):
+    mw_ids = [int(mw_el.get('id')[2:])
+              for mw_el in mws_layer.xpath('mw')]
+    if mw_ids:
+        next_mw_id = max(mw_ids) + 1
+    else:
+        next_mw_id = 1
 
-        for attr in attrs:
-            from_tid = dep_el.get(attr)
-            rfunc = dep_el.get('rfunc')
+    return f'mw{next_mw_id}'
 
-            if rfunc in not_replace_tags:
-                continue
-
-            mapped_to = tid_mapping.get(from_tid, None)
-            if mapped_to is not None:
-                dep_el.set(attr, mapped_to)
 
 def add_multi_words(root,
                     naf_version,
@@ -206,73 +201,59 @@ def add_multi_words(root,
         print(f'add_multi_words function only implemented for {supported_languages}, not for supplied {language}')
         return root
 
-    terms_el = root.find('terms')
-    deps_el = root.find('deps')
-
     # dictionary from tid -> term_el
     tid_to_term = {term_el.get('id') : term_el
                    for term_el in root.xpath('terms/term')}
-    max_tid = max(
-        int(term_el.get('id')[1:])
-        for term_el in root.xpath('terms/term')
-    )
 
     num_of_compound_prts = 0
-    componentid_to_termid = {}
 
     # loop deps el
     for dep in root.findall('deps/dep'):
         if dep.get('rfunc') == 'compound:prt':
+
+            mws_layer = get_mws_layer(root)
+            next_mw_id = get_next_mw_id(root)
+
             idverb = dep.get('from')
             idparticle = dep.get('to')
             num_of_compound_prts += 1
 
             verb_term_el = tid_to_term[idverb]
             verb = verb_term_el.get('lemma')
-            verb_term_el.set('phrase_type', 'component')
+            verb_term_el.set('component_of', next_mw_id)
 
             particle_term_el = tid_to_term[idparticle]
             particle = particle_term_el.get('lemma')
-            particle_term_el.set('phrase_type', 'component')
+            particle_term_el.set('component_of', next_mw_id)
 
             seperable_verb_lemma = create_seperable_verb_lemma(verb,
                                                                particle,
                                                                language)
 
-            mw_term_id = max_tid + 1
-            max_tid += 1
 
-            the_mw_term_id = f't{mw_term_id}'
-            attributes = [('id', the_mw_term_id),
+            attributes = [('id', next_mw_id),
                           ('lemma', seperable_verb_lemma),
                           ('pos', 'VERB'),
-                          ('phrase_type', 'multi_word'),
-                          ('ud_rel', 'compound:prt')]
+                          ('type', 'phrasal')]
 
-            another_term_element = etree.SubElement(terms_el,
-                                                    'term')
+            mw_element = etree.SubElement(mws_layer,
+                                          'mw')
             for attr, value in attributes:
-                another_term_element.set(attr, value)
+                mw_element.set(attr, value)
 
-            component = etree.SubElement(another_term_element, 'component')
-            component_attribute_verb = {'id': idverb}
-            component_attribute_particle = {'id': idparticle}
-            etree.SubElement(component,
-                             'target',
-                             attrib=component_attribute_verb)
-            etree.SubElement(component,
-                             'target',
-                             attrib=component_attribute_particle)
-
-            componentid_to_termid[idverb] = the_mw_term_id
-            componentid_to_termid[idparticle] = the_mw_term_id
-
-    retag_deps_layer(tid_mapping=componentid_to_termid,
-                     deps_layer=deps_el)
-
-    # check that the correct number of term elements have been added
-    current_num_of_term_els = len(root.xpath('terms/term'))
-    assert (len(tid_to_term) + num_of_compound_prts) == current_num_of_term_els, f'mismatch between number of compound:prts values and number of term elements added.'
+            # add component elements
+            components = [
+                (f'{next_mw_id}.c1', idverb),
+                (f'{next_mw_id}.c2', idparticle)
+            ]
+            for c_id, t_id in components:
+                component = etree.SubElement(mw_element,
+                                             'component',
+                                              attrib={'id': c_id})
+                span = etree.SubElement(component, 'span')
+                etree.SubElement(span,
+                                 'target',
+                                 attrib={'id': t_id})
 
     return root
 
@@ -316,7 +297,6 @@ def add_wf_element(text_layer, wf_data, cdata=True):
 
 def add_term_element(terms_layer,
                      term_data,
-                     naf_version,
                      unwanted_attributes=set(),
                      add_comments=False):
     """
@@ -325,9 +305,6 @@ def add_term_element(terms_layer,
     term_el = etree.SubElement(terms_layer, "term")
 
     attrs = ['id', 'lemma', 'pos', 'type', 'morphofeat']
-
-    if naf_version == 'v3.1':
-        attrs.append('phrase_type')
 
     for attr in attrs:
         if attr not in unwanted_attributes:
@@ -342,7 +319,6 @@ def add_term_element(terms_layer,
     for target in term_data.targets:
         target_el = etree.SubElement(span, "target")
         target_el.set("id", target)
-
 
 def add_entity_element(entities_layer,
                        naf_version,
@@ -573,6 +549,8 @@ def naf_from_doc(doc,
     if uri is not None:
         public_el.set('uri', uri)
 
+    if add_mws:
+        layers.add('multiwords')
     for layer in layers:
         add_linguisticProcessors_el(naf_header,
                                     layer,
@@ -593,6 +571,7 @@ def naf_from_doc(doc,
         dependency_layer = etree.SubElement(root, "deps")
     if 'chunks' in layers:
         chunks_layer = etree.SubElement(root, "chunks")
+
     # Initialize variables:
     # ---------------------
     # - Use a generator for entity awareness.
@@ -658,15 +637,13 @@ def naf_from_doc(doc,
                                     type=pos_type,
                                     morphofeat = token.tag_,
                                     targets = current_term,
-                                    text = current_term_orth,
-                                    phrase_type='singleton')
+                                    text = current_term_orth)
 
             if 'text' in layers:
                 add_wf_element(text_layer, wf_data, cdata=cdata)
             if 'terms' in layers:
                 add_term_element(terms_layer,
                                  term_data,
-                                 naf_version,
                                  unwanted_attributes=layer_to_attributes_to_ignore.get('terms', set()),
                                  add_comments=comments)
 
