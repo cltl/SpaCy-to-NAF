@@ -510,12 +510,12 @@ def naf_from_doc(doc,
                  add_mws=True,
                  cdata=True,
                  layer_to_attributes_to_ignore=dict(),
-                 layers={'raw',
+                 layers=['raw',
                          'text',
                          'terms',
                          'entities',
                          'deps',
-                         'chunks'},
+                         'chunks'],
                  dtd_validation=False):
     """
     Function that takes a document and returns an ElementTree
@@ -535,6 +535,8 @@ def naf_from_doc(doc,
 
     root.set('version', naf_version)
 
+    layers = list(layers)
+
     # Create text and terms layers.
     naf_header = etree.SubElement(root, "nafHeader")
 
@@ -550,7 +552,8 @@ def naf_from_doc(doc,
         public_el.set('uri', uri)
 
     if add_mws:
-        layers.add('multiwords')
+        layers.append('multiwords')
+
     for layer in layers:
         add_linguisticProcessors_el(naf_header,
                                     layer,
