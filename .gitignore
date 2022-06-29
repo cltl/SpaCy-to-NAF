@@ -1,7 +1,11 @@
 dev
 dep
-tests/output
+tests/out/
+local
 .idea
+
+build
+dist
 
 .DS_Store
 .AppleDouble

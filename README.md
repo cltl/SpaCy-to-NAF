@@ -1,32 +1,44 @@
-# spaCy to NAF
+`spacy-to-naf` is a [spaCy](https://spacy.io/) wrapper that converts text or 
+[NAF](https://github.com/cltl/NAF-4-Development) input to NAF.
+The converter minimally extracts a tokenized `text` layer, and can additionally extract `terms`, `deps`, `entities` and 
+`chunks` layers.
 
-This repository contains everything you need to output SpaCy results in NAF format.
+## Installation
+To install `spacy-to-naf`:
+```
+pip install spacy-to-naf
+```
+Download a spaCy model, eg. 'en-core-web-sm':
+```
+python -m spacy download en-core-web-sm
+```
 
-Please check **log.md** for updates on the conversion script.
-
-**Example**:
-
+## Usage
+Specify the spaCy model and the NAF layers to create (the `text` layer is always created).
 ```python
-import spacy_to_naf
-import spacy
+from spacy_to_naf.converter import Converter
+converter = Converter('en-core-web-sm', add_terms=True, add_deps=True, add_entities=True, add_chunks=True)
+```
+The input may be a naf or text directory or a text string. 
 
-nlp = spacy.load('en')
-
+### Text input
+To convert text to a file 'example.naf' in the current directory:
+```python
 text = """The cat sat on the mat. Felix was his name."""
-
-NAF = spacy_to_naf.text_to_NAF(text, nlp)
-print(spacy_to_naf.NAF_to_string(NAF))
+naf = converter.convert(text, 'example.naf', '.')
 ```
+The converter additionally returns a [NafParser](https://cltl.github.io/nafparserpy/) object for further
+processing.
 
-Or use the command line:
+### Processing files
+To process text files from a 'text_in' to 'naf_out' directory:
+```python
+converter.convert_files('text_in', 'naf_out')
 ```
-python spacy_to_naf.py example_files/felix.txt > example_files/felix.naf
+*Note that input text files are expected to end in '.txt'.*
+
+To process NAF files from 'naf_in' to 'naf_out':
+```python
+converter.convert_naf_files('naf_in', 'naf_out')
 ```
-
-NB. Don't use this for batch processing! That would mean loading SpaCy for each
-file, which is wildly inefficient. For large batches, write a python script that
-loads SpaCy and this module, loops over the files, and writes out NAF in one go.
-
-## TODO
-* add https://github.com/huggingface/neuralcoref
-
+Output files carry the same name as the input file, extension excepted.

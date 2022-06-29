@@ -1,9 +1,19 @@
+## 0.1.0 - 2022-07-19
+### Changed
+- replaced conversion script with module; Converter class used to preload spacy model for file processing
+- converter accepts text string or input directory of either naf or text files as input
+- input texts are kept as is, without replacement of whitespace characters
+- only the latest naf version is supported
+
+### Removed
+- particle-verb pairs and multiwords are not identified anymore
+
 ## 27-1-2020
--added keyword argument **naf_version** to be able to differentiate between NAF version 3 and 4
+- added keyword argument **naf_version** to be able to differentiate between NAF version 3 and 4
 
 ## 23-1-2020
 
--added keyword argument **layer_to_attributes_to_ignore** to indicate
+- added keyword argument **layer_to_attributes_to_ignore** to indicate
 which attributes you want to exclude. Now only implemented for terms.
 
 ## 25-9-2019
