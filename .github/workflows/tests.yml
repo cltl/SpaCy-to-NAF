@@ -18,7 +18,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 mypy types-requests
         pip install -r requirements.txt
-        python -m spacy download 'en-core-web-sm'
+        python -m spacy download en-core-web-sm
     - name: flake8
       run: |
         flake8 . --max-line-length=127
