@@ -194,7 +194,7 @@ class Converter:
                  add_chunks=False,
                  map_udpos=False):
         self.processor_name = 'spacy_to_naf'
-        self.processor_version = '0.1.0'
+        self.processor_version = '0.2.0'
         self.nlp = spacy.load(spacy_model)
         self.model_name = f'spaCy-model_{self.nlp.meta["lang"]}_{self.nlp.meta["name"]}'
         self.model_version = f'spaCy_version-{spacy.__version__}__model_version-{self.nlp.meta["version"]}'
@@ -204,18 +204,17 @@ class Converter:
         self.add_deps = add_deps
         self.map_udpos = map_udpos
 
-    def convert(self, text: str, filename: str, out_path: Union[str, None] = None):
-        naf = self.init_naf(filename, text)
+    def convert(self, text: str, naf: NafParser, out_path: Union[str, None] = None):
         doc = self.nlp(text)
-        self.convert_text(doc, naf)
+        self.add_text_layer(doc, naf)
         if self.add_terms:
-            self.convert_terms(doc, naf)
+            self.add_terms_layer(doc, naf)
         if self.add_deps:
-            self.convert_deps(doc, naf)
+            self.add_deps_layer(doc, naf)
         if self.add_entities:
-            self.convert_entities(doc, naf)
+            self.add_entities_layer(doc, naf)
         if self.add_chunks:
-            self.convert_noun_chunks(doc, naf)
+            self.add_chunks_layer(doc, naf)
         if out_path is not None:
             naf.write(out_path)
         return naf
@@ -226,31 +225,51 @@ class Converter:
         naf.add_linguistic_processor('raw', self.processor_name, self.processor_version)
         return naf
 
-    def convert_text(self, doc, naf):
-        naf.add_layer_from_elements('text', extract_text(doc))
+    def add_text_layer(self, doc, naf):
+        naf.add_layer_from_elements('text', extract_text(doc), exist_ok=True)
         self.add_linguistic_processor('text', naf)
 
-    def convert_terms(self, doc, naf):
-        naf.add_layer_from_elements('terms', extract_terms(doc, self.map_udpos))
+    def add_terms_layer(self, doc, naf):
+        naf.add_layer_from_elements('terms', extract_terms(doc, self.map_udpos), exist_ok=True)
         self.add_linguistic_processor('terms', naf)
 
     def add_linguistic_processor(self, layer: str, naf: NafParser):
         naf.add_linguistic_processor(layer, self.processor_name, self.processor_version,
                                      lpDependencies=[LPDependency(self.model_name, self.model_version)])
 
-    def convert_entities(self, doc, naf: NafParser):
+    def add_entities_layer(self, doc, naf: NafParser):
         if doc.ents:
-            naf.add_layer_from_elements('entities', extract_entities(doc))
+            naf.add_layer_from_elements('entities', extract_entities(doc), exist_ok=True)
             self.add_linguistic_processor('entities', naf)
 
-    def convert_noun_chunks(self, doc, naf):
+    def add_chunks_layer(self, doc, naf):
         if doc.noun_chunks:
-            naf.add_layer_from_elements('chunks', extract_chunks(doc))
+            naf.add_layer_from_elements('chunks', extract_chunks(doc), exist_ok=True)
             self.add_linguistic_processor('chunks', naf)
 
-    def convert_deps(self, doc, naf):
-        naf.add_layer_from_elements('deps', extract_deps(doc))
+    def add_deps_layer(self, doc, naf):
+        naf.add_layer_from_elements('deps', extract_deps(doc), exist_ok=True)
         self.add_linguistic_processor('deps', naf)
+
+    def process_naf(self, naf: NafParser, out_path: Union[str, None] = None):
+        return self.convert(naf.get('raw').text, naf, out_path)
+
+    def convert_naf_files(self, input_path, output_dir):
+        for path in Path(input_path).rglob('*.naf'):
+            naf = NafParser.load(str(path), decorate=False)
+            filename = os.path.basename(path)
+            self.process_naf(naf, os.path.join(output_dir, filename))
+
+    def process_text(self, text: str, filename: str, out_path: Union[str, None] = None):
+        naf = self.init_naf(filename, text)
+        return self.convert(text, naf, out_path)
+
+    def convert_text_files(self, input_path, output_dir):
+        for path in Path(input_path).rglob('*.txt'):
+            with open(path) as f:
+                text = f.read()
+            filename = f'{without_extension(os.path.basename(path))}.naf'
+            self.process_text(text, filename, os.path.join(output_dir, filename))
 
     def run(self, input_path, filename=None, output_dir=None, is_naf_input=False):
         if os.path.exists(input_path):
@@ -259,22 +278,9 @@ class Converter:
             if is_naf_input:
                 self.convert_naf_files(input_path, output_dir)
             else:
-                self.convert_files(input_path, output_dir)
+                self.convert_text_files(input_path, output_dir)
         else:
             self.convert(input_path, filename, output_dir)
-
-    def convert_naf_files(self, input_path, output_dir):
-        for path in Path(input_path).rglob('*.naf'):
-            text = NafParser.load(str(path)).get('raw').text
-            filename = os.path.basename(path)
-            self.convert(text, filename, os.path.join(output_dir, filename))
-
-    def convert_files(self, input_path, output_dir):
-        for path in Path(input_path).rglob('*.txt'):
-            with open(path) as f:
-                text = f.read()
-            filename = f'{without_extension(os.path.basename(path))}.naf'
-            self.convert(text, filename, os.path.join(output_dir, filename))
 
 
 if __name__ == '__main__':

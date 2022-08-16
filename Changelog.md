@@ -1,3 +1,7 @@
+## 0.2.0 - 2022-08-16
+### Changed
+- naf conversion builds on existing naf tree instead of creating a new one
+
 ## 0.1.0 - 2022-07-19
 ### Changed
 - replaced conversion script with module; Converter class used to preload spacy model for file processing

@@ -3,30 +3,30 @@
   <nafHeader>
     <fileDesc filename="example.naf"/>
     <linguisticProcessors layer="raw">
-      <lp name="spacy_to_naf" version="0.1.0" timestamp="2022-07-19T08:30:49+00:00"/>
+      <lp name="spacy_to_naf" version="0.2.0" timestamp="2022-08-16T11:09:19+00:00"/>
     </linguisticProcessors>
     <linguisticProcessors layer="text">
-      <lp name="spacy_to_naf" version="0.1.0" timestamp="2022-07-19T08:30:49+00:00">
+      <lp name="spacy_to_naf" version="0.2.0" timestamp="2022-08-16T11:09:19+00:00">
         <lpDependency name="spaCy-model_en_core_web_sm" version="spaCy_version-3.3.1__model_version-3.3.0"/>
       </lp>
     </linguisticProcessors>
     <linguisticProcessors layer="terms">
-      <lp name="spacy_to_naf" version="0.1.0" timestamp="2022-07-19T08:30:49+00:00">
+      <lp name="spacy_to_naf" version="0.2.0" timestamp="2022-08-16T11:09:19+00:00">
         <lpDependency name="spaCy-model_en_core_web_sm" version="spaCy_version-3.3.1__model_version-3.3.0"/>
       </lp>
     </linguisticProcessors>
     <linguisticProcessors layer="deps">
-      <lp name="spacy_to_naf" version="0.1.0" timestamp="2022-07-19T08:30:49+00:00">
+      <lp name="spacy_to_naf" version="0.2.0" timestamp="2022-08-16T11:09:19+00:00">
         <lpDependency name="spaCy-model_en_core_web_sm" version="spaCy_version-3.3.1__model_version-3.3.0"/>
       </lp>
     </linguisticProcessors>
     <linguisticProcessors layer="entities">
-      <lp name="spacy_to_naf" version="0.1.0" timestamp="2022-07-19T08:30:49+00:00">
+      <lp name="spacy_to_naf" version="0.2.0" timestamp="2022-08-16T11:09:19+00:00">
         <lpDependency name="spaCy-model_en_core_web_sm" version="spaCy_version-3.3.1__model_version-3.3.0"/>
       </lp>
     </linguisticProcessors>
     <linguisticProcessors layer="chunks">
-      <lp name="spacy_to_naf" version="0.1.0" timestamp="2022-07-19T08:30:49+00:00">
+      <lp name="spacy_to_naf" version="0.2.0" timestamp="2022-08-16T11:09:19+00:00">
         <lpDependency name="spaCy-model_en_core_web_sm" version="spaCy_version-3.3.1__model_version-3.3.0"/>
       </lp>
     </linguisticProcessors>

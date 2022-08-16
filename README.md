@@ -32,8 +32,9 @@ processing.
 
 ### Processing files
 To process text files from a 'text_in' to 'naf_out' directory:
+
 ```python
-converter.convert_files('text_in', 'naf_out')
+converter.convert_text_files('text_in', 'naf_out')
 ```
 *Note that input text files are expected to end in '.txt'.*
 
