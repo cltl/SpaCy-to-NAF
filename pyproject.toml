@@ -30,8 +30,8 @@ license = {text = "Apache License 2.0"}
 test = ["pytest"]
 
 [project.urls]
-repository = "https://github.com/cltl/Spacy_to_NAF"
-changelog = "https://github.com/cltl/Spacy_to_NAF/blob/main/Changelog.md"
+repository = "https://github.com/cltl/SpaCy-to-NAF"
+changelog = "https://github.com/cltl/SpaCy-to-NAF/blob/master/Changelog.md"
 
 [tool.setuptools.packages.find]
 where = ["src"]

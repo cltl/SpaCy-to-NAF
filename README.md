@@ -24,10 +24,10 @@ The input may be a naf or text directory or a text string.
 ### Text input
 To convert text to a file 'example.naf' in the current directory:
 ```python
-text = """The cat sat on the mat. Felix was his name."""
+text = "The cat sat on the mat. Felix was his name."
 naf = converter.convert(text, 'example.naf', '.')
 ```
-The converter additionally returns a [NafParser](https://cltl.github.io/nafparserpy/) object for further
+The converter additionally returns a [NafParser](https://github.com/cltl/nafparserpy) object for further
 processing.
 
 ### Processing files
