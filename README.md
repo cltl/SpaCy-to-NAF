@@ -4,20 +4,21 @@ The converter minimally extracts a tokenized `text` layer, and can additionally 
 `chunks` layers.
 
 ## Installation
-To install `spacy-to-naf`:
+Install `spaCy` and `spacy-to-naf`:
 ```
+pip install spacy
 pip install spacy-to-naf
 ```
-Download a spaCy model, eg. 'en-core-web-sm':
+Download a spaCy model, eg. 'en_core_web_sm':
 ```
-python -m spacy download en-core-web-sm
+python -m spacy download en_core_web_sm
 ```
 
 ## Usage
 Specify the spaCy model and the NAF layers to create (the `text` layer is always created).
 ```python
 from spacy_to_naf.converter import Converter
-converter = Converter('en-core-web-sm', add_terms=True, add_deps=True, add_entities=True, add_chunks=True)
+converter = Converter('en_core_web_sm', add_terms=True, add_deps=True, add_entities=True, add_chunks=True)
 ```
 The input may be a naf or text directory or a text string. 
 
@@ -25,7 +26,7 @@ The input may be a naf or text directory or a text string.
 To convert text to a file 'example.naf' in the current directory:
 ```python
 text = "The cat sat on the mat. Felix was his name."
-naf = converter.convert(text, 'example.naf', '.')
+naf = converter.run(text, 'example.naf', '.')
 ```
 The converter additionally returns a [NafParser](https://github.com/cltl/nafparserpy) object for further
 processing.

@@ -3,6 +3,7 @@ dep
 tests/out/
 local
 .idea
+.vscode
 
 build
 dist

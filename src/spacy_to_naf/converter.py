@@ -280,7 +280,7 @@ class Converter:
             else:
                 self.convert_text_files(input_path, output_dir)
         else:
-            self.convert(input_path, filename, output_dir)
+            self.process_text(input_path, filename, os.path.join(output_dir, filename))
 
 
 if __name__ == '__main__':

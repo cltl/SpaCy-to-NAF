@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NAF xml:lang="en" version="3.3.1">
+  <nafHeader>
+    <fileDesc filename="hello.naf"/>
+    <linguisticProcessors layer="raw">
+      <lp name="spacy_to_naf" version="0.2.0" timestamp="2023-03-27T09:43:25+00:00"/>
+    </linguisticProcessors>
+    <linguisticProcessors layer="text">
+      <lp name="spacy_to_naf" version="0.2.0" timestamp="2023-03-27T09:43:25+00:00">
+        <lpDependency name="spaCy-model_en_core_web_sm" version="spaCy_version-3.3.1__model_version-3.3.0"/>
+      </lp>
+    </linguisticProcessors>
+    <linguisticProcessors layer="terms">
+      <lp name="spacy_to_naf" version="0.2.0" timestamp="2023-03-27T09:43:25+00:00">
+        <lpDependency name="spaCy-model_en_core_web_sm" version="spaCy_version-3.3.1__model_version-3.3.0"/>
+      </lp>
+    </linguisticProcessors>
+    <linguisticProcessors layer="deps">
+      <lp name="spacy_to_naf" version="0.2.0" timestamp="2023-03-27T09:43:25+00:00">
+        <lpDependency name="spaCy-model_en_core_web_sm" version="spaCy_version-3.3.1__model_version-3.3.0"/>
+      </lp>
+    </linguisticProcessors>
+    <linguisticProcessors layer="chunks">
+      <lp name="spacy_to_naf" version="0.2.0" timestamp="2023-03-27T09:43:25+00:00">
+        <lpDependency name="spaCy-model_en_core_web_sm" version="spaCy_version-3.3.1__model_version-3.3.0"/>
+      </lp>
+    </linguisticProcessors>
+  </nafHeader>
+  <raw><![CDATA[Hello World]]></raw>
+  <text>
+    <wf id="w1" offset="0" length="5" sent="1"><![CDATA[Hello]]></wf>
+    <wf id="w2" offset="6" length="5" sent="1"><![CDATA[World]]></wf>
+  </text>
+  <terms>
+    <term id="t1" type="open" lemma="hello" pos="INTJ" morphofeat="UH">
+      <span>
+        <target id="w1"/>
+      </span>
+    </term>
+    <term id="t2" type="open" lemma="World" pos="PROPN" morphofeat="NNP">
+      <span>
+        <target id="w2"/>
+      </span>
+    </term>
+  </terms>
+  <deps>
+    <dep from="t1" to="t2" rfunc="npadvmod"/>
+  </deps>
+  <chunks/>
+</NAF>
